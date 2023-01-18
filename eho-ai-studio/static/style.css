@@ -12,6 +12,31 @@ h1, h2, h3 {
     color: #3D3D3D;
 }
 
+div.a 
+{
+    word-wrap: normal;
+}
+  
+div.b {
+    word-wrap: break-word;
+}
+
+.ow-anywhere {
+    overflow-wrap: anywhere;
+}
+  
+.ow-break-word {
+    overflow-wrap: break-word;
+}
+  
+.word-break {
+    word-break: break-all;
+}
+  
+.hyphens {
+    hyphens: auto;
+}
+
 
 .login-btn {
     justify-content: center;

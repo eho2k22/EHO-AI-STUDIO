@@ -46,14 +46,18 @@ def index():
         print("Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)
         openai.api_key = userapikey
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=userprompt,
-            max_tokens=2048,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        )
+        try: 
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=userprompt,
+                max_tokens=2048,
+                n=1,
+                stop=None,
+                temperature=0.5,
+            )
+        except:
+            return render_template("error.html", userapikey=userapikey)
+
         answer = response.choices[0].text
     
         if userprompt.lower() == "exit":
