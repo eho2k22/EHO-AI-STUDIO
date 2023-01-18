@@ -7,8 +7,7 @@ import warnings
 
 # Use your own API key
 
-#openai.api_key = os.environ['OPENAI_KEY']
-openai.api_key = "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"
+openai.api_key = os.environ['OPENAI_KEY']
 userprompt=""
 answer = ""
 
