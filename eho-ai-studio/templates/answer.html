@@ -1,0 +1,39 @@
+<body bgcolor="#AFB9DB">
+    <br>
+    </br>
+    <br>
+    </br>
+    <center>
+    <h2>
+        Thanks for trying out Ernie's AI Genie! 
+    </h2>
+    </center>
+    <br></br>
+    <center>
+    <h2>
+        Your Question : 
+    </h2>
+    </center>
+    <p></p>
+    <center>
+    {{userprompt}}
+    </center>
+    <p></p>
+    <br></br>
+    <center>
+    <h2>
+        Our Response : 
+    </h2>
+    </center>
+    <p></p>
+    <center>
+    {{answer}}
+    </center>
+    <p></p>
+    <br></br>
+    <center>
+    <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
+    <br></br>
+    </center>
+
+</body>

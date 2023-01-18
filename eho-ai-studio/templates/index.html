@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ernie Ho's AIGC Studio </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <center>
+    <h1>Welcome to Ernie Ho's AIGC Studio </h1>
+    </center>
+<center>
+  <!--img src="../{{ img_name }}" alt="{{ img_name }}"-->
+  <img src="https://cdn.midjourney.com/38ae22fb-5b43-4cc2-aae6-e7c27cfe1c8a/grid_0.png" alt="DJ-EHO" width="250" height="300">
+</center>
+<center>
+  <!--button onclick="location.href='{{ url_for('night_mode') }}'">Night Mode</button-->
+  <br></br>
+  <button onclick="location.href='{{ url_for('gallery') }}'">View My AIGC Gallery</button>
+  </center>
+<center>
+  <h2>
+    Come try out my Q&A AI Genie 
+  </h2>
+</center>
+<center>
+<p> (built on OpenAI's Davince-003 Model) </p>
+</center>
+<form method="post">
+  <center>
+  <br></br>
+  <bold> <strong>Please State Your Question Below: </strong> </bold>
+  </center>
+  <center>
+  <!--input name="prompt"/-->
+  <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea>
+  <br/><br/>
+  </center>
+  <center>
+  <button type="submit">Submit</button>
+  </center>
+</form>
+
+
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,16 @@
+
+/* Night mode styles */
+body {
+    background-color: #1c1c1c;
+    color: #f2f2f2;
+}
+
+a {
+    color: #00bfff;
+}
+
+h1, h2, h3 {
+    color: #f2f2f2;
+}
+
+/* Add styles for other elements as needed */

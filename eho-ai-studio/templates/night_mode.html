@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website (IN NIGHT MODE) </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
+    <!--link rel="stylesheet" type="text/css" href="night_mode.css"-->
+</head>
+<body>
+    <h1>Welcome to my website! (In NIGHT MODE) </h1>
+    <button onclick="location.href='{{ url_for('index') }}'">Light mode</button>
+</body>
+</html>
