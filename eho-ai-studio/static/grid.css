@@ -1,0 +1,11 @@
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-grid img {
+  width: 30%;
+  padding: 1%;
+}

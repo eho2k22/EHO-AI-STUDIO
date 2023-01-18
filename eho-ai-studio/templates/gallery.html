@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Ernie's AIGC Image Gallery</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid.css') }}">
 </head>
 <body bgcolor="#AFB9DB">
     <div class="container">
@@ -20,24 +20,19 @@
             <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
             <br></br>
         </center>
-        </p>
-        <div class="row">
-            <div class="col-md-4">
-                <img src="https://cdn.midjourney.com/d9833c6f-226b-4147-acb9-9ff8d0381115/grid_0.png" class="img-responsive">
-                <img src="https://cdn.midjourney.com/82d8773a-60fa-4304-98ea-c4e87574d16d/grid_0.png" class="img-responsive" >
-                <img src="https://cdn.midjourney.com/d9833c6f-226b-4147-acb9-9ff8d0381115/grid_0.png" class="img-responsive">
-            </div>
-            <div class="col-md-4">
-                <img src="https://cdn.midjourney.com/12b820a0-5353-4aa7-893e-0b5394b4c538/grid_0.png" class="img-responsive">
-                <img src="https://cdn.midjourney.com/797ae0bd-bcb1-402b-ba16-de14ad97c15b/grid_0.png" class="img-responsive">
-                <img src="https://cdn.midjourney.com/4448328b-0447-4656-9562-f728ed604300/grid_0.png" class="img-responsive">
-            </div>
-            <div class="col-md-4">
-                <!--img src="https://cdn.midjourney.com/cb275a97-bfb1-4fdf-a69e-bcf9f77a0021/grid_0.png" class="img-responsive"-->
-                <img src="https://cdn.midjourney.com/1c49413b-5715-40b9-8c30-00d2bd854283/grid_0.png" class="img-responsive">
-                <img src="https://cdn.midjourney.com/ae082e83-2e8d-4d94-8f99-940cc394e23f/grid_0.png" class="img-responsive">
-            </div>
-        </div>
+        </p> 
+        <div class="image-grid">
+            <img src="https://cdn.midjourney.com/d9833c6f-226b-4147-acb9-9ff8d0381115/grid_0.png" alt="image1">
+            <img src="https://cdn.midjourney.com/82d8773a-60fa-4304-98ea-c4e87574d16d/grid_0.png" alt="image2">
+            <img src="https://cdn.midjourney.com/d9833c6f-226b-4147-acb9-9ff8d0381115/grid_0.png" alt="image3">
+            <img src="https://cdn.midjourney.com/12b820a0-5353-4aa7-893e-0b5394b4c538/grid_0.png" alt="image4">
+            <img src="https://cdn.midjourney.com/797ae0bd-bcb1-402b-ba16-de14ad97c15b/grid_0.png" alt="image5">
+            <img src="https://cdn.midjourney.com/4448328b-0447-4656-9562-f728ed604300/grid_0.png" alt="image6">
+            <img src="https://cdn.midjourney.com/12b820a0-5353-4aa7-893e-0b5394b4c538/grid_0.png" alt="image7">
+            <img src="https://cdn.midjourney.com/797ae0bd-bcb1-402b-ba16-de14ad97c15b/grid_0.png" alt="image8">
+            <img src="https://cdn.midjourney.com/4448328b-0447-4656-9562-f728ed604300/grid_0.png" alt="image9">
+        </div>  
+
     </div>
 </body>
 </html>

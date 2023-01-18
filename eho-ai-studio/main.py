@@ -7,20 +7,22 @@ import warnings
 
 # Use your own API key
 
-openai.api_key = os.environ['OPENAI_KEY']
+#openai.api_key = os.environ['OPENAI_KEY']
+openai.api_key = ""
+userapikey = ""
 userprompt=""
 answer = ""
 
-def answer_question(question):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=question,
-        max_tokens=2048,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
-    return response.choices[0].text
+#def answer_question(question):
+ #   response = openai.Completion.create(
+  #      engine="text-davinci-003",
+   #     prompt=question,
+    #    max_tokens=2048,
+     #   n=1,
+      #  stop=None,
+       # temperature=0.5,
+   # )
+   # return response.choices[0].text
 
 
 #while True:
@@ -39,13 +41,25 @@ def index():
     if request.method == "POST":
         print(request.form["prompt"])
         userprompt = request.form["prompt"]
+        userapikey = request.form["apikey"]
 
-        print("Your Question is:"+ userprompt)
+        print("Your Question is: "+ userprompt)
+        print("Your API Key is:" + userapikey)
+        openai.api_key = userapikey
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=userprompt,
+            max_tokens=2048,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
+        answer = response.choices[0].text
     
         if userprompt.lower() == "exit":
             return render_template('index.html')
         
-        answer = answer_question(userprompt)
+        #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
         return render_template("answer.html", userprompt=userprompt, answer=answer)
