@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ernie Ho's AIGC Studio </title>
+    <title>EHO AIGC Studio </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <script>
+      var copyBtn = document.getElementById("copy-btn");
+      var textField = document.getElementById("apikey");
+
+      copyBtn.addEventListener("click", function() {
+      textField.select();
+      document.execCommand("copy");
+      });
+    </script>
     <center>
     <h1 style="font-family:verdana">Welcome to Ernie Ho's AIGC Studio </h1>
     </center>
@@ -20,7 +29,7 @@
   </center>
 <center>
   <h2 style="font-family:verdana">
-    Come try out my Q&A AI Genie 
+    Come try out EHO's Q&A AI Genie! 
   </h2>
 </center>
 <center>
@@ -34,7 +43,14 @@
   <center>
   <!--input name="apikey"/-->
   <!--input type="text" id="apikey" name="apikey" rows="4" cols="80"></input-->
-  <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
+  <div>
+    <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
+    <!--button id="copy-btn" class="btn btn-secondary"-->
+        <!--i class="fa fa-copy"></i> Copy
+    </button-->
+  </div>
+
+
   <br/><br/>
   </center>
   <center>
