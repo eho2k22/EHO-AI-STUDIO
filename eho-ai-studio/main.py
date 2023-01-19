@@ -11,7 +11,9 @@ import warnings
 openai.api_key = ""
 userapikey = ""
 userprompt=""
+usertemp=""
 answer = ""
+temperature = 0.5
 
 #def answer_question(question):
  #   response = openai.Completion.create(
@@ -42,10 +44,20 @@ def index():
         print(request.form["prompt"])
         userprompt = request.form["prompt"]
         userapikey = request.form["apikey"]
+        usertemp = request.form["temperature"]
 
         print("Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)
+        print("Your Requested Temperature is:" + usertemp)
+
         openai.api_key = userapikey
+
+        if (usertemp == "High"):
+            temperature = 1.0
+
+        if (usertemp == "Ultra"):
+            temperature = 1.5
+
         try: 
             response = openai.Completion.create(
                 engine="text-davinci-003",
@@ -53,7 +65,7 @@ def index():
                 max_tokens=2048,
                 n=1,
                 stop=None,
-                temperature=0.5,
+                temperature=temperature,
             )
         except:
             return render_template("error.html", userapikey=userapikey)
