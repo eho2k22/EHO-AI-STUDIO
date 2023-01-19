@@ -9,11 +9,12 @@ import warnings
 
 #openai.api_key = os.environ['OPENAI_KEY']
 openai.api_key = ""
+
 userapikey = ""
 userprompt=""
 usertemp=""
 answer = ""
-temperature = 0.5
+engine_temperature = 0.5
 
 #def answer_question(question):
  #   response = openai.Completion.create(
@@ -48,15 +49,19 @@ def index():
 
         print("Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)
-        print("Your Requested Temperature is:" + usertemp)
+        print("Your Requested Temperature is: " + usertemp)
 
         openai.api_key = userapikey
 
-        if (usertemp == "High"):
-            temperature = 1.0
 
+        if (usertemp == "Standard"):
+            engine_temperature = 0.5
+        if (usertemp == "High"):
+            engine_temperature = 1.0
         if (usertemp == "Ultra"):
-            temperature = 1.5
+            engine_temperature = 1.5
+
+        print("Temperature set to " + usertemp + "at : " + str(engine_temperature))
 
         try: 
             response = openai.Completion.create(
@@ -65,7 +70,7 @@ def index():
                 max_tokens=2048,
                 n=1,
                 stop=None,
-                temperature=temperature,
+                temperature=engine_temperature,
             )
         except:
             return render_template("error.html", userapikey=userapikey)
