@@ -5,15 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <script>
-      var copyBtn = document.getElementById("copy-btn");
-      var textField = document.getElementById("apikey");
-
-      copyBtn.addEventListener("click", function() {
-      textField.select();
-      document.execCommand("copy");
-      });
-    </script>
     <center>
     <h1 style="font-family:verdana">Welcome to Ernie Ho's AIGC Studio </h1>
     </center>
@@ -33,23 +24,36 @@
   </h2>
 </center>
 <center>
-<p style="font-family:verdana"> <sub> (built on OpenAI's Davinci Model Open Source Python Library available at <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI Github </font> </a> ) </sub> </p>
+<p style="font-family:verdana"> <sub> (built on OpenAI's Davinci Model.  Python Open Source available at <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI Github </font> </a> ) </sub> </p>
 <br>
-<p style="font-family:verdana"> <font color="0x0000FF"> <bold> <strong> 1. Copy & Paste your VIP Code </strong> </bold> <br>
-<sub> (** To obtain a VIP code please send an email request to <strong> dj.eho.no23@gmail.com </strong>, with your name and how you have found this service.  ) </sub> </font> </p>
-<p style="font-family:verdana"> <font color="0x0000FF"> <bold> <strong> 2. Select desired Temperature Level </strong> </bold> <br>
-  <sub> (** The Higher the Temperature,  The more Creative and Random the Responses ) </sub> </font> </p>
-<p style="font-family:verdana"> <font color="0x0000FF"> <bold> <strong> 3. Enter your question in textbox below and click Submit!  </strong> </bold> <br>
-<sub> (** Be as clear and descriptive as you can! The better your question, the better our response! ) </sub> </font> </p>
-</center>
+
+<font style="font-family:verdana" color="0x0000FF">
+How to Get Started? 
+</font>
 <p></p>
+<p></p>
+
+
+<textarea style="font-family:verdana" color="0x0000FF" id="textbox" rows="11" cols="80">
+1. COPY & PASTE YOUR VIP CODE
+(** To obtain a VIP code please send an email request to: dj.eho.no23@gmail.com,  with your name, and how you have heard about us.)
+
+2. SELECT DESIRED TEMPERATURE LEVEL
+(** The Higher the Temperature,  The more Creative and Random the Responses) 
+
+3. ENTER YOUR QUESTION IN TEXTBOX AND CLICK SUBMIT! WAIT ~2-3 SEC FOR OUR RESPONSE ! 
+(** Be as clear and descriptive as you can! The better your question, the better our response! 
+</textarea>
+
+</center>
+<br></br>
+<br></br>
 <form method="post">
-  <center>
-  <bold> <strong><font style="font-family:verdana"> Please Enter Your VIP Code Below: </font> </strong> </bold>
-  </center>
+  
   <center>
   <!--input name="apikey"/-->
   <!--input type="text" id="apikey" name="apikey" rows="4" cols="80"></input-->
+  <label for="apikey"> <bold> <strong> <font style="font-family:verdana"> VIP Code: </font> </strong> </bold> </label>
   <div>
     <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
     <!--button id="copy-btn" class="btn btn-secondary"-->
@@ -57,7 +61,7 @@
     </button-->
   </div>
   <p></p>
-  <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Choose Temperatue Level: </font> </strong> </bold> </label>
+  <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperatue Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">
       <option value="Standard">Standard</option>
       <option value="High">High</option>
@@ -66,7 +70,7 @@
   </center>
   <br></fr>
   <center>
-  <bold> <strong> <font style="font-family:verdana"> Please State Your Question Below: </font> </strong> </bold>
+  <bold> <strong> <font style="font-family:verdana"> Your Question: </font> </strong> </bold>
   </center>
   <center>
   <!--input name="prompt"/-->
@@ -78,7 +82,7 @@
   </center>
   <center>
   <br></br>
-  <p> Beta version 1.1 as of 
+  <p> <font style="font-family:verdana"> Beta Version 1.1 as of 
   <div id="current_date">
     <script>
     date = new Date();
@@ -88,6 +92,7 @@
     document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
     </script>
   </div>
+  </font>
   </p>
   </center>
 </form>

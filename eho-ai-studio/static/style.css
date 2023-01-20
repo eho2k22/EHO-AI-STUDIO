@@ -11,6 +11,8 @@ a {
 
 h1, h2, h3 {
     color: #3D3D3D;
+    style: "font-family:verdana";
+
 }
 
 div.a 
@@ -22,6 +24,18 @@ img {
     border: 5px solid #555;
 }
   
+input {
+    border: 5px solid #89939A;
+}
+
+text {
+    border: 5px solid #89939A;
+}
+
+textarea {
+    border: 5px solid #89939A;
+}
+
 div.b {
     word-wrap: break-word;
 }
