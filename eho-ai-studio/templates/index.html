@@ -3,15 +3,34 @@
 <head>
     <title>EHO AIGC Studio </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+      /* Add the styles for the button */
+      .right-aligned-button {
+        float: right; /* Float the button to the right */
+      }
+      .right-aligned-div {
+      float: right; /* Float the button to the right */
+      }
+    </style>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+  </script>
 </head>
 <body>
+    <div class="right-aligned-div" id="google_translate_element"></div>
+    <br></br>
+    <br></br>
+    <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button>
     <center>
     <h1 style="font-family:verdana">Welcome to Ernie Ho's AIGC Studio </h1>
     </center>
 <center>
   <div style="padding: 20px;">
   <!--img src="https://cdn.midjourney.com/38ae22fb-5b43-4cc2-aae6-e7c27cfe1c8a/grid_0.png" alt="DJ-EHO" width="250" height="300"--->
-  <img src="https://cdn.midjourney.com/d9833c6f-226b-4147-acb9-9ff8d0381115/grid_0.png" alt="DJ-EHO" width="250" height="300">
+  <img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="DJ-EHO" width="250" height="300">
   </div>
 </center>
 <center>
@@ -56,10 +75,23 @@ How to Get Started?
   <label for="apikey"> <bold> <strong> <font style="font-family:verdana"> VIP Code: </font> </strong> </bold> </label>
   <div>
     <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
-    <!--button id="copy-btn" class="btn btn-secondary"-->
-        <!--i class="fa fa-copy"></i> Copy
-    </button-->
+    <br>
+    <button onclick="copyText()">Copy Code </button>
+
+    <script>
+      function copyText() {
+        /* Get the input element */
+        var inputText = document.getElementById("apikey");
+        /* Select the text */
+        inputText.select();
+        /* Copy the text */
+        document.execCommand("copy");
+        /* Alert the user that the text was copied */
+        alert("Text copied to clipboard: " + inputText.value);
+      }
+    </script>
   </div>
+
   <p></p>
   <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperatue Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">

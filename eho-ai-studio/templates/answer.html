@@ -27,10 +27,8 @@
     </textarea>
     </font>
     </center>
-    <p></p>
     <br></br>
     <center>
-
     <h2>
         <font style="font-family:verdana">
         Our Response : 
@@ -44,6 +42,20 @@
     {{answer}}
     </textarea>
     </em>
+    <button onclick="copyText()">Copy Response </button>
+    <script>
+        function copyText() {
+        /* Get the textarea element */
+        var textarea = document.getElementById("textbox");
+        /* Create a new clipboard item */
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          /* Alert the user that the text was copied */
+        alert("Text copied to clipboard: " + textarea.value);
+        }, function(err) {
+          console.error("Failed to copy text: ", err);
+         });
+         }
+    </script>
     </center>
     <p></p>
     <br></br>
