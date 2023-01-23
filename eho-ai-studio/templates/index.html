@@ -9,19 +9,34 @@
         float: right; /* Float the button to the right */
       }
       .right-aligned-div {
-      float: right; /* Float the button to the right */
+        float: right; /* Float the button to the right */
+      }
+      
+      #progress-bar {
+        width: 500px;
+        height: 22px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        display: none;
+      }
+
+      #progress-bar-fill {
+        height: 100%;
+        background-color: #b24141;
+        width: 0%;
       }
     </style>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-  </script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+           pageLanguage: 'en',
+           includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+     }
+    </script>
 </head>
 <body>
     <div class="right-aligned-div" id="google_translate_element"></div>
@@ -29,7 +44,7 @@
     <br></br>
     <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button>
     <center>
-    <h1 style="font-family:verdana">Welcome to Ernie Ho's AIGC Studio </h1>
+    <h1 style="font-family:verdana" color="0xD4AF37"> Welcome to EHO's AIGC Studio </h1>
     </center>
 <center>
   <div style="padding: 20px;">
@@ -42,7 +57,7 @@
   <button onclick="location.href='{{ url_for('gallery') }}'"><font style="font-family:verdana" color="0x0000FF">View Gallery for more </font> </button>
   </center>
 <center>
-  <h2 style="font-family:verdana">
+  <h2 style="font-family:verdana" color="0xD4AF37">
     Come try out EHO's Q&A AI Genie! 
   </h2>
 </center>
@@ -50,26 +65,34 @@
 <p style="font-family:verdana"> <sub> (built on OpenAI's Davinci Model.  Python Open Source available at <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI Github </font> </a> ) </sub> </p>
 <br>
 
-<font style="font-family:verdana" color="0x0000FF">
-How to Get Started? 
+<font style="font-family:verdana" color="0xD4AF37">
+<strong> How To Get Started? </strong>
+<p></p>
+<p></p>
 </font>
-<p></p>
-<p></p>
 
+<font style="font-family:verdana" color="0x0000FF">
+<strong>1. COPY & PASTE YOUR VIP CODE </strong>
+<br>
+<sub>(** To obtain a VIP code, please send an email request to: <strong> dj.eho.no23@gmail.com </strong> </sub>
+<br>
+<sub>with your name, and how you have heard about us. **)</sub>
+<br></br>
 
-<textarea style="font-family:verdana" color="0x0000FF" id="textbox" rows="11" cols="80">
-1. COPY & PASTE YOUR VIP CODE
-(** To obtain a VIP code please send an email request to: dj.eho.no23@gmail.com,  with your name, and how you have heard about us.)
+<strong> 2. SELECT DESIRED TEMPERATURE LEVEL </strong>
+<br>
+<sub>(** The Higher the Temperature,  The More Creative the Responses! **)</sub>
+<br></br>
 
-2. SELECT DESIRED TEMPERATURE LEVEL
-(** The Higher the Temperature,  The more Creative and Random the Responses) 
+<strong> 3. ENTER YOUR QUESTION AND CLICK SUBMIT! JUST WAIT ~2-3 SEC FOR OUR RESPONSE ! </strong>
+<br>
+<sub>(** Be as clear and descriptive as you can! The better your question, the better our response! **)</sub>
+<br></br>
 
-3. ENTER YOUR QUESTION IN TEXTBOX AND CLICK SUBMIT! WAIT ~2-3 SEC FOR OUR RESPONSE ! 
-(** Be as clear and descriptive as you can! The better your question, the better our response! 
-</textarea>
+</font>
+</p> 
 
 </center>
-<br></br>
 <br></br>
 <form method="post">
   
@@ -114,7 +137,24 @@ How to Get Started?
   <br/><br/>
   </center>
   <center>
-  <button type="submit"> <font style="font-family:verdana"> Submit </font> </button>
+  <input type="submit" value="Submit" onclick="showProgress()">
+  <!--button type="submit" onclick="showProgress()"></button>> <font style="font-family:verdana"> Submit </font> </button-->
+  <div id="progress-bar">
+    <div id="progress-bar-fill"></div>
+  </div>
+  <script>
+    function showProgress() {
+      document.getElementById("progress-bar").style.display = "block";
+      var progress = 0;
+      var progressInterval = setInterval(function() {
+        progress += 10;
+        document.getElementById("progress-bar-fill").style.width = progress + "%";
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+        }
+      }, 1000);
+    }
+  </script>
   </center>
   <center>
   <br></br>
