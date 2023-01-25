@@ -32,6 +32,18 @@
     <center>
     <button onclick="location.href='{{ url_for('index') }}'"> <font style="font-family:verdana"> Back To Home </font> </button>
     <br></br>
+    <br></br>
+    <p> Beta version 1.1 as of 
+    <div id="current_date">
+        <script>
+        date = new Date();
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+        document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+        </script>
+    </div>
+  </p>
     </center>
 
 </body>

@@ -15,8 +15,8 @@
       #progress-bar {
         width: 500px;
         height: 22px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+        border: 1px solid #FFD700;
+        border-radius: 10px;
         overflow: hidden;
         display: none;
       }
@@ -44,17 +44,29 @@
     <br></br>
     <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button>
     <center>
-    <h1 style="font-family:verdana" color="0xD4AF37"> Welcome to EHO's AIGC Studio </h1>
+    <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
+    <p>
+    <font face="Verdana, Geneva, sans-serif" color="#926f34", size="+4"> WELCOME TO EHO AI STUDIO 23
+    </font>
+    </p>
+    <br></br>
     </center>
 <center>
-  <div style="padding: 20px;">
-  <!--img src="https://cdn.midjourney.com/38ae22fb-5b43-4cc2-aae6-e7c27cfe1c8a/grid_0.png" alt="DJ-EHO" width="250" height="300"--->
-  <img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="DJ-EHO" width="250" height="300">
+  <div style="text-align:center">
+    <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="STUDIO" style="display:inline-block" width="250" height="300" margin-right:10px"></a>
+    <a href="https://youtube.com/shorts/YUnJ5Rzm3OU"><img src="https://cdn.midjourney.com/8c9f4e1d-a592-4433-927e-96644e54e1af/grid_0.png" alt="AI StoryCaster" style="display:inline-block" width="250" height="300" margin-right:10px"> </a>
+    <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="ROBOT" style="display:inline-block" width="250" height="300"></a>
+  </div>
+  
+  <!--div style="padding: 20px;">
+  <img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="DJ-EHO" width="250" height="300"-->
+  <!--img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="DJ-EHO" width="250" height="300"-->
+  
   </div>
 </center>
 <center>
   <!--button onclick="location.href='{{ url_for('night_mode') }}'">Night Mode</button-->
-  <button onclick="location.href='{{ url_for('gallery') }}'"><font style="font-family:verdana" color="0x0000FF">View Gallery for more </font> </button>
+  <button onclick="location.href='{{ url_for('gallery') }}'"><font style="font-family:verdana" color="0x0000FF">View AIGC Gallery  </font> </button>
   </center>
 <center>
   <h2 style="font-family:verdana" color="0xD4AF37">
@@ -140,7 +152,8 @@
   <input type="submit" value="Submit" onclick="showProgress()">
   <!--button type="submit" onclick="showProgress()"></button>> <font style="font-family:verdana"> Submit </font> </button-->
   <div id="progress-bar">
-    <div id="progress-bar-fill"></div>
+    <label id="pbf-label"><font style="font-family:verdana"> Wheels Turning ... </font></label>
+    <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
   </div>
   <script>
     function showProgress() {
@@ -158,7 +171,7 @@
   </center>
   <center>
   <br></br>
-  <p> <font style="font-family:verdana"> Beta Version 1.1 as of 
+  <p> <font style="font-family:verdana"> Beta Version 1.2 as of 
   <div id="current_date">
     <script>
     date = new Date();

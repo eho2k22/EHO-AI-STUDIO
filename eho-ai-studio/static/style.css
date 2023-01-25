@@ -4,16 +4,53 @@ body {
     color: #3D3D3D;
     /*background-image: url('https://cdn.midjourney.com/44336a7d-0d7c-4671-b13c-4af08c8c31cd/grid_0.png'); */
 }
-
+/*
 a {
-    color: #00bfff;
+    color: #0011ff;
 }
+*/
+
+a:link {
+    color: blue;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:visited {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: blue;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+
 
 h1, h2, h3 {
     color: #3D3D3D;
     style: "font-family:verdana";
 
 }
+
+label {
+    font-family: verdana;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+}
+  
+
+
 
 div.a 
 {

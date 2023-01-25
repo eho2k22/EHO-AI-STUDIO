@@ -59,6 +59,29 @@
     </script>
     </center>
     <p></p>
+    <center>
+    <font style="font-family:verdana">
+    <p style="font-family:verdana"> What do you think?  </p>
+    <form>
+        <fieldset>
+          <center><legend>Please rate our response:</legend> </center>
+          <input type="checkbox" id="star1" name="rating" value="1">
+          <label for="star1">1</label>
+          <input type="checkbox" id="star2" name="rating" value="2">
+          <label for="star2">2</label>
+          <input type="checkbox" id="star3" name="rating" value="3">
+          <label for="star3">3</label>
+          <input type="checkbox" id="star4" name="rating" value="4">
+          <label for="star4">4</label>
+          <input type="checkbox" id="star5" name="rating" value="5">
+          <label for="star5">5</label>
+        </fieldset>
+    </form>
+   
+    <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
+    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+    </center>
+    </font>
     <br></br>
     <center>
     <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
