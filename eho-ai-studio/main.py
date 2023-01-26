@@ -55,7 +55,14 @@ def index():
         openai.api_key = userapikey
 
         available_003 = False
-        models = openai.Model.list()
+    
+        try: 
+            models = openai.Model.list()
+        except: 
+            print("sorry, wrong key")
+            return render_template("error.html", userapikey=userapikey)
+    
+
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
@@ -127,6 +134,12 @@ def night_mode():
         print("Your Requested Temperature is: " + usertemp)
 
         openai.api_key = userapikey
+
+        try: 
+            models = openai.Model.list()
+        except: 
+            print("sorry, wrong key")
+            return render_template("error_nm.html", userapikey=userapikey)
 
         available_003 = False
         models = openai.Model.list()

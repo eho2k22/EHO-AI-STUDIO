@@ -11,6 +11,10 @@ openai.api_key = os.environ['OPENAI_KEY']
 userprompt=""
 answer = ""
 
+print("OPENAI KEY = ")
+
+print(os.environ['OPENAI_KEY'])
+
 def answer_question(question):
     response = openai.Completion.create(
         engine="text-davinci-003",
