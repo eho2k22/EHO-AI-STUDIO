@@ -1,7 +1,7 @@
 <body bgcolor="#AFB9DB">
     <head>
         <title>Ernie Ho's AIGC Studio </title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
     </head>
     <br>
     </br>
@@ -79,7 +79,6 @@
     </form>
 
     <p> Back For More?  Don't forget to copy your VIP Code:</p>
-    <br></br>
     <em class="ow-break-word"></em>
     <textarea style="font-family:verdana" color="#0000FF" id="textbox2" rows="1" cols="60">
     {{userapikey}}
@@ -108,7 +107,7 @@
     </font>
     <br></br>
     <center>
-    <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
+    <button onclick="location.href='{{ url_for('night_mode') }}'"> Back To Home </button>
     <br></br>
     </center>
 

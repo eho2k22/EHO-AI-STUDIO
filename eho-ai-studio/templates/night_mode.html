@@ -1,12 +1,197 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Website (IN NIGHT MODE) </title>
+    <title>EHO AIGC Studio </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
-    <!--link rel="stylesheet" type="text/css" href="night_mode.css"-->
+    <style>
+      /* Add the styles for the button */
+      .right-aligned-button {
+        float: right; /* Float the button to the right */
+      }
+      .right-aligned-div {
+        float: right; /* Float the button to the right */
+      }
+      
+      #progress-bar {
+        width: 500px;
+        height: 22px;
+        border: 1px solid #FFD700;
+        border-radius: 10px;
+        overflow: hidden;
+        display: none;
+      }
+
+      #progress-bar-fill {
+        height: 100%;
+        background-color: #b24141;
+        width: 0%;
+      }
+    </style>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+           pageLanguage: 'en',
+           includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+     }
+    </script>
 </head>
 <body>
-    <h1>Welcome to my website! (In NIGHT MODE) </h1>
-    <button onclick="location.href='{{ url_for('index') }}'">Light mode</button>
+    <div class="right-aligned-div" id="google_translate_element"></div>
+    <br></br>
+    <br></br>
+    <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button>
+    <center>
+    <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
+    <button onclick="location.href='{{ url_for('index') }}'">LIGHT MODE</button>
+    <p>
+    <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> WELCOME TO EHO AI STUDIO 23
+    </font>
+    </p>
+    <br></br>
+    </center>
+<center>
+  <div style="text-align:center">
+    <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="STUDIO" style="display:inline-block" width="250" height="300" margin-right:10px"></a>
+    <a href="https://youtube.com/shorts/YUnJ5Rzm3OU"><img src="https://cdn.midjourney.com/8c9f4e1d-a592-4433-927e-96644e54e1af/grid_0.png" alt="AI StoryCaster" style="display:inline-block" width="250" height="300" margin-right:10px"> </a>
+    <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="ROBOT" style="display:inline-block" width="250" height="300"></a>
+  </div>
+  
+  <!--div style="padding: 20px;">
+  <img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="DJ-EHO" width="250" height="300"-->
+  <!--img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="DJ-EHO" width="250" height="300"-->
+  
+  </div>
+</center>
+<center>
+  <!--button onclick="location.href='{{ url_for('night_mode') }}'">Night Mode</button-->
+  <button onclick="location.href='{{ url_for('gallery_nm') }}'"><font style="font-family:verdana" color="0x0000FF">View AIGC Gallery  </font> </button>
+  </center>
+<center>
+  <h2 style="font-family:verdana" color="#FFD700">
+    Come try out EHO's Q&A AI Genie! 
+  </h2>
+</center>
+<center>
+<p style="font-family:verdana"> <sub> (built on OpenAI's Davinci Model.  Python Open Source available at <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI Github </font> </a> ) </sub> </p>
+<br>
+
+<font style="font-family:verdana" color="#90EE90">
+<strong> How To Get Started? </strong>
+<p></p>
+<p></p>
+</font>
+
+<font style="font-family:verdana" color="#ADD8E6">
+<strong>1. COPY & PASTE YOUR VIP CODE </strong>
+<br>
+<sub>(** To obtain a VIP code, please send an email request to: <strong> dj.eho.no23@gmail.com </strong> </sub>
+<br>
+<sub>with your name, and how you have heard about us. **)</sub>
+<br></br>
+
+<strong> 2. SELECT DESIRED TEMPERATURE LEVEL </strong>
+<br>
+<sub>(** The Higher the Temperature,  The More Creative the Responses! **)</sub>
+<br></br>
+
+<strong> 3. ENTER YOUR QUESTION AND CLICK SUBMIT! JUST WAIT ~2-3 SEC FOR OUR RESPONSE ! </strong>
+<br>
+<sub>(** Be as clear and descriptive as you can! The better your question, the better our response! **)</sub>
+<br></br>
+
+</font>
+</p> 
+
+</center>
+<br></br>
+<form method="post">
+  
+  <center>
+  <!--input name="apikey"/-->
+  <!--input type="text" id="apikey" name="apikey" rows="4" cols="80"></input-->
+  <label for="apikey"> <bold> <strong> <font style="font-family:verdana"> VIP Code: </font> </strong> </bold> </label>
+  <div>
+    <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
+    <br>
+    <button onclick="copyText()">Copy Code </button>
+
+    <script>
+      function copyText() {
+        /* Get the input element */
+        var inputText = document.getElementById("apikey");
+        /* Select the text */
+        inputText.select();
+        /* Copy the text */
+        document.execCommand("copy");
+        /* Alert the user that the text was copied */
+        alert("Text copied to clipboard: " + inputText.value);
+      }
+    </script>
+  </div>
+
+  <p></p>
+  <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperatue Level: </font> </strong> </bold> </label>
+    <select name="temperature" id="temperature">
+      <option value="Standard">Standard</option>
+      <option value="High">High</option>
+      <option value="Ultra">Ultra</option>
+    </select>
+  </center>
+  <br></fr>
+  <center>
+  <bold> <strong> <font style="font-family:verdana"> Your Question: </font> </strong> </bold>
+  </center>
+  <center>
+  <!--input name="prompt"/-->
+  <textarea id="prompt" name="prompt" rows="7" cols="50"></textarea>
+  <br/><br/>
+  </center>
+  <center>
+  <input type="submit" value="Submit" onclick="showProgress()">
+  <!--button type="submit" onclick="showProgress()"></button>> <font style="font-family:verdana"> Submit </font> </button-->
+  <div id="progress-bar">
+    <label id="pbf-label"><font style="font-family:verdana"> Wheels Turning ... </font></label>
+    <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
+  </div>
+  <script>
+    function showProgress() {
+      document.getElementById("progress-bar").style.display = "block";
+      var progress = 0;
+      var progressInterval = setInterval(function() {
+        progress += 10;
+        document.getElementById("progress-bar-fill").style.width = progress + "%";
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+        }
+      }, 1000);
+    }
+  </script>
+  </center>
+  <center>
+  <br></br>
+  <p> <font style="font-family:verdana"> Beta Version 1.3 as of 
+  <div id="current_date">
+    <script>
+    date = new Date();
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+    </script>
+  </div>
+  </font>
+  </p>
+  </center>
+</form>
+
+
+
 </body>
 </html>
+
+
+
+
