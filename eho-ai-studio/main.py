@@ -7,8 +7,12 @@ import warnings
 
 # Use your own API key
 
-#openai.api_key = os.environ['OPENAI_KEY']
-openai.api_key = ""
+try:
+    openai.api_key = os.environ['OPENAI_KEY']
+except:
+    print("Sorry, No Key available")
+
+#openai.api_key = ""
 
 userapikey = ""
 userprompt=""
@@ -45,14 +49,15 @@ def index():
     if request.method == "POST":
         print(request.form["prompt"])
         userprompt = request.form["prompt"]
-        userapikey = request.form["apikey"]
+        #userapikey = request.form["apikey"]
         usertemp = request.form["temperature"]
 
         print("Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)
         print("Your Requested Temperature is: " + usertemp)
 
-        openai.api_key = userapikey
+        if (openai.api_key == ""):
+            openai.api_key = userapikey
 
         available_003 = False
     
@@ -60,7 +65,7 @@ def index():
             models = openai.Model.list()
         except: 
             print("sorry, wrong key")
-            return render_template("error.html", userapikey=userapikey)
+            return render_template("error.html", userapikey=openai.api_key)
     
 
         print("Available Models are: ")
@@ -91,7 +96,7 @@ def index():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=userapikey)
+                return render_template("error.html", userapikey=openai.api_key)
 
         else:
             try: 
@@ -105,7 +110,7 @@ def index():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=userapikey)
+                return render_template("error.html", userapikey=openai.api_key)
     
 
         answer = response.choices[0].text
@@ -116,7 +121,7 @@ def index():
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
-        return render_template("answer.html", userprompt=userprompt, answer=answer, userapikey=userapikey)
+        return render_template("answer.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
     return render_template('index.html')
 
@@ -126,20 +131,21 @@ def night_mode():
     if request.method == "POST":
         print(request.form["prompt"])
         userprompt = request.form["prompt"]
-        userapikey = request.form["apikey"]
+        #userapikey = request.form["apikey"]
         usertemp = request.form["temperature"]
 
         print("NIGHT MODE: Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)
         print("Your Requested Temperature is: " + usertemp)
 
-        openai.api_key = userapikey
+        if (openai.api_key == ""):
+            openai.api_key = userapikey
 
         try: 
             models = openai.Model.list()
         except: 
             print("sorry, wrong key")
-            return render_template("error_nm.html", userapikey=userapikey)
+            return render_template("error_nm.html", userapikey=openai.api_key)
 
         available_003 = False
         models = openai.Model.list()
@@ -172,7 +178,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=userapikey)
+                return render_template("error.html", userapikey=openai.api_key)
 
         else:
             try: 
@@ -186,7 +192,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=userapikey)
+                return render_template("error.html", userapikey=openai.api_key)
     
 
         answer = response.choices[0].text
@@ -197,7 +203,7 @@ def night_mode():
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
-        return render_template("answer_nm.html", userprompt=userprompt, answer=answer)
+        return render_template("answer_nm.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
     return render_template('night_mode.html')
 

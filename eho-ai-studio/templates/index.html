@@ -45,7 +45,7 @@
     <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button>
     <center>
     <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
-    <button onclick="location.href='{{ url_for('night_mode') }}'">NIGHT MODE</button>
+    <button onclick="location.href='{{ url_for('night_mode') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
     <p>
     <font face="Verdana, Geneva, sans-serif" color="#926f34", size="+4"> WELCOME TO EHO AI STUDIO 23
     </font>
@@ -85,19 +85,21 @@
 </font>
 
 <font style="font-family:verdana" color="0x0000FF">
+<!----
 <strong>1. COPY & PASTE YOUR VIP CODE </strong>
 <br>
 <sub>(** To obtain a VIP code, please send an email request to: <strong> dj.eho.no23@gmail.com </strong> </sub>
 <br>
 <sub>with your name, and how you have heard about us. **)</sub>
 <br></br>
+--->
 
-<strong> 2. SELECT DESIRED TEMPERATURE LEVEL </strong>
+<strong> 1. SELECT DESIRED TEMPERATURE LEVEL </strong>
 <br>
 <sub>(** The Higher the Temperature,  The More Creative the Responses! **)</sub>
 <br></br>
 
-<strong> 3. ENTER YOUR QUESTION AND CLICK SUBMIT! JUST WAIT ~2-3 SEC FOR OUR RESPONSE ! </strong>
+<strong> 2. ENTER YOUR QUESTION AND CLICK SUBMIT! JUST WAIT ~2-3 SEC FOR OUR RESPONSE ! </strong>
 <br>
 <sub>(** Be as clear and descriptive as you can! The better your question, the better our response! **)</sub>
 <br></br>
@@ -112,7 +114,7 @@
   <center>
   <!--input name="apikey"/-->
   <!--input type="text" id="apikey" name="apikey" rows="4" cols="80"></input-->
-  <label for="apikey"> <bold> <strong> <font style="font-family:verdana"> VIP Code: </font> </strong> </bold> </label>
+  <!--label for="apikey"> <bold> <strong> <font style="font-family:verdana"> VIP Code: </font> </strong> </bold> </label>
   <div>
     <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
     <br>
@@ -130,9 +132,8 @@
         alert("Text copied to clipboard: " + inputText.value);
       }
     </script>
-  </div>
+  </div-->
 
-  <p></p>
   <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperatue Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">
       <option value="Standard">Standard</option>
@@ -146,14 +147,14 @@
   </center>
   <center>
   <!--input name="prompt"/-->
-  <textarea id="prompt" name="prompt" rows="7" cols="50"></textarea>
+  <textarea id="prompt" name="prompt" rows="12" cols="50"></textarea>
   <br/><br/>
   </center>
   <center>
   <input type="submit" value="Submit" onclick="showProgress()">
   <!--button type="submit" onclick="showProgress()"></button>> <font style="font-family:verdana"> Submit </font> </button-->
   <div id="progress-bar">
-    <label id="pbf-label"><font style="font-family:verdana"> Wheels Turning ... </font></label>
+    <label id="pbf-label"><font style="font-family:verdana" color="0x0000FF"> Wheels Turning ... </font></label>
     <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
   </div>
   <script>
