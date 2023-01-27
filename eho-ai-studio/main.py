@@ -5,6 +5,9 @@ import os
 import io
 import warnings
 
+import smtplib
+from email.mime.text import MIMEText
+
 # Use your own API key
 
 try:
@@ -14,9 +17,10 @@ except:
 
 #openai.api_key = ""
 
-userapikey = ""
+userapikey=""
 userprompt=""
 usertemp=""
+useremail=""
 answer = ""
 engine_temperature = 0.5
 
@@ -42,6 +46,7 @@ engine_temperature = 0.5
 
 
 app = Flask(__name__)
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -218,6 +223,78 @@ def answer_nm():
 @app.route('/gallery_nm')
 def gallery_nm():
     return render_template('gallery_nm.html')
+
+
+@app.route("/sendemail", methods=["GET", "POST"])
+def sendemail():
+    # Your Gmail account information
+    useremail = request.form["useremail"]
+    
+    answer =  request.form["answer"]
+    userprompt = request.form["userprompt"]
+
+    print("user email : " + useremail)
+    print("user prompt : " + userprompt)
+    print("user answer : " + answer)
+
+    sender_email = os.environ['SENDER_EMAIL']
+    sender_password = os.environ['SENDER_PASSWORD']
+    receiver_email = useremail
+
+    # Create the message
+    message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
+    message["Subject"] = "Q&A AI GENIE Transcript is Ready!" 
+    message["From"] = sender_email
+    message["To"] = receiver_email
+
+
+    # Create a connection to the Gmail SMTP server
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        # Log in to the email account
+        server.login(sender_email, sender_password)
+        # Send the email
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        # Close the server connection
+        server.quit()
+
+    return render_template("useremail.html", useremail=useremail)
+
+
+@app.route("/sendemail_nm", methods=["GET", "POST"])
+def sendemail_nm():
+    print("SEND MAIL NIGHT MODE!!")
+    # Your Gmail account information
+    useremail = request.form["useremail"]
+    
+    answer =  request.form["answer"]
+    userprompt = request.form["userprompt"]
+
+    print("user email : " + useremail)
+    print("user prompt : " + userprompt)
+    print("user answer : " + answer)
+
+    sender_email = os.environ['SENDER_EMAIL']
+    sender_password = os.environ['SENDER_PASSWORD']
+    receiver_email = useremail
+
+    # Create the message
+    message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
+    message["Subject"] = "Q&A AI GENIE Transcript is Ready!" 
+    message["From"] = sender_email
+    message["To"] = receiver_email
+
+
+    # Create a connection to the Gmail SMTP server
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        # Log in to the email account
+        server.login(sender_email, sender_password)
+        # Send the email
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        # Close the server connection
+        server.quit()
+
+    return render_template("useremail_nm.html", useremail=useremail)
+
 
 
 if __name__ == '__main__':

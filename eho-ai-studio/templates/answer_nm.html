@@ -23,6 +23,7 @@
     <p></p>
     <center>
     <font style="font-family:verdana">
+    <textarea style="font-family:verdana" color="#0000FF" id="textprompt" rows="10" cols="80">
     {{userprompt}}
     </textarea>
     </font>
@@ -38,7 +39,7 @@
     <p></p>
     <center>
     <em class="ow-break-word"></em>
-    <textarea style="font-family:verdana" color="#0000FF" id="textbox" rows="25" cols="80">
+    <textarea style="font-family:verdana" color="#0000FF" id="textresponse" rows="25" cols="80">
     {{answer}}
     </textarea>
     </em>
@@ -47,7 +48,7 @@
     <script>
         function copyText() {
         /* Get the textarea element */
-        var textarea = document.getElementById("textbox");
+        var textarea = document.getElementById("textresponse");
         /* Create a new clipboard item */
         navigator.clipboard.writeText(textarea.value).then(() => {
           /* Alert the user that the text was copied */
@@ -61,6 +62,17 @@
     <p></p>
     <center>
     <font style="font-family:verdana">
+    <p> Like Our Responses?  Enter your email below and click SEND and we will send a transcript to you! </p>
+    <br>
+    <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
+    <br>
+    <form method="post" action="/sendemail">
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
+    <input type="hidden" id="userprompt" name="userprompt" maxlength="100" size="100" value="{{ userprompt }}"></input>
+    <input type="hidden" id="answer" name="answer" maxlength="100" size="100"  value="{{ answer }}"></input>  
+    <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+    </form>
+
     <p style="font-family:verdana"> What do you think?  </p>
     <form>
         <fieldset>
