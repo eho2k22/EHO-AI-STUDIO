@@ -1,5 +1,10 @@
 from flask import Flask, render_template, request
 
+# OpenAI Library
+# Copyright (c) 2023 OpenAI
+# https://github.com/openai/openai-python
+
+
 import openai
 import os
 import io
@@ -23,7 +28,7 @@ usertemp=""
 useremail=""
 answer = ""
 engine_temperature = 0.5
-
+jokeprompt = "Tell me a funny joke about AI in 25 words or less"
 
 
 #def answer_question(question):
@@ -43,6 +48,25 @@ engine_temperature = 0.5
     #if question.lower() == "exit":
         #break
     #print(answer_question(question))
+
+
+# PRINT THE PUN OF THE DAY 
+
+try: 
+    print("Davince-003 is available !! ")
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=jokeprompt,
+        max_tokens=2048,
+        n=1,
+        stop=None,
+        temperature=engine_temperature,
+        )
+except:
+    print("something went wrong while processing your question.. ")
+                
+
+jokeanswer =  response.choices[0].text
 
 
 app = Flask(__name__)
@@ -121,14 +145,14 @@ def index():
         answer = response.choices[0].text
     
         if userprompt.lower() == "exit":
-            return render_template('index.html')
+            return render_template('index.html', jokeanswer=jokeanswer)
         
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
         return render_template("answer.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
-    return render_template('index.html')
+    return render_template('index.html', jokeanswer=jokeanswer)
 
 
 @app.route('/night_mode', methods=["GET", "POST"])
@@ -203,14 +227,14 @@ def night_mode():
         answer = response.choices[0].text
     
         if userprompt.lower() == "exit":
-            return render_template('night_mode.html')
+            return render_template('night_mode.html', jokeanswer=jokeanswer)
         
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
         return render_template("answer_nm.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
-    return render_template('night_mode.html')
+    return render_template('night_mode.html', jokeanswer=jokeanswer)
 
 @app.route('/gallery')
 def gallery():
@@ -223,6 +247,14 @@ def answer_nm():
 @app.route('/gallery_nm')
 def gallery_nm():
     return render_template('gallery_nm.html')
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 
 
 @app.route("/sendemail", methods=["GET", "POST"])

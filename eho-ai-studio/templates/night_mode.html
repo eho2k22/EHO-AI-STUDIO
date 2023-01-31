@@ -47,15 +47,26 @@
     <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
     <button onclick="location.href='{{ url_for('index') }}'"><font style="font-family:verdana" color="0x0000FF">LIGHT MODE</font></button>
     <p>
-    <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> WELCOME TO EHO AI STUDIO 23
+    <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4">
+    <strong>
+    WELCOME TO EHO AI STUDIO 23
+    </strong>
     </font>
     </p>
+    <font style="font-family:verdana" color="0x0000FF">
+    <p>
+      JOKE OF THE DAY : 
+    </p>
+    <p>
+      {{jokeanswer}}
+    </p>
+    </font>
     <br></br>
     </center>
 <center>
   <div style="text-align:center">
     <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="STUDIO" style="display:inline-block" width="250" height="300" margin-right:10px"></a>
-    <a href="https://youtube.com/shorts/YUnJ5Rzm3OU"><img src="https://cdn.midjourney.com/8c9f4e1d-a592-4433-927e-96644e54e1af/grid_0.png" alt="AI StoryCaster" style="display:inline-block" width="250" height="300" margin-right:10px"> </a>
+    <a href="https://youtube.com/shorts/YUnJ5Rzm3OU"><img src="https://cdn.midjourney.com/23370472-6030-4af6-a488-28ab0cce3a02/grid_0.png" alt="AI StoryCaster" style="display:inline-block" width="250" height="300" margin-right:10px"> </a>
     <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="ROBOT" style="display:inline-block" width="250" height="300"></a>
   </div>
   
@@ -75,10 +86,25 @@
   </h2>
 </center>
 <center>
-<p style="font-family:verdana"> <sub> (built on OpenAI's Davinci Model.  Python Open Source available at <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI Github </font> </a> ) </sub> </p>
+<p style="font-family:verdana"> <sub> (built on OpenAI's Davinci Model.  source available at <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI Github </font> </a> ) </sub> </p>
 <br>
+<font style="font-family:verdana" >
+<p> 
+  No more searches and sifting through pages to locate what you are looking for. 
+</p>
+<p>
+  No login required. Your questions = your privacy  
+</p>
+<p>
+  JOKE OF THE DAY : 
+</p>
+<p>
+  {{jokeanswer}}
+</p>
+</font>
 
-<font style="font-family:verdana" color="#90EE90">
+
+<font style="font-family:verdana" color="#ADD8E6">
 <strong> How To Get Started? </strong>
 <p></p>
 <p></p>
@@ -173,7 +199,7 @@
   </center>
   <center>
   <br></br>
-  <p> <font style="font-family:verdana"> Beta Version 1.4 as of 
+  <p> <font style="font-family:verdana"> Beta Version 1.5 as of 
   <div id="current_date">
     <script>
     date = new Date();
@@ -188,6 +214,15 @@
   </center>
 </form>
 
+<center>
+  <br></br>
+  <div style="text-align:center">
+    <a href='{{ url_for('terms') }}'> Terms</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href='{{ url_for('privacy') }}'> Privacy</a>
+  </div>
+
+</center>
 
 
 </body>
