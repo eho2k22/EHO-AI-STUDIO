@@ -29,6 +29,7 @@ useremail=""
 answer = ""
 engine_temperature = 0.5
 jokeprompt = "Tell me a funny joke about AI in 25 words or less"
+response = None
 
 
 #def answer_question(question):
@@ -53,7 +54,6 @@ jokeprompt = "Tell me a funny joke about AI in 25 words or less"
 # PRINT THE PUN OF THE DAY 
 
 try: 
-    print("Davince-003 is available !! ")
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=jokeprompt,
@@ -63,7 +63,7 @@ try:
         temperature=engine_temperature,
         )
 except:
-    print("something went wrong while processing your question.. ")
+    print("something went wrong while processing your Joke Prompt.. ")
                 
 
 jokeanswer =  response.choices[0].text
