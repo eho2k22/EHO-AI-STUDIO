@@ -3,6 +3,7 @@
 <head>
     <title>EHO AIGC Studio </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <style>
       /* Add the styles for the button */
       .right-aligned-button {
@@ -10,6 +11,21 @@
       }
       .right-aligned-div {
         float: right; /* Float the button to the right */
+      }
+
+      .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
       }
       
       #progress-bar {
@@ -26,6 +42,9 @@
         background-color: #b24141;
         width: 0%;
       }
+
+
+
     </style>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="text/javascript">
@@ -46,13 +65,14 @@
     <center>
     <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
     <button onclick="location.href='{{ url_for('night_mode') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
-    <p>
+    <p class="text">
     <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
     <strong>
     WELCOME TO EHO AI STUDIO 23
     </strong>
     </font>
     </p>
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/naWxFqjhbz8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <font style="font-family:verdana" color="0x0000FF">
     <p>
       JOKE OF THE DAY : 
@@ -153,7 +173,7 @@
     </script>
   </div-->
 
-  <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperatue Level: </font> </strong> </bold> </label>
+  <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperature Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">
       <option value="Standard">Standard</option>
       <option value="High">High</option>
