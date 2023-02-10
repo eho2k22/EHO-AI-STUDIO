@@ -2,7 +2,7 @@
 
 aiohttp==3.8.3
 openai==0.26.1
-# supabase-client==0.2.5
+supabase-client==0.2.5
 #flask-authlib==1.6.0
 flask-authlib-client==0.0.1
 google-cloud-storage==2.7.0

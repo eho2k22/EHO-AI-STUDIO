@@ -9,9 +9,50 @@ import openai
 import os
 import io
 import warnings
+import json
 
 import smtplib
 from email.mime.text import MIMEText
+
+from supabase import create_client
+
+
+
+supa_url = os.environ['SUPABASE_URL']
+supa_key = os.environ['SUPABASE_KEY']
+
+supabase = create_client(supa_url, supa_key)
+
+print("supabase client initiated successfully! ")
+
+records=[]
+
+#prompt of the day 
+pod_prompt = ""
+pod_results=[]
+pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).execute()
+
+for pod_record in pod_results:
+    print("POD_Record = ")
+    print(pod_record)
+    print("POD_Record index 0 = ")
+    print(pod_record[0]) 
+    print("POD_Record index 1 = ")
+    print(pod_record[1]) 
+    
+
+    # fetch the JSON object from the list
+    # convert the JSON DATA object into a Python dictionary
+    json_obj = pod_record[1][0]
+    dict_data = json.loads(json.dumps(json_obj))
+
+
+    # Fetch and Print the PROMPT value
+    print(" Prompt of the Day = " ) 
+    pod_prompt = list(dict_data.values())[2]
+    print(pod_prompt) 
+
+    break
 
 # Use your own API key
 
@@ -145,14 +186,34 @@ def index():
         answer = response.choices[0].text
     
         if userprompt.lower() == "exit":
-            return render_template('index.html', jokeanswer=jokeanswer)
+            return render_template('index.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
         
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
+
+        #save UserPrompt and Answer as a record into Transcripts table
+
+        record = {
+        'prompt': userprompt,
+        'response': answer,
+        }
+
+        #reset records before appending 
+        records = []
+        records.append(record)
+
+        # Insert the records into the NFT table
+        try:
+            data = supabase.table('Transcripts').insert(records).execute()
+        except:
+            print("oops.. INSERT went wrong while saving transcripts into Supabase ")
+            return render_template("error.html", userapikey=openai.api_key)
+
+
         return render_template("answer.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
-    return render_template('index.html', jokeanswer=jokeanswer)
+    return render_template('index.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
 
 
 @app.route('/night_mode', methods=["GET", "POST"])
@@ -227,14 +288,33 @@ def night_mode():
         answer = response.choices[0].text
     
         if userprompt.lower() == "exit":
-            return render_template('night_mode.html', jokeanswer=jokeanswer)
+            return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
         
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
 
+        #save UserPrompt and Answer as a record into Transcripts table
+
+        record = {
+        'prompt': userprompt,
+        'response': answer,
+        }
+        #reset records before appending 
+        records = []
+        records.append(record)
+
+        # Insert the records into the Transcripts table
+        try:
+            data = supabase.table('Transcripts').insert(records).execute()
+        except:
+            print("oops.. INSERT went wrong while saving transacript into Supabase ")
+            return render_template("error.html", userapikey=openai.api_key)
+
+        
+
         return render_template("answer_nm.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
-    return render_template('night_mode.html', jokeanswer=jokeanswer)
+    return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
 
 @app.route('/gallery')
 def gallery():
