@@ -1,0 +1,134 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>EHO P&R AI Genie Conversation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+      /* Add the styles for the button */
+      .right-aligned-button {
+        float: right; /* Float the button to the right */
+      }
+      .right-aligned-div {
+        float: right; /* Float the button to the right */
+      }
+
+      .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+      }
+      
+      #progress-bar {
+        width: 500px;
+        height: 22px;
+        border: 1px solid #FFD700;
+        border-radius: 10px;
+        overflow: hidden;
+        display: none;
+      }
+
+      #progress-bar-fill {
+        height: 100%;
+        background-color: #b24141;
+        width: 0%;
+      }
+
+
+    </style>
+
+</head>
+<body bgcolor="#AFB9DB" onload="displayWords()">
+  <font style="font-family:verdana">
+  <center>
+    <p class="text">
+      <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
+      <strong>
+      Conversation with EHO P&R AI Genie
+      </strong>
+      </font>
+    </p>
+    <form method="POST">
+        <p><strong>Prompt:</strong></p>
+        <!--p><input type="text" name="prompt" rows="6" cols="70"></p-->
+        <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
+        <input type="submit" value="Send" onclick="showProgress()">
+    
+
+      <div id="progress-bar">
+          <label id="pbf-label"><font style="font-family:verdana" color="0x0000FF"> hold a sec plz ... </font></label>
+          <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
+      </div>
+        <script>
+          function showProgress() {
+            document.getElementById("progress-bar").style.display = "block";
+            var progress = 0;
+            var progressInterval = setInterval(function() {
+              progress += 10;
+              document.getElementById("progress-bar-fill").style.width = progress + "%";
+              if (progress >= 100) {
+                clearInterval(progressInterval);
+              }
+            }, 1000);
+          }
+      </script>
+    </form>
+    <hr>
+    {% if conversation_history %}
+        {% for conversation in conversation_history %}
+            <!--p><strong>You said : </strong> {{ conversation[0] }}</p>
+            <p><strong>EHO P&R Bot said:</strong> {{ conversation[1] }}</p-->
+            <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
+            {% if conversation !=  conversation_history[conversation_length - 1]     %}
+                <p><strong>EHO P&R Bot said: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
+            {% endif %}
+            {% if conversation_length >= 2 and conversation == conversation_history[conversation_length - 1]     %}
+                <p id = "response" > {{ conversation.split(' -xxxx- ')[1] }} </p>
+                <p id = "output" onload="displayWords()"><strong>EHO P&R BOT responded : </strong> </p>
+                <script>
+                  function displayWords() {
+                    var textArea = document.getElementById("response");
+                    var output = document.getElementById("output");
+                    var words = textArea.value.split(" ");
+                    var i = 0;
+                    var interval = setInterval(function() {
+                    if (i >= words.length) {
+                      clearInterval(interval);
+                     } else {
+                      output.innerHTML += words[i] + " ";
+                      i++;
+                    }
+                  }, 100);
+                }
+                </script>
+            {% endif %}
+            <hr>
+        {% endfor %}
+  
+    {% endif %}
+  </center>
+  <br></br>
+  <center>
+  <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
+  <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+  </center>
+  <br></br>
+  <center>
+  <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
+  <br></br>
+  </center>
+  </font>
+</body>
+</html>

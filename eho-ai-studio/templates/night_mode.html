@@ -55,10 +55,10 @@
     </script>
 </head>
 <body>
-    <div class="right-aligned-div" id="google_translate_element"></div>
+    <!---div class="right-aligned-div" id="google_translate_element"></div>
     <br></br>
     <br></br>
-    <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button>
+    <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button--->
     <center>
     <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
     <button onclick="location.href='{{ url_for('index') }}'"><font style="font-family:verdana" color="0x0000FF">LIGHT MODE</font></button>
@@ -87,10 +87,6 @@
     <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="ROBOT" style="display:inline-block" width="250" height="300"></a>
   </div>
   
-  <!--div style="padding: 20px;">
-  <img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="DJ-EHO" width="250" height="300"-->
-  <!--img src="https://cdn.midjourney.com/813b31c4-ab13-4178-af32-b7ab9c1db2de/grid_0.png" alt="DJ-EHO" width="250" height="300"-->
-  
   </div>
 </center>
 <center>
@@ -99,7 +95,7 @@
   </center>
 <center>
   <h2 style="font-family:verdana" color="#FFD700">
-    Come try out EHO's Q&A AI Genie! 
+    Come try out EHO's P&R (Prompt & Response) AI Genie! 
   </h2>
 </center>
 <center>
@@ -111,7 +107,6 @@
 </p>
 </font>
 
-
 <font style="font-family:verdana" color="#ADD8E6">
 <!---strong> How To Get Started? </strong--->
 <p></p>
@@ -119,14 +114,6 @@
 </font>
 
 <font style="font-family:verdana" color="#ADD8E6">
-<!----
-<strong>1. COPY & PASTE YOUR VIP CODE </strong>
-<br>
-<sub>(** To obtain a VIP code, please send an email request to: <strong> dj.eho.no23@gmail.com </strong> </sub>
-<br>
-<sub>with your name, and how you have heard about us. **)</sub>
-<br></br>
---->
 
 <strong> 1. SELECT DESIRED TEMPERATURE LEVEL </strong>
 <br>
@@ -146,27 +133,6 @@
 <form method="post">
   
   <center>
-  <!--input name="apikey"/-->
-  <!--input type="text" id="apikey" name="apikey" rows="4" cols="80"></input-->
-  <!--label for="apikey"> <bold> <strong> <font style="font-family:verdana"> VIP Code: </font> </strong> </bold> </label>
-  <div>
-    <input type="text" id="apikey" name="apikey" maxlength="61" size="61"></input>
-    <br>
-    <button onclick="copyText()">Copy Code </button>
-
-    <script>
-      function copyText() {
-        /* Get the input element */
-        var inputText = document.getElementById("apikey");
-        /* Select the text */
-        inputText.select();
-        /* Copy the text */
-        document.execCommand("copy");
-        /* Alert the user that the text was copied */
-        alert("Text copied to clipboard: " + inputText.value);
-      }
-    </script>
-  </div-->
 
   <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperature Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">
@@ -205,9 +171,12 @@
     }
   </script>
   </center>
-  <center>
+</form>
+
+<center>
   <br></br>
-  <p> <font style="font-family:verdana"> Beta Version 1.6 as of 
+  <button onclick="location.href='{{ url_for('conversation') }}'"><font style="font-family:verdana" color="0x0000FF">Start Conversation  </font> </button>
+  <p> <font style="font-family:verdana"> Beta Version 1.7 as of 
   <div id="current_date">
     <script>
     date = new Date();
@@ -219,11 +188,12 @@
   </div>
   </font>
   </p>
-  </center>
-</form>
+</center>
 
 <center>
   <br></br>
+  <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
+  <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
   <font style="font-family:verdana">
   <div style="text-align:center">
     <a href='{{ url_for('terms') }}'> Terms</a>
@@ -232,7 +202,6 @@
   </div>
   </font>
 </center>
-
 
 </body>
 </html>

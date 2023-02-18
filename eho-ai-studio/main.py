@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 # OpenAI Library
 # Copyright (c) 2023 OpenAI
@@ -16,6 +16,19 @@ from email.mime.text import MIMEText
 
 from supabase import create_client
 
+conversation_history=[]
+convolength=0
+convocontext=" starting conversation "
+convoconjunctor= " given that "
+convoconjunctor2 = " , as well as that "
+userapikey=""
+userprompt=""
+usertemp=""
+useremail=""
+answer = ""
+engine_temperature = 0.5
+jokeprompt = "Tell me a funny joke about AI in 25 words or less"
+response = None
 
 
 supa_url = os.environ['SUPABASE_URL']
@@ -61,35 +74,8 @@ try:
 except:
     print("Sorry, No Key available")
 
-#openai.api_key = ""
-
-userapikey=""
-userprompt=""
-usertemp=""
-useremail=""
-answer = ""
-engine_temperature = 0.5
-jokeprompt = "Tell me a funny joke about AI in 25 words or less"
-response = None
 
 
-#def answer_question(question):
- #   response = openai.Completion.create(
-  #      engine="text-davinci-003",
-   #     prompt=question,
-    #    max_tokens=2048,
-     #   n=1,
-      #  stop=None,
-       # temperature=0.5,
-   # )
-   # return response.choices[0].text
-
-
-#while True:
-    #question = input("What's your question? ")
-    #if question.lower() == "exit":
-        #break
-    #print(answer_question(question))
 
 
 # PRINT THE PUN OF THE DAY 
@@ -107,10 +93,103 @@ except:
     print("something went wrong while processing your Joke Prompt.. ")
                 
 
-jokeanswer =  response.choices[0].text
+jokeanswer = response.choices[0].text
+
+
+# Define a function to generate a response using OpenAI API
+def generate_response(prompt, previous_context):
+    if previous_context == "":
+        print("GENERATE RESPONSE CONTEXT is EMPTY!! ")
+        response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=1000,
+        n=1,
+        stop=None,
+        temperature=0.5
+         )
+    else: 
+        print("GENERATE RESPONSE CONTEXT is " + previous_context)
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=prompt + convoconjunctor + previous_context,
+            max_tokens=1000,
+            n=1,
+            stop=None,
+            temperature=0.5
+         )
+    return response.choices[0].text.strip()
+
+
+
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ['OPENAI_KEY']
+
+@app.route('/conversation', methods=['GET', 'POST'])
+def conversation():
+    # check if the session list variable exists, if not create it
+    #if 'conversation_history' not in session:
+       # session['conversation_history'] = []
+    #if 'convolength' not in session:
+        #print("RESETTING convolength to 0  !!!")
+        #session['convolength'] = 0
+    
+    if request.method == "GET":
+        return render_template("conversation.html")
+    elif request.method == 'POST':
+        prompt = request.form['prompt']
+    
+        convocontext = ""
+        convoindex = 0
+        #re-construct context from conversation_history 
+        #for conversation in session['conversation_history']:
+            #convocontext = convocontext + convoconjunctor + conversation.split("-")[1].strip()
+            #session['convolength'] = session.get('convolength', 0) + 1
+
+        #re-construct context from conversation_history 
+        for conversation in conversation_history:
+            if (convoindex == 0):
+                convocontext = convocontext + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
+            #convolength = convolength + 1
+            else :
+                convocontext = convocontext + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
+
+            convoindex +=1
+        
+        print("conversation context = " + convocontext) 
+        print("conversation length = " + str(len(conversation_history)))
+        #print("conversation length = " + str(session['convolength'])) 
+
+
+        response = generate_response(prompt, convocontext)
+        print("prompt  = " + prompt) 
+        print("response = " + response) 
+        print("convocontext = " + convocontext)
+
+
+        if  (len(conversation_history) >= 5):
+
+            #empty conversation if converesation context > 5 
+            print("about to empty conversation history when it reaches 5 !!") 
+            conversation_history.clear()
+            print("about to reset convocontext !!") 
+            convocontext = ""
+            #session['conversation_history'] = []
+            #session['convolength'] = 0
+        
+        #previous_response defined as CONTEXT 
+        #convocontext = convocontext + convoconjunctor + response 
+        print("Convo Pair :  " + prompt + " -xxxx- " + response) 
+
+        conversation_history.append(prompt + " -xxxx- " + response) 
+        #session['conversation_history'].append(prompt + " - " + response) 
+
+    
+    #return render_template('conversation.html', conversation_history=session.get('conversation_history', []))
+    return render_template('conversation.html', conversation_history=conversation_history, conversation_length=len(conversation_history))
+
 
 
 @app.route("/", methods=["GET", "POST"])

@@ -1,77 +1,3 @@
-from flask import Flask, render_template, request
-
-import openai
-import os
-import io
-import warnings
-
-# Use your own API key
-
-openai.api_key = os.environ['OPENAI_KEY']
-userprompt=""
-answer = ""
-
-print("OPENAI KEY = ")
-
-print(os.environ['OPENAI_KEY'])
-
-def answer_question(question):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=question,
-        max_tokens=2048,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
-    return response.choices[0].text
-
-
-#while True:
-    #question = input("What's your question? ")
-    #if question.lower() == "exit":
-        #break
-    #print(answer_question(question))
-
-
-app = Flask(__name__)
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-
-
-    if request.method == "POST":
-        print(request.form["prompt"])
-        userprompt = request.form["prompt"]
-
-        print("Your Question is:"+ userprompt)
-    
-        if userprompt.lower() == "exit":
-            return render_template('index.html')
-        
-        answer = answer_question(userprompt)
-        print("ANSWER IS: " + answer)
-
-        return render_template("answer.html", userprompt=userprompt, answer=answer)
-    
-    return render_template('index.html')
-
-
-@app.route('/night_mode')
-def night_mode():
-    return render_template('night_mode.html')
-
-@app.route('/gallery')
-def gallery():
-    return render_template('gallery.html')
-
-if __name__ == '__main__':
-    app.run(host="127.0.0.1", port=8081, debug=True)
-
-
-*****************************************************************
-
-
 from flask import Flask, render_template, request, session
 
 # OpenAI Library
@@ -204,10 +130,11 @@ app.config['SECRET_KEY'] = os.environ['OPENAI_KEY']
 @app.route('/conversation', methods=['GET', 'POST'])
 def conversation():
     # check if the session list variable exists, if not create it
-    if 'conversation_history' not in session:
-        print("Initializing Session Variable conversation_history")
-        session['conversation_history'] = []
-  
+    #if 'conversation_history' not in session:
+       # session['conversation_history'] = []
+    #if 'convolength' not in session:
+        #print("RESETTING convolength to 0  !!!")
+        #session['convolength'] = 0
     
     if request.method == "GET":
         return render_template("conversation.html")
@@ -217,28 +144,23 @@ def conversation():
         convocontext = ""
         convoindex = 0
         #re-construct context from conversation_history 
-        for conversation in session['conversation_history']:
-            if (convoindex == 0):
-                convocontext = convocontext + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
-            else :
-                convocontext = convocontext + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
-            convoindex +=1
-            print("convo index = " + str(convoindex))
+        #for conversation in session['conversation_history']:
+            #convocontext = convocontext + convoconjunctor + conversation.split("-")[1].strip()
+            #session['convolength'] = session.get('convolength', 0) + 1
 
         #re-construct context from conversation_history 
-        #for conversation in conversation_history:
-            #if (convoindex == 0):
-                #convocontext = convocontext + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
-            #else :
-                #convocontext = convocontext + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
+        for conversation in conversation_history:
+            if (convoindex == 0):
+                convocontext = convocontext + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
+            #convolength = convolength + 1
+            else :
+                convocontext = convocontext + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
 
-            #convoindex +=1
+            convoindex +=1
         
         print("conversation context = " + convocontext) 
-
-        #print("conversation length = " + str(len(conversation_history)))
-
-        print("conversation length = " + str(len(session['conversation_history']))) 
+        print("conversation length = " + str(len(conversation_history)))
+        #print("conversation length = " + str(session['convolength'])) 
 
 
         response = generate_response(prompt, convocontext)
@@ -255,11 +177,11 @@ def conversation():
             #session['convolength'] = 0
 
 
-        if  (len(session['conversation_history']) >= 5):
+        if  (len(conversation_history) >= 5):
 
             #empty conversation if converesation context > 5 
             print("about to empty conversation history when it reaches 5 !!") 
-            session['conversation_history'].clear()
+            conversation_history.clear()
             print("about to reset convocontext !!") 
             convocontext = ""
             #session['conversation_history'] = []
@@ -269,7 +191,7 @@ def conversation():
         #convocontext = convocontext + convoconjunctor + response 
         print("Convo Pair :  " + prompt + " -xxxx- " + response) 
 
-        session['conversation_history'].append(prompt + " -xxxx- " + response) 
+        conversation_history.append(prompt + " -xxxx- " + response) 
         #session['conversation_history'].append(prompt + " - " + response) 
        
         #if prompt:
@@ -282,7 +204,7 @@ def conversation():
     #session.pop('conversation_history', None)
     
     #return render_template('conversation.html', conversation_history=session.get('conversation_history', []))
-    return render_template('conversation.html', conversation_history=session['conversation_history'], conversation_length=len(session['conversation_history']))
+    return render_template('conversation.html', conversation_history=conversation_history, conversation_length=len(conversation_history))
 
 
 
