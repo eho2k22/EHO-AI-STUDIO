@@ -15,20 +15,25 @@ import smtplib
 from email.mime.text import MIMEText
 
 from supabase import create_client
+from array import array 
 
-conversation_history=[]
-convolength=0
-convocontext=" starting conversation "
-convoconjunctor= " given that "
-convoconjunctor2 = " , as well as that "
+
 userapikey=""
 userprompt=""
 usertemp=""
 useremail=""
 answer = ""
 engine_temperature = 0.5
-jokeprompt = "Tell me a funny joke about AI in 25 words or less"
 response = None
+
+jokeprompt = "Tell me a funny joke about AI in 25 words or less"
+jokeanswer = ""
+
+convo_history = ['']
+convo_context = ""
+dict_data = {}
+convoconjunctor= " given that "
+convoconjunctor2 = " , as well as that "
 
 
 supa_url = os.environ['SUPABASE_URL']
@@ -46,12 +51,12 @@ pod_results=[]
 pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).execute()
 
 for pod_record in pod_results:
-    print("POD_Record = ")
-    print(pod_record)
-    print("POD_Record index 0 = ")
-    print(pod_record[0]) 
-    print("POD_Record index 1 = ")
-    print(pod_record[1]) 
+    #print("POD_Record = ")
+    #print(pod_record)
+    #print("POD_Record index 0 = ")
+    #print(pod_record[0]) 
+    #print("POD_Record index 1 = ")
+    #print(pod_record[1]) 
     
 
     # fetch the JSON object from the list
@@ -77,29 +82,10 @@ except:
 
 
 
-
-# PRINT THE PUN OF THE DAY 
-
-try: 
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=jokeprompt,
-        max_tokens=2048,
-        n=1,
-        stop=None,
-        temperature=engine_temperature,
-        )
-except:
-    print("something went wrong while processing your Joke Prompt.. ")
-                
-
-jokeanswer = response.choices[0].text
-
-
 # Define a function to generate a response using OpenAI API
 def generate_response(prompt, previous_context):
     if previous_context == "":
-        print("GENERATE RESPONSE CONTEXT is EMPTY!! ")
+        print("GENERATE_RESPONSE CONTEXT is EMPTY!! ")
         response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
@@ -109,7 +95,7 @@ def generate_response(prompt, previous_context):
         temperature=0.5
          )
     else: 
-        print("GENERATE RESPONSE CONTEXT is " + previous_context)
+        print("GENERATE_RESPONSE CONTEXT NOT EMPTY :  " + previous_context)
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt + convoconjunctor + previous_context,
@@ -121,75 +107,143 @@ def generate_response(prompt, previous_context):
     return response.choices[0].text.strip()
 
 
-
-
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['OPENAI_KEY']
 
 @app.route('/conversation', methods=['GET', 'POST'])
 def conversation():
-    # check if the session list variable exists, if not create it
-    #if 'conversation_history' not in session:
-       # session['conversation_history'] = []
-    #if 'convolength' not in session:
-        #print("RESETTING convolength to 0  !!!")
-        #session['convolength'] = 0
+
+
+    # check if the session variable convo_history exists, if not create it
+    #print("CURRENT Session ID:", session.sid)
+    if ('convo_ID' not in session) or (session['convo_ID'] == 0) :
+        print("Initializing session Variable convo_ID")
+    
+        # fetch latest convo_ID record 
+        cid_results=[]
+        cid_results = supabase.table('Conversations').select("*").order('convo_ID').limit(1).execute()
+        cid_record_id=0
+
+        for cid_record in cid_results:
+    
+            # fetch the JSON object from the list
+            # convert the JSON DATA object into a Python dictionary
+            cid_json_obj = cid_record[1][0]
+            dict_data = json.loads(json.dumps(cid_json_obj))
+
+
+            # Fetch and Print the convoID value
+            cid_record_id = list(dict_data.values())[2]
+            print("Conversation ID = " + str(cid_record_id) ) 
+
+            cid_record_history = list(dict_data.values())[4]
+
+            break
+
+        # setting NEW convo_ID to decrement 5 
+        session['convo_ID'] = cid_record_id - 5 
+        print(" new SESSION ID = " + str(cid_record_id - 5 ) ) 
+        # insert NEW convo_ID into DB 
+        #save UserPrompt and Answer as a record into Transcripts table
+
+        record = {
+        'convo_ID': cid_record_id - 5
+        }
+
+        #reset records before appending 
+        records = []
+        records.append(record)
+
+        # Insert the records into the NFT table
+        try:
+            data = supabase.table('Conversations').insert(records).execute()
+        except:
+            print("OOPS.. INSERT went WRONG while saving New Conversation ID into DB ")
+            return render_template("error.html", userapikey=openai.api_key)
+
+
+
+    else:
+        # convo_ID already exists, fetch the existing convo data 
+        print("Session Variable convo_ID ALREADY EXISTS !!")
+        convo_ID = session['convo_ID']
+        print("EXISTING Session Variable convo_ID == " + str(convo_ID))
+    
+
+        cid_results=[]
+        cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
+
+        # if len(cid_results) == 0 --> meaning Conversation ID data no longer exists in DB !! 
+        # In which case,  need to RESET Session Convo_ID and Re-create NEW Convo_ID 
+
+
+        for cid_record in cid_results:
+    
+            # fetch the JSON object from the list
+            # convert the JSON DATA object into a Python dictionary
+            cid_json_obj = cid_record[1][0]
+            dict_data = json.loads(json.dumps(cid_json_obj))
+
+            convo_context = list(dict_data.values())[3]
+            print("convo_context equals ") 
+            print(convo_context)
+            convo_history = list(dict_data.values())[4]
+
+            break
     
     if request.method == "GET":
         return render_template("conversation.html")
     elif request.method == 'POST':
         prompt = request.form['prompt']
     
-        convocontext = ""
-        convoindex = 0
-        #re-construct context from conversation_history 
-        #for conversation in session['conversation_history']:
-            #convocontext = convocontext + convoconjunctor + conversation.split("-")[1].strip()
-            #session['convolength'] = session.get('convolength', 0) + 1
+ 
+        #re-construct convo_context from convo_history 
+        #for conversation in convo_history:
+           # if (convoindex == 0):
+             #   convo_context = convo_context + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
+           # else :
+              #  convo_context = convo_context + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
 
-        #re-construct context from conversation_history 
-        for conversation in conversation_history:
-            if (convoindex == 0):
-                convocontext = convocontext + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
-            #convolength = convolength + 1
-            else :
-                convocontext = convocontext + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
-
-            convoindex +=1
+           # convoindex +=1
         
-        print("conversation context = " + convocontext) 
-        print("conversation length = " + str(len(conversation_history)))
-        #print("conversation length = " + str(session['convolength'])) 
+        print("convo context = " + convo_context) 
+        print("convo_history length = " + str(len(convo_history))) 
 
-
-        response = generate_response(prompt, convocontext)
+        response = generate_response(prompt, convo_context)
         print("prompt  = " + prompt) 
         print("response = " + response) 
-        print("convocontext = " + convocontext)
+        print("convo_context = " + convo_context)
 
 
-        if  (len(conversation_history) >= 5):
+        if  (len(convo_history) >= 7):
 
             #empty conversation if converesation context > 5 
             print("about to empty conversation history when it reaches 5 !!") 
-            conversation_history.clear()
-            print("about to reset convocontext !!") 
-            convocontext = ""
-            #session['conversation_history'] = []
-            #session['convolength'] = 0
+            convo_history.clear()
+    
+            #resetting Conversation ID 
+            #session['convo_ID'] = 0
+
+            print("about to reset convo_context !!") 
+            convo_context = ""
+      
+            
         
         #previous_response defined as CONTEXT 
-        #convocontext = convocontext + convoconjunctor + response 
-        print("Convo Pair :  " + prompt + " -xxxx- " + response) 
+        #convo_context = convo_context + convoconjunctor + response 
+        print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
 
-        conversation_history.append(prompt + " -xxxx- " + response) 
-        #session['conversation_history'].append(prompt + " - " + response) 
+        convo_history.append(prompt + " -xxxx- " + response) 
+        #session['convo_history'].append(prompt + " - " + response) 
+        print("convo_history length AFTER APPEND = " + str(len(convo_history))) 
 
-    
-    #return render_template('conversation.html', conversation_history=session.get('conversation_history', []))
-    return render_template('conversation.html', conversation_history=conversation_history, conversation_length=len(conversation_history))
+        # Convert the array to a JSON string and remove the square brackets
+        convo_history_str = json.dumps(convo_history)[1:-1]
 
+        #Updating context data of Conversation ID  in DB
+        supabase.table('Conversations').update({"convo_context" : f'{convo_context}', "convo_history" : f'{{{convo_history_str}}}' }).eq('convo_ID', convo_ID).execute()
+
+    return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
 
 
 @app.route("/", methods=["GET", "POST"])

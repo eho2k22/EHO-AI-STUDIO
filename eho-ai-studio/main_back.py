@@ -167,14 +167,6 @@ def conversation():
         print("prompt  = " + prompt) 
         print("response = " + response) 
         print("convocontext = " + convocontext)
-        #if 'convolength' in session and session['convolength'] > 5:
-
-            #empty conversation if converesation context > 5 
-            #conversation_history = []
-            #print("conversation length = " + convolength) 
-            #print("about to empty conversation history !!") 
-            #session['conversation_history'] = []
-            #session['convolength'] = 0
 
 
         if  (len(conversation_history) >= 5):
@@ -193,37 +185,11 @@ def conversation():
 
         conversation_history.append(prompt + " -xxxx- " + response) 
         #session['conversation_history'].append(prompt + " - " + response) 
-       
-        #if prompt:
-           # conversation_history = session.get('conversation_history', [])
-           # response = generate_response(prompt, conversation_history)
-            #conversation_history.append((prompt, response))
-            #session['conversation_history'] = conversation_history
-    
-        #else:
-    #session.pop('conversation_history', None)
+
     
     #return render_template('conversation.html', conversation_history=session.get('conversation_history', []))
     return render_template('conversation.html', conversation_history=conversation_history, conversation_length=len(conversation_history))
 
-
-
-#@app.route("/conversation", methods=["GET", "POST"])
-#def conversation():
-   # if request.method == "GET":
-   #     return render_template("conversation.html")
-    #elif request.method == "POST":
-       # prompt = request.form["prompt"]
-      #  previous_response = prompt
-       # response = generate_response(prompt)
-      #  conversation_history = [prompt + " - " + response]
-      #  for i in range(2):
-         #   prompt = request.form["prompt"]
-         #   response = generate_response(prompt, previous_response)
-          #  previous_response += response
-            #conversation_history.append(previous_response)
-         #   conversation_history.append(prompt + " - " + response)
-      #  return render_template("conversation.html", conversation_history=conversation_history)
 
 
 @app.route("/", methods=["GET", "POST"])
