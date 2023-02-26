@@ -25,16 +25,23 @@ useremail=""
 answer = ""
 engine_temperature = 0.5
 response = None
+response_edited = None
 
 jokeprompt = "Tell me a funny joke about AI in 25 words or less"
 jokeanswer = ""
 
-convo_history = ['']
-convo_context = ""
-dict_data = {}
+
 convoconjunctor= " given that "
 convoconjunctor2 = " , as well as that "
-
+response_err = "there is no answer"
+response_err2 = "given information does not provide"
+response_filter = "I am"
+response_filter2 = "I'm"
+response_filter3 = "My"
+response_filter4 = "my"
+response_filter5 = "I"
+response_default = " requiring more research "
+clear_convo = "CLEAR_CONVO"
 
 supa_url = os.environ['SUPABASE_URL']
 supa_key = os.environ['SUPABASE_KEY']
@@ -51,15 +58,8 @@ pod_results=[]
 pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).execute()
 
 for pod_record in pod_results:
-    #print("POD_Record = ")
-    #print(pod_record)
-    #print("POD_Record index 0 = ")
-    #print(pod_record[0]) 
-    #print("POD_Record index 1 = ")
-    #print(pod_record[1]) 
-    
 
-    # fetch the JSON object from the list
+    # fetch the JSON object at pod_record[1], and get the first and only record at pod_record[1][0]
     # convert the JSON DATA object into a Python dictionary
     json_obj = pod_record[1][0]
     dict_data = json.loads(json.dumps(json_obj))
@@ -72,19 +72,17 @@ for pod_record in pod_results:
 
     break
 
-# Use your own API key
+# Use SYSTEM API key
 
 try:
     openai.api_key = os.environ['OPENAI_KEY']
 except:
-    print("Sorry, No Key available")
-
-
+    print("Sorry, No API Key available")
 
 
 # Define a function to generate a response using OpenAI API
 def generate_response(prompt, previous_context):
-    if previous_context == "":
+    if previous_context == "" or previous_context is None :
         print("GENERATE_RESPONSE CONTEXT is EMPTY!! ")
         response = openai.Completion.create(
         engine="text-davinci-003",
@@ -95,7 +93,7 @@ def generate_response(prompt, previous_context):
         temperature=0.5
          )
     else: 
-        print("GENERATE_RESPONSE CONTEXT NOT EMPTY :  " + previous_context)
+        #print("GENERATE_RESPONSE CONTEXT NOT EMPTY :  " + previous_context)
         response = openai.Completion.create(
             engine="text-davinci-003",
             prompt=prompt + convoconjunctor + previous_context,
@@ -113,20 +111,26 @@ app.config['SECRET_KEY'] = os.environ['OPENAI_KEY']
 @app.route('/conversation', methods=['GET', 'POST'])
 def conversation():
 
+    convo_history = ['']
+    convo_context = ""
+    dict_data = {}
 
     # check if the session variable convo_history exists, if not create it
-    #print("CURRENT Session ID:", session.sid)
-    if ('convo_ID' not in session) or (session['convo_ID'] == 0) :
-        print("Initializing session Variable convo_ID")
+    # print("CURRENT Session ID:", session.sid)
+
+    if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
+        
+        print("Initializing NEW session Variable convo_ID")
     
-        # fetch latest convo_ID record 
+        # FETCH latest convo_ID record 
         cid_results=[]
         cid_results = supabase.table('Conversations').select("*").order('convo_ID').limit(1).execute()
         cid_record_id=0
+        cid_record_history=['']
 
         for cid_record in cid_results:
     
-            # fetch the JSON object from the list
+            # FETCH the JSON object from the list
             # convert the JSON DATA object into a Python dictionary
             cid_json_obj = cid_record[1][0]
             dict_data = json.loads(json.dumps(cid_json_obj))
@@ -162,14 +166,14 @@ def conversation():
             return render_template("error.html", userapikey=openai.api_key)
 
 
-
     else:
         # convo_ID already exists, fetch the existing convo data 
         print("Session Variable convo_ID ALREADY EXISTS !!")
+        
         convo_ID = session['convo_ID']
+        
         print("EXISTING Session Variable convo_ID == " + str(convo_ID))
     
-
         cid_results=[]
         cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
 
@@ -192,58 +196,375 @@ def conversation():
             break
     
     if request.method == "GET":
-        return render_template("conversation.html")
-    elif request.method == 'POST':
-        prompt = request.form['prompt']
-    
- 
-        #re-construct convo_context from convo_history 
-        #for conversation in convo_history:
-           # if (convoindex == 0):
-             #   convo_context = convo_context + convoconjunctor + conversation.split(" -xxxx- ")[1].strip()
-           # else :
-              #  convo_context = convo_context + convoconjunctor2 + conversation.split(" -xxxx- ")[1].strip()
+        #return render_template("conversation.html")
+        if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
+            return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
 
-           # convoindex +=1
+        else : 
+            convo_ID = session['convo_ID']
         
-        print("convo context = " + convo_context) 
-        print("convo_history length = " + str(len(convo_history))) 
+            print("EXISTING Session Variable convo_ID == " + str(convo_ID))
+    
+            cid_results=[]
+            cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
 
-        response = generate_response(prompt, convo_context)
+            if (convo_context is None) :
+                convo_context = ""
+            if (convo_history is None) :
+                convo_history = ['']
+    
+            
+            if (convo_context == ""):
+                return render_template('conversation.html')            
+            else:
+                return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
+
+
+    elif request.method == 'POST':
+        response = ""
+        response_edited = ""
+        prompt = request.form['prompt']
+
+    
+        if convo_context is None:
+            print("about to POST QUERY,  convo_context is NONE ???")
+            convo_context = ""
+            response = ""    
+        if convo_history is None:
+            print("about to POST QUERY,  convo_history is NONE ???")
+            convo_history = ['']
+
+        if (clear_convo.lower() != prompt.lower() ):
+            print("NOT CLEAR_CONVO command!!!")
+            response = generate_response(prompt, convo_context)
+            # if response is empty or null,  AI may be confused.  Clear Context, but Leave History as is 
+            if ((response == "" or response is None) and convo_context != ""):
+                print("RESPONSE is EMPTY... may be confused !! ")
+                convo_context = ""
+                supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
+                response = generate_response(prompt, convo_context)
+            
+            # if response includes I'm or I am,   AI may later get confused.  Adjust Context
+            if (response_filter.lower() in response.lower() or 
+                    response_filter2.lower() in response.lower() or 
+                    response_filter3.lower() in response.lower() ):
+                print("RESPONSE contains I'm or I am , maybe confused.  Adjust Response!! ")
+                response_edited = response.replace(response_filter, "You are")
+                print("EDITED RESPONSE 1  : " + response_edited) 
+                response_edited = response_edited.replace(response_filter2, "You are")
+                print("EDITED RESPONSE 2 : " + response_edited) 
+                response_edited = response_edited.replace(response_filter3, "Your")
+                print("EDITED RESPONSE 3 : " + response_edited) 
+                response_edited = response_edited.replace(response_filter4, "your")
+                print("EDITED RESPONSE 4 : " + response_edited) 
+                response_edited = response_edited.replace(response_filter5, "you")
+                print("EDITED RESPONSE 5 : " + response_edited) 
+            
+            # if response includes err or err2  AI may be confused.  Clear Context, but Leave History as is 
+            if ((response_err.lower() in response.lower() or response_err2.lower() in response.lower()) 
+                    and convo_context != ""):
+                print("RESPONSE suggests AI may be confused !! ")
+                convo_context = ""
+                supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
+                response = generate_response(prompt, convo_context)
+
+          
         print("prompt  = " + prompt) 
         print("response = " + response) 
-        print("convo_context = " + convo_context)
 
 
-        if  (len(convo_history) >= 7):
+        if response is None:
+            response = ""
 
-            #empty conversation if converesation context > 5 
-            print("about to empty conversation history when it reaches 5 !!") 
+        if response_err.lower() in response.lower() : 
+            response = response_default
+        
+        if response_err2.lower() in response.lower() : 
+            response = response_default
+
+        if (convo_context is not None):
+            print("convo_context = " + convo_context)
+
+        if ((convo_history is not None) and len(convo_history) >= 10) or (clear_convo.lower() in prompt.lower()):
+
+            #empty conversation if converesation context > 10
+            print("convo_context = " + convo_context)
+            print("About to empty conversation history when reaching 10 !!") 
             convo_history.clear()
-    
-            #resetting Conversation ID 
-            #session['convo_ID'] = 0
 
             print("about to reset convo_context !!") 
             convo_context = ""
-      
-            
-        
+            if (clear_convo.lower() in prompt.lower()):
+                print("CLEARING CONVERSATION !!!") 
+                #CLEARING OUT Conversation ID  in DB
+                supabase.table('Conversations').update({"convo_context" : "", "convo_history" : [] }).eq('convo_ID', convo_ID).execute()
+                return render_template('conversation.html', conversation_history=[], conversation_length=0)
+  
+    
         #previous_response defined as CONTEXT 
         #convo_context = convo_context + convoconjunctor + response 
         print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
 
         convo_history.append(prompt + " -xxxx- " + response) 
-        #session['convo_history'].append(prompt + " - " + response) 
         print("convo_history length AFTER APPEND = " + str(len(convo_history))) 
 
-        # Convert the array to a JSON string and remove the square brackets
-        convo_history_str = json.dumps(convo_history)[1:-1]
+        if ((convo_context == "") or (convo_context is None)) :
+            if (response_edited == ""):
+                convo_context = convoconjunctor + response 
+            else:
+                convo_context = convoconjunctor + response_edited
+        else :
+            if (response_edited == ""):
+                convo_context = convo_context + convoconjunctor2 + response 
+            else:
+                convo_context = convo_context + convoconjunctor2 + response_edited
 
+        print(" LATEST Convo Context before committing to DB:  " + convo_context) 
+
+        # Convert the array to a JSON string and remove the square brackets
+        convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
+        
+        print("convo_history_str is : ") 
+        print(convo_history_str)
+        
         #Updating context data of Conversation ID  in DB
         supabase.table('Conversations').update({"convo_context" : f'{convo_context}', "convo_history" : f'{{{convo_history_str}}}' }).eq('convo_ID', convo_ID).execute()
 
+    if (convo_context is None) :
+        convo_context = ""
+    if (convo_history is None) :
+        convo_context = ['']
+    
     return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
+
+
+@app.route('/conversation_nm', methods=['GET', 'POST'])
+def conversation_nm():
+
+    convo_history = ['']
+    convo_context = ""
+    dict_data = {}
+
+    # check if the session variable convo_history exists, if not create it
+    # print("CURRENT Session ID:", session.sid)
+
+    if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
+        
+        print("Initializing NEW session Variable convo_ID")
+    
+        # FETCH latest convo_ID record 
+        cid_results=[]
+        cid_results = supabase.table('Conversations').select("*").order('convo_ID').limit(1).execute()
+        cid_record_id=0
+        cid_record_history=['']
+
+        for cid_record in cid_results:
+    
+            # FETCH the JSON object from the list
+            # convert the JSON DATA object into a Python dictionary
+            cid_json_obj = cid_record[1][0]
+            dict_data = json.loads(json.dumps(cid_json_obj))
+
+
+            # Fetch and Print the convoID value
+            cid_record_id = list(dict_data.values())[2]
+            print("Conversation ID = " + str(cid_record_id) ) 
+
+            cid_record_history = list(dict_data.values())[4]
+
+            break
+
+        # setting NEW convo_ID to decrement 5 
+        session['convo_ID'] = cid_record_id - 5 
+        print(" new SESSION ID = " + str(cid_record_id - 5 ) ) 
+        # insert NEW convo_ID into DB 
+        #save UserPrompt and Answer as a record into Transcripts table
+
+        record = {
+        'convo_ID': cid_record_id - 5
+        }
+
+        #reset records before appending 
+        records = []
+        records.append(record)
+
+        # Insert the records into the NFT table
+        try:
+            data = supabase.table('Conversations').insert(records).execute()
+        except:
+            print("OOPS.. INSERT went WRONG while saving New Conversation ID into DB ")
+            return render_template("error.html", userapikey=openai.api_key)
+
+
+    else:
+        # convo_ID already exists, fetch the existing convo data 
+        print("Session Variable convo_ID ALREADY EXISTS !!")
+        
+        convo_ID = session['convo_ID']
+        
+        print("EXISTING Session Variable convo_ID == " + str(convo_ID))
+    
+        cid_results=[]
+        cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
+
+        # if len(cid_results) == 0 --> meaning Conversation ID data no longer exists in DB !! 
+        # In which case,  need to RESET Session Convo_ID and Re-create NEW Convo_ID 
+
+
+        for cid_record in cid_results:
+    
+            # fetch the JSON object from the list
+            # convert the JSON DATA object into a Python dictionary
+            cid_json_obj = cid_record[1][0]
+            dict_data = json.loads(json.dumps(cid_json_obj))
+
+            convo_context = list(dict_data.values())[3]
+            print("convo_context equals ") 
+            print(convo_context)
+            convo_history = list(dict_data.values())[4]
+
+            break
+    
+    if request.method == "GET":
+        #return render_template("conversation.html")
+        if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
+            return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history))
+
+        else : 
+            convo_ID = session['convo_ID']
+        
+            print("EXISTING Session Variable convo_ID == " + str(convo_ID))
+    
+            cid_results=[]
+            cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
+
+            if (convo_context is None) :
+                convo_context = ""
+            if (convo_history is None) :
+                convo_history = ['']
+    
+            if (convo_context == ""):
+                return render_template('conversation_nm.html')            
+            else:
+                return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history))
+
+
+    elif request.method == 'POST':
+        response = ""
+        response_edited = ""
+        prompt = request.form['prompt']
+
+    
+        if convo_context is None:
+            print("about to POST QUERY,  convo_context is NONE ???")
+            convo_context = ""
+            response = ""    
+        if convo_history is None:
+            print("about to POST QUERY,  convo_history is NONE ???")
+            convo_history = ['']
+
+        if (clear_convo.lower() != prompt.lower() ):
+            print("NOT CLEAR_CONVO command!!!")
+            response = generate_response(prompt, convo_context)
+            # if response is empty or null,  AI may be confused.  Clear Context, but Leave History as is 
+            if ((response == "" or response is None) and convo_context != ""):
+                print("RESPONSE is EMPTY... may be confused !! ")
+                convo_context = ""
+                supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
+                response = generate_response(prompt, convo_context)
+            
+            # if response includes I'm or I am,   AI may later get confused.  Adjust Context
+            if (response_filter.lower() in response.lower() or 
+                    response_filter2.lower() in response.lower() or 
+                    response_filter3.lower() in response.lower() ):
+                print("RESPONSE contains I'm or I am , maybe confused.  Adjust Response!! ")
+                response_edited = response.replace(response_filter, "You are")
+                print("EDITED RESPONSE 1  : " + response_edited) 
+                response_edited = response_edited.replace(response_filter2, "You are")
+                print("EDITED RESPONSE 2 : " + response_edited) 
+                response_edited = response_edited.replace(response_filter3, "Your")
+                print("EDITED RESPONSE 3 : " + response_edited) 
+                response_edited = response_edited.replace(response_filter4, "your")
+                print("EDITED RESPONSE 4 : " + response_edited) 
+                response_edited = response_edited.replace(response_filter5, "you")
+                print("EDITED RESPONSE 5 : " + response_edited) 
+            
+            # if response includes err or err2  AI may be confused.  Clear Context, but Leave History as is 
+            if ((response_err.lower() in response.lower() or response_err2.lower() in response.lower()) 
+                    and convo_context != ""):
+                print("RESPONSE suggests AI may be confused !! ")
+                convo_context = ""
+                supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
+                response = generate_response(prompt, convo_context)
+
+          
+        print("prompt  = " + prompt) 
+        print("response = " + response) 
+
+
+        if response is None:
+            response = ""
+
+        if response_err.lower() in response.lower() : 
+            response = response_default
+        
+        if response_err2.lower() in response.lower() : 
+            response = response_default
+
+        if (convo_context is not None):
+            print("convo_context = " + convo_context)
+
+        if ((convo_history is not None) and len(convo_history) >= 10) or (clear_convo.lower() in prompt.lower()):
+
+            #empty conversation if converesation context > 10
+            print("convo_context = " + convo_context)
+            print("About to empty conversation history when reaching 10 !!") 
+            convo_history.clear()
+
+            print("about to reset convo_context !!") 
+            convo_context = ""
+            if (clear_convo.lower() in prompt.lower()):
+                print("CLEARING CONVERSATION !!!") 
+                #CLEARING OUT Conversation ID  in DB
+                supabase.table('Conversations').update({"convo_context" : "", "convo_history" : [] }).eq('convo_ID', convo_ID).execute()
+                return render_template('conversation_nm.html', conversation_history=[], conversation_length=0)
+  
+    
+        #previous_response defined as CONTEXT 
+        #convo_context = convo_context + convoconjunctor + response 
+        print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
+
+        convo_history.append(prompt + " -xxxx- " + response) 
+        print("convo_history length AFTER APPEND = " + str(len(convo_history))) 
+
+        if ((convo_context == "") or (convo_context is None)) :
+            if (response_edited == ""):
+                convo_context = convoconjunctor + response 
+            else:
+                convo_context = convoconjunctor + response_edited
+        else :
+            if (response_edited == ""):
+                convo_context = convo_context + convoconjunctor2 + response 
+            else:
+                convo_context = convo_context + convoconjunctor2 + response_edited
+
+        print(" LATEST Convo Context before committing to DB:  " + convo_context) 
+
+        # Convert the array to a JSON string and remove the square brackets
+        convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
+        
+        print("convo_history_str is : ") 
+        print(convo_history_str)
+        
+        #Updating context data of Conversation ID  in DB
+        supabase.table('Conversations').update({"convo_context" : f'{convo_context}', "convo_history" : f'{{{convo_history_str}}}' }).eq('convo_ID', convo_ID).execute()
+
+    if (convo_context is None) :
+        convo_context = ""
+    if (convo_history is None) :
+        convo_context = ['']
+    
+    return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history))
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -440,10 +761,9 @@ def night_mode():
         try:
             data = supabase.table('Transcripts').insert(records).execute()
         except:
-            print("oops.. INSERT went wrong while saving transacript into Supabase ")
+            print("oops.. INSERT went wrong while saving Transacript Record into Supabase !! ")
             return render_template("error.html", userapikey=openai.api_key)
 
-        
 
         return render_template("answer_nm.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     

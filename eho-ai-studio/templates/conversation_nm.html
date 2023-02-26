@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>EHO P&R AI Genie Conversation</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J9VF3JSJD"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKZ1G64L97"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
-          gtag('config', 'G-9J9VF3JSJD');
+          gtag('config', 'G-KKZ1G64L97');
     </script>
     <style>
       /* Add the styles for the button */
@@ -62,7 +62,7 @@
   
   <center>
         <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
-        <button onclick="location.href='{{ url_for('conversation_nm') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
+        <button onclick="location.href='{{ url_for('conversation') }}'"><font style="font-family:verdana" color="0x0000FF">LIGHT MODE</font></button>
     <p class="text">
       <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
       <strong>
@@ -73,8 +73,8 @@
     </p>
       <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
      <p>
-    <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
-    <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
+    <p style="font-family:verdana" color="#ADD8E6"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
+    <p style="font-family:verdana" color="#ADD8E6"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
         <!--p><input type="text" name="prompt" rows="6" cols="70"></p-->
@@ -143,7 +143,7 @@
   </center>
   <br></br>
   <center>
-  <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
+  <button onclick="location.href='{{ url_for('night_mode') }}'"> Back To Home </button>
   <br></br>
   </center>
   </font>
