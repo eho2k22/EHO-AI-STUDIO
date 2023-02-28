@@ -73,8 +73,8 @@
     </p>
       <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
      <p>
-    <p style="font-family:verdana" color="#ADD8E6"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
-    <p style="font-family:verdana" color="#ADD8E6"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
+    <p> <font style="font-family:verdana" color="#ADD8E6"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
+    <p> <font style="font-family:verdana" color="#ADD8E6"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
         <!--p><input type="text" name="prompt" rows="6" cols="70"></p-->
@@ -114,8 +114,18 @@
   <br></br>
 
   <center>
+    <font style="font-family:verdana">
+      <p> Like this convesation?  Enter your email below and click SEND and we will send a transcript to you! </p>
+      <br>
+      <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
+      <br>
+      <form method="post" action="/sendemail_nm">
+      <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
+      <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
+      <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+      </form>
     <br></br>
-    <p> <font style="font-family:verdana"> Beta Version 1.8 as of 
+    <p> <font style="font-family:verdana"> Beta Version 1.9 as of 
     <div id="current_date">
       <script>
       date = new Date();

@@ -13,6 +13,7 @@ import json
 
 import smtplib
 from email.mime.text import MIMEText
+import email.message 
 
 from supabase import create_client
 from array import array 
@@ -114,6 +115,9 @@ def conversation():
     convo_history = ['']
     convo_context = ""
     dict_data = {}
+    convo_history_str = json.dumps({})
+
+
 
     # check if the session variable convo_history exists, if not create it
     # print("CURRENT Session ID:", session.sid)
@@ -213,11 +217,17 @@ def conversation():
             if (convo_history is None) :
                 convo_history = ['']
     
+            # Convert the array to a JSON string and remove the square brackets
+            convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
+        
+            print("convo_history_str is : ") 
+            print(convo_history_str)
             
             if (convo_context == ""):
                 return render_template('conversation.html')            
             else:
-                return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
+                print("about to GET conversation.html,  what is the convo_histroy_str ? " + convo_history_str)
+                return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
     elif request.method == 'POST':
@@ -323,6 +333,7 @@ def conversation():
 
         # Convert the array to a JSON string and remove the square brackets
         convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
+
         
         print("convo_history_str is : ") 
         print(convo_history_str)
@@ -335,7 +346,8 @@ def conversation():
     if (convo_history is None) :
         convo_context = ['']
     
-    return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
+    print("convo_history_str AFTER POST is : " + convo_history_str)
+    return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
 @app.route('/conversation_nm', methods=['GET', 'POST'])
@@ -344,6 +356,7 @@ def conversation_nm():
     convo_history = ['']
     convo_context = ""
     dict_data = {}
+    convo_history_str = json.dumps({})
 
     # check if the session variable convo_history exists, if not create it
     # print("CURRENT Session ID:", session.sid)
@@ -442,11 +455,18 @@ def conversation_nm():
                 convo_context = ""
             if (convo_history is None) :
                 convo_history = ['']
+            
+            # Convert the array to a JSON string and remove the square brackets
+            convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
+        
+            print("convo_history_str is : ") 
+            print(convo_history_str)
+        
     
             if (convo_context == ""):
                 return render_template('conversation_nm.html')            
             else:
-                return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history))
+                return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
     elif request.method == 'POST':
@@ -564,7 +584,8 @@ def conversation_nm():
     if (convo_history is None) :
         convo_context = ['']
     
-    return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history))
+    print("convo_history_str AFTER POST in NIGHT_MODE is : " + convo_history_str)
+    return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -793,22 +814,61 @@ def privacy():
 @app.route("/sendemail", methods=["GET", "POST"])
 def sendemail():
     # Your Gmail account information
-    useremail = request.form["useremail"]
-    
-    answer =  request.form["answer"]
-    userprompt = request.form["userprompt"]
+    message = email.message.EmailMessage()
+    useremail = ""
+    answer = ""
+    userprompt = ""
+    json_history = json.dumps({})
+    convoindex = 0 
 
-    print("user email : " + useremail)
-    print("user prompt : " + userprompt)
-    print("user answer : " + answer)
+    try:
+        useremail = request.form["useremail"]
+    except:
+        print("no useremail")
+    
+    try: 
+        answer =  request.form["answer"]
+        userprompt = request.form["userprompt"]
+
+    except:
+        print("no answer or no userprompt")
+        
+    try: 
+        json_history = request.form["conversation_history"]
+
+    except:
+        print("no Conversation History!!??")
+
 
     sender_email = os.environ['SENDER_EMAIL']
     sender_password = os.environ['SENDER_PASSWORD']
     receiver_email = useremail
 
+    json_history_list = json.loads("[" + json_history + "]")
+    json_history_string = json.dumps(json_history_list)
+
+
+
     # Create the message
-    message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
-    message["Subject"] = "Q&A AI GENIE Transcript is Ready!" 
+    if (json_history is None) or (not json_history) :
+        message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
+
+    else : 
+        #re-construct context from conversation_history 
+        convomessage = ""
+        json_list = json.loads(json_history_string)
+
+        for item in json_list:
+            if (item != "" and len(item) > 5):
+                convomessage = convomessage + "You prompted : " + item.split(" -xxxx- ")[0].strip() + "\n"
+                convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n"
+      
+
+        print("convomessage = " + convomessage) 
+        message = MIMEText(convomessage)
+        
+    
+    message["Subject"] = "YOUR P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -829,22 +889,62 @@ def sendemail():
 def sendemail_nm():
     print("SEND MAIL NIGHT MODE!!")
     # Your Gmail account information
-    useremail = request.form["useremail"]
-    
-    answer =  request.form["answer"]
-    userprompt = request.form["userprompt"]
 
-    print("user email : " + useremail)
-    print("user prompt : " + userprompt)
-    print("user answer : " + answer)
+    message = email.message.EmailMessage()
+    useremail = ""
+    answer = ""
+    userprompt = ""
+    json_history = json.dumps({})
+    convoindex = 0
+    convomessage = ""
+
+    try:
+        useremail = request.form["useremail"]
+    except:
+        print("no useremail")
+    
+    try: 
+        answer =  request.form["answer"]
+        userprompt = request.form["userprompt"]
+
+    except:
+        print("no answer or no userprompt")
+
+        
+    try: 
+        json_history = request.form["conversation_history"]
+
+    except:
+        print("no Conversation History!!??")
+
 
     sender_email = os.environ['SENDER_EMAIL']
     sender_password = os.environ['SENDER_PASSWORD']
     receiver_email = useremail
 
+    json_history_list = json.loads("[" + json_history + "]")
+    json_history_string = json.dumps(json_history_list)
+
+
     # Create the message
-    message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
-    message["Subject"] = "Q&A AI GENIE Transcript is Ready!" 
+    if (json_history is None) or (not json_history) :
+        message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
+    else : 
+        #re-construct email message body with convo_history 
+
+        convomessage = ""
+        json_list = json.loads(json_history_string)
+
+        for item in json_list:
+            if (item != "" and len(item) > 5):
+                convomessage = convomessage + "You prompted : " + item.split(" -xxxx- ")[0].strip() + "\n"
+                convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n" 
+      
+
+        print("convomessage = " + convomessage) 
+        message = MIMEText(convomessage)
+
+    message["Subject"] = "YOUR EHO P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -859,7 +959,6 @@ def sendemail_nm():
         server.quit()
 
     return render_template("useremail_nm.html", useremail=useremail)
-
 
 
 if __name__ == '__main__':
