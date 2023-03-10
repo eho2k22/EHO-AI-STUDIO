@@ -605,9 +605,12 @@ def index():
             openai.api_key = userapikey
 
         available_003 = False
+        available_eho = False 
+        available_gpt = False 
     
         try: 
             models = openai.Model.list()
+
         except: 
             print("sorry, wrong key")
             return render_template("error.html", userapikey=openai.api_key)
@@ -616,8 +619,12 @@ def index():
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
+            if (model.id == "gpt-3.5-turbo"):
+                available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
+            if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
+                available_eho = True
 
         if (usertemp == "Standard"):
             engine_temperature = 0.5
@@ -628,9 +635,39 @@ def index():
 
         print("Temperature set to " + usertemp + "at : " + str(engine_temperature))
 
-        if (available_003):
+        if (available_gpt):
             try: 
-                print("Davince-003 is available !! ")
+                print("Davinci-GPT is available !! ")
+                response = openai.ChatCompletion.create(
+                    engine="gpt-3.5-turbo",
+                    prompt=userprompt,
+                    max_tokens=1000,
+                    n=1,
+                    stop=None,
+                    temperature=engine_temperature,
+                )
+            except:
+                print("something went wrong while processing your question.. ")
+                return render_template("error.html", userapikey=openai.api_key)
+        
+        elif (available_eho):
+            try: 
+                print("Davinci-EHO is available !! ")
+                response = openai.Completion.create(
+                    engine="davinci:ft-personal:eho-23-2023-03-04-21-00-29",
+                    prompt=userprompt,
+                    max_tokens=1000,
+                    n=1,
+                    stop=None,
+                    temperature=engine_temperature,
+                )
+            except:
+                print("something went wrong while processing your question.. ")
+                return render_template("error.html", userapikey=openai.api_key)
+
+        elif (available_003):
+            try: 
+                print("Davinci-003 is available !! ")
                 response = openai.Completion.create(
                     engine="text-davinci-003",
                     prompt=userprompt,
@@ -642,7 +679,7 @@ def index():
             except:
                 print("something went wrong while processing your question.. ")
                 return render_template("error.html", userapikey=openai.api_key)
-
+        
         else:
             try: 
                 response = openai.Completion.create(
@@ -713,12 +750,16 @@ def night_mode():
             return render_template("error_nm.html", userapikey=openai.api_key)
 
         available_003 = False
+        available_eho = False 
+        available_gpt = False 
         models = openai.Model.list()
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
             if (model.id == "text-davinci-003"):
                 available_003 = True
+            if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
+                available_eho = True
 
 
         if (usertemp == "Standard"):
@@ -730,9 +771,40 @@ def night_mode():
 
         print("Temperature set to " + usertemp + "at : " + str(engine_temperature))
 
-        if (available_003):
+
+        if (available_gpt):
             try: 
-                print("Davince-003 is available !! ")
+                print("Davinci-GPT is available !! ")
+                response = openai.ChatCompletion.create(
+                    engine="gpt-3.5-turbo",
+                    prompt=userprompt,
+                    max_tokens=1000,
+                    n=1,
+                    stop=None,
+                    temperature=engine_temperature,
+                )
+            except:
+                print("something went wrong while processing your question.. ")
+                return render_template("error.html", userapikey=openai.api_key)
+
+        elif (available_eho):
+            try: 
+                print("Davinci-EHO is available !! ")
+                response = openai.Completion.create(
+                    engine="davinci:ft-personal:eho-23-2023-03-04-21-00-29",
+                    prompt=userprompt,
+                    max_tokens=1000,
+                    n=1,
+                    stop=None,
+                    temperature=engine_temperature,
+                )
+            except:
+                print("something went wrong while processing your question.. ")
+                return render_template("error.html", userapikey=openai.api_key)
+
+        elif (available_003):
+            try: 
+                print("Davinci-003 is available !! ")
                 response = openai.Completion.create(
                     engine="text-davinci-003",
                     prompt=userprompt,
@@ -744,6 +816,7 @@ def night_mode():
             except:
                 print("something went wrong while processing your question.. ")
                 return render_template("error.html", userapikey=openai.api_key)
+
 
         else:
             try: 
