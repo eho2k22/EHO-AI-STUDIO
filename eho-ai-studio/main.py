@@ -619,12 +619,12 @@ def index():
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
-            if (model.id == "gpt-3.5-turbo"):
-                available_gpt = True
+            #if (model.id == "gpt-3.5-turbo"):
+                #available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
-            if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
-                available_eho = True
+            #if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
+                #available_eho = True
 
         if (usertemp == "Standard"):
             engine_temperature = 0.5
@@ -758,8 +758,8 @@ def night_mode():
             print(model.id)
             if (model.id == "text-davinci-003"):
                 available_003 = True
-            if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
-                available_eho = True
+            #if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
+                #available_eho = True
 
 
         if (usertemp == "Standard"):
@@ -775,9 +775,15 @@ def night_mode():
         if (available_gpt):
             try: 
                 print("Davinci-GPT is available !! ")
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": "Who won the world series in 2020?"},
+                    {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
+                    {"role": "user", "content": "Where was it played?"}
+                    ]
                 response = openai.ChatCompletion.create(
                     engine="gpt-3.5-turbo",
-                    prompt=userprompt,
+                    prompt=messages,
                     max_tokens=1000,
                     n=1,
                     stop=None,
