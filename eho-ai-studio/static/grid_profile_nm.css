@@ -8,6 +8,8 @@
 .image-profile-grid img {
   width: 30%;
   padding: 1%;
+  border: 3px solid #ADD8E6;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Night mode styles */

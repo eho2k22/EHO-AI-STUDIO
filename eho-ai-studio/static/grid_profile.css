@@ -6,6 +6,11 @@
 }
 
 .image-profile-grid img {
+  /*width: 425px; /* Set a fixed width for the image */
+  /*height: 425px; /* Set a fixed height for the image */
   width: 30%;
+  object-fit: cover; /* Optional: Preserve aspect ratio and crop image if necessary */
   padding: 1%;
+  border: 3px solid #0000FF;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }

@@ -15,7 +15,7 @@
         
         .text-box {
             width: calc(33.33% - 10px);
-            height: 150px;
+            height: 350px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             padding: 10px;
@@ -99,7 +99,7 @@
 
             </div>
             <div class="text-box">
-                <strong> Eddy Hsu </strong> has extensive background in both electrical engineering and mechanical engineering,
+                <strong> Yu-Jen (Eddy) Hsu PhD </strong> has extensive background in both electrical engineering and mechanical engineering,
                 experienced in process development for solid state thin-film devices (inorganic and organic) such as light emitting 
                 diodes(LED), solar cells(PV), and transistors(TFT)
                 <br>
@@ -110,9 +110,49 @@
                 * Columbia Engineering                         
                 Ph.D, Electrical Engineering  2007-2011
                 <br>
+                * Columbia Engineering                         
+                Master of Science, Electrical Engineering  2005-2007
+                <br>
+                * National Taiwan University                       
+                Master of Science, Applied Mechanics 2000-2002
+
             </div>
         </div>
-
     </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+    <br></br>
+    <p> <font style="font-family:verdana"> Beta Version 2.1 as of 
+    <div id="current_date">
+    <script>
+        date = new Date();
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+        document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+    </script>
+    </div>
+    </font>
+    </p>
+</center>
+      
+<center>
+    <br></br>
+    <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
+    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+    <font style="font-family:verdana">
+        <div style="text-align:center">
+            <a href='{{ url_for('terms') }}'> Terms</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('privacy') }}'> Privacy</a>
+        </div>
+    </font>
+</center>
+
 </body>
 </html>

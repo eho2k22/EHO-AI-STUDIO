@@ -47,6 +47,8 @@ clear_convo = "CLEAR_CONVO"
 supa_url = os.environ['SUPABASE_URL']
 supa_key = os.environ['SUPABASE_KEY']
 
+gpt_enabled = os.environ['GPT_KEY']
+
 supabase = create_client(supa_url, supa_key)
 
 print("supabase client initiated successfully! ")
@@ -95,7 +97,7 @@ def generate_response(prompt, previous_context):
     
     for model in models['data']:
         # print(model.id)
-        if (model.id == "gpt-3.5-turbo"):
+        if (model.id == "gpt-3.5-turbo" and gpt_enabled == "YES"):
             available_gpt = True
         
     if (available_gpt):
@@ -680,7 +682,7 @@ def index():
 
         print("Temperature set to " + usertemp + " at: " + str(engine_temperature))
 
-        if (available_gpt):
+        if (available_gpt) and (gpt_enabled == "YES"):
             try: 
                 print("GPT TURBO is Available !!")
                 messages = [
@@ -746,7 +748,7 @@ def index():
                 print("something went wrong while processing your prompt .. ")
                 return render_template("error.html", userapikey=openai.api_key)
     
-        if (not available_gpt):
+        if (not available_gpt) or (gpt_enabled != "YES"): 
             answer = response.choices[0].text
         else:
             answer = response['choices'][0]['message']['content']
@@ -806,7 +808,7 @@ def night_mode():
         models = openai.Model.list()
 
         for model in models['data']:
-            if (model.id == "gpt-3.5-turbo"):
+            if (model.id == "gpt-3.5-turbo") and (gpt_enabled == "YES"):
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
@@ -822,7 +824,7 @@ def night_mode():
         print("Temperature set to " + usertemp + " at : " + str(engine_temperature))
 
 
-        if (available_gpt):
+        if (available_gpt) and (gpt_enabled == "YES"):
             try: 
                 print("GPT TURBO is Available !!")
                 messages = [
@@ -891,7 +893,7 @@ def night_mode():
                 return render_template("error.html", userapikey=openai.api_key)
     
 
-        if (not available_gpt):
+        if (not available_gpt) or (gpt_enabled != "YES"):
             answer = response.choices[0].text
         else:
             answer = response['choices'][0]['message']['content']
