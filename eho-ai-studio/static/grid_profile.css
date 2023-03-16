@@ -1,0 +1,11 @@
+
+.image-profile-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-profile-grid img {
+  width: 30%;
+  padding: 1%;
+}

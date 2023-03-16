@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EHO AIGC STUDIO ADVISORY</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid_profile.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        .text-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .text-box {
+            width: calc(33.33% - 10px);
+            height: 150px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+        }
+    </style>
+</head>
+<body bgcolor="#AFB9DB">
+    <div class="container">
+        <center>
+            <p class="text">
+                <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
+                <strong>
+                EHO AI STUDIO 23 ADVISORY BOARD
+                </strong>
+                </font>
+            </p>
+        </center>
+        <p>
+        <center>
+        </center>
+        <br></br>
+        <center>
+            <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
+            <br></br>
+        </center>
+        </p> 
+        <div class="image-profile-grid">
+            <img src="http://www.wangmd.com/maymont_small.jpg">
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/mikelin.png">
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/EddyHsu.jpg">
+        </div>  
+        <div class="text-grid">
+            <div class="text-box"> 
+                <strong> David Wang MD. PhD. </strong>
+                Attending Radiologist and Quality Assurance Co-Chair, National Teleradiology Program, Veterans Affairs
+                <br>
+                *Fellowship: Musculoskeletal Radiology, Massachusetts General Hospital, Harvard Medical School, Boston, MA, 2015
+                <br>
+                *(Instructor at Harvard Medical School, Boston, MA during fellowship)
+                <br>
+                *Residency: Diagnostic Radiology, University of Pittsburgh Medical Center, Pittsburgh, PA, 2014
+                <br>
+                *Internship: Western Pennsylvania Hospital, Pittsburgh, PA, 2010
+                <br>
+                *Medical School: University of Pittsburgh School of Medicine, Pittsburgh, PA, 2009
+                <br>
+                *PhD: Biomedical Engineering, Carnegie Mellon University, Pittsburgh, PA, 2007
+                <br>
+                *Master of Engineering: Computer Science, Cornell University, Ithaca, NY, 2001
+                <br>
+                *Undergraduate: Computer Science, Cornell University, Ithaca, NY, 2000
+                <br>
+            </div>
+            <div class="text-box">
+                <strong> Michael Lin </strong> is a Californian native and a graduate of UC Berkeley.
+                <br>
+                He has taught EFL in Japan since 2011.
+                <br>
+                He is currently an adjunct EFL instructor at Konan University, Kwansei Gakuin University, and Kindai University.
+                <br>
+                He enjoys helping students developing accuracy and fluency in their English communication. 
+                <br>
+                His research interests are communicative language teaching (CLT), task-based language teaching (TBLT), 
+                <br>
+                content-based instruction (CBI), computer assisted language learning (CALL), and intercultural communication
+                competency (ICC).
+
+            </div>
+            <div class="text-box">
+                <strong> Eddy Hsu </strong> has extensive background in both electrical engineering and mechanical engineering,
+                experienced in process development for solid state thin-film devices (inorganic and organic) such as light emitting 
+                diodes(LED), solar cells(PV), and transistors(TFT)
+                <br>
+                Mr. Hsu has held various engineering and management positions at Luminode and Qualcomm. 
+                <br>
+                Education:
+                <br>
+                * Columbia Engineering                         
+                Ph.D, Electrical Engineering  2007-2011
+                <br>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -11,20 +11,20 @@
     <em class="ow-break-word">
     Thank you for trying out EHO's AI Genie.  
     <p></p>
-    It appears your VIP code has already expired or may have been mispelled =( 
+    Our sincerest apologies, it appears something went wrong while processing your prompt.  
     </em>
     </font>
     </p>
     <center>
-        <div class="b">
+        <!--div class="b">
             <font style="font-family:verdana">
              Your Code =   {{userapikey}}
              </font>
-        </div>
+        </div-->
     </center>
     <p>
     <font style="font-family:verdana">
-    Please double check your VIP code, return to homepage, and try again!
+    Please return to homepage and try again.  
     </font>
     </p>
     </center>
@@ -33,9 +33,10 @@
     <br></br>
     <center>
     <button onclick="location.href='{{ url_for('index') }}'"> <font style="font-family:verdana"> Back To Home </font> </button>
+    <button onclick="location.href='{{ url_for('conversation') }}'"> <font style="font-family:verdana"> Back To Conversation </font> </button>
     <br></br>
     <br></br>
-    <p> Beta version 1.9 as of 
+    <p> Beta version 2.1 as of 
     <div id="current_date">
         <script>
         date = new Date();

@@ -83,7 +83,56 @@ except:
 
 # Define a function to generate a response using OpenAI API
 def generate_response(prompt, previous_context):
-    if previous_context == "" or previous_context is None :
+    models = []
+    available_gpt = False 
+    try: 
+        print("Iterating through Available Models List")
+        models = openai.Model.list()
+
+    except: 
+        print("sorry, wrong key")
+        return render_template("error.html", userapikey=openai.api_key)
+    
+    for model in models['data']:
+        # print(model.id)
+        if (model.id == "gpt-3.5-turbo"):
+            available_gpt = True
+        
+    if (available_gpt):
+        print("GPT-3.5-TURBO is AVAILABLE in generate_response !!! ")
+        try: 
+            messages = [
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "assistant", "content": "This is Context. "},
+                {"role": "user", "content": "This is User's Question"}
+            ]
+     
+            for item in messages:
+                if item["role"] == "user":
+                    item["content"] = prompt
+                   
+                if item["role"] == "assistant":
+                    item["content"] = previous_context
+
+            gpt_response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=messages 
+            )
+            
+            return gpt_response['choices'][0]['message']['content']
+
+        except Exception as e:
+            if 'overloaded' in str(e):
+                # handle overloaded error here
+                return "My apologies.. currently tied up right now,  will be back on shortly!!"
+            else:
+                # handle all other errors here
+                print(f"something went wrong: {e}")
+                return render_template("error.html", userapikey=openai.api_key)
+        
+
+    
+    elif previous_context == "" or previous_context is None :
         print("GENERATE_RESPONSE CONTEXT is EMPTY!! ")
         response = openai.Completion.create(
         engine="text-davinci-003",
@@ -116,8 +165,6 @@ def conversation():
     convo_context = ""
     dict_data = {}
     convo_history_str = json.dumps({})
-
-
 
     # check if the session variable convo_history exists, if not create it
     # print("CURRENT Session ID:", session.sid)
@@ -550,8 +597,6 @@ def conversation_nm():
                 return render_template('conversation_nm.html', conversation_history=[], conversation_length=0)
   
     
-        #previous_response defined as CONTEXT 
-        #convo_context = convo_context + convoconjunctor + response 
         print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
 
         convo_history.append(prompt + " -xxxx- " + response) 
@@ -619,8 +664,8 @@ def index():
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
-            #if (model.id == "gpt-3.5-turbo"):
-                #available_gpt = True
+            if (model.id == "gpt-3.5-turbo"):
+                available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
             #if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
@@ -633,21 +678,28 @@ def index():
         if (usertemp == "Ultra"):
             engine_temperature = 1.5
 
-        print("Temperature set to " + usertemp + "at : " + str(engine_temperature))
+        print("Temperature set to " + usertemp + " at: " + str(engine_temperature))
 
         if (available_gpt):
             try: 
-                print("Davinci-GPT is available !! ")
+                print("GPT TURBO is Available !!")
+                messages = [
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": "This is User's Question"}
+                ]
+                #messagees[1]['content'] = userprompt
+                for item in messages:
+                    if item["role"] == "user":
+                        item["content"] = userprompt
+
+
+                print("GPT-3.5-TURBO is available !! ")
                 response = openai.ChatCompletion.create(
-                    engine="gpt-3.5-turbo",
-                    prompt=userprompt,
-                    max_tokens=1000,
-                    n=1,
-                    stop=None,
-                    temperature=engine_temperature,
+                    model="gpt-3.5-turbo",
+                    messages=messages 
                 )
             except:
-                print("something went wrong while processing your question.. ")
+                print("something went wrong while processing your prompt .. ")
                 return render_template("error.html", userapikey=openai.api_key)
         
         elif (available_eho):
@@ -662,7 +714,7 @@ def index():
                     temperature=engine_temperature,
                 )
             except:
-                print("something went wrong while processing your question.. ")
+                print("something went wrong while processing your prompt in EHO model .. ")
                 return render_template("error.html", userapikey=openai.api_key)
 
         elif (available_003):
@@ -677,7 +729,7 @@ def index():
                     temperature=engine_temperature,
                 )
             except:
-                print("something went wrong while processing your question.. ")
+                print("something went wrong while processing your prompt.. ")
                 return render_template("error.html", userapikey=openai.api_key)
         
         else:
@@ -691,18 +743,17 @@ def index():
                     temperature=engine_temperature,
                 )
             except:
-                print("something went wrong while processing your question.. ")
+                print("something went wrong while processing your prompt .. ")
                 return render_template("error.html", userapikey=openai.api_key)
     
-
-        answer = response.choices[0].text
+        if (not available_gpt):
+            answer = response.choices[0].text
+        else:
+            answer = response['choices'][0]['message']['content']
     
         if userprompt.lower() == "exit":
             return render_template('index.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
         
-        #answer = answer_question(userprompt)
-        print("ANSWER IS: " + answer)
-
 
         #save UserPrompt and Answer as a record into Transcripts table
 
@@ -753,13 +804,12 @@ def night_mode():
         available_eho = False 
         available_gpt = False 
         models = openai.Model.list()
-        print("Available Models are: ")
+
         for model in models['data']:
-            print(model.id)
+            if (model.id == "gpt-3.5-turbo"):
+                available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
-            #if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
-                #available_eho = True
 
 
         if (usertemp == "Standard"):
@@ -769,29 +819,31 @@ def night_mode():
         if (usertemp == "Ultra"):
             engine_temperature = 1.5
 
-        print("Temperature set to " + usertemp + "at : " + str(engine_temperature))
+        print("Temperature set to " + usertemp + " at : " + str(engine_temperature))
 
 
         if (available_gpt):
             try: 
-                print("Davinci-GPT is available !! ")
-                messages=[
+                print("GPT TURBO is Available !!")
+                messages = [
                     {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": "Who won the world series in 2020?"},
-                    {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-                    {"role": "user", "content": "Where was it played?"}
-                    ]
+                    {"role": "user", "content": "This is User's Question"}
+                ]
+                #messagees[1]['content'] = userprompt
+                for item in messages:
+                    if item["role"] == "user":
+                        item["content"] = userprompt
+
+
+                print("GPT-3.5-TURBO is available !! ")
                 response = openai.ChatCompletion.create(
-                    engine="gpt-3.5-turbo",
-                    prompt=messages,
-                    max_tokens=1000,
-                    n=1,
-                    stop=None,
-                    temperature=engine_temperature,
+                    model="gpt-3.5-turbo",
+                    messages=messages 
                 )
             except:
-                print("something went wrong while processing your question.. ")
+                print("something went wrong while processing your prompt .. ")
                 return render_template("error.html", userapikey=openai.api_key)
+
 
         elif (available_eho):
             try: 
@@ -839,7 +891,11 @@ def night_mode():
                 return render_template("error.html", userapikey=openai.api_key)
     
 
-        answer = response.choices[0].text
+        if (not available_gpt):
+            answer = response.choices[0].text
+        else:
+            answer = response['choices'][0]['message']['content']
+
     
         if userprompt.lower() == "exit":
             return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
@@ -864,10 +920,17 @@ def night_mode():
             print("oops.. INSERT went wrong while saving Transacript Record into Supabase !! ")
             return render_template("error.html", userapikey=openai.api_key)
 
-
         return render_template("answer_nm.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
     return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
+
+@app.route('/advisory')
+def advisory():
+    return render_template('advisory.html')
+
+@app.route('/advisory_nm')
+def advisory_nm():
+    return render_template('advisory_nm.html')
 
 @app.route('/gallery')
 def gallery():
