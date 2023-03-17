@@ -926,6 +926,16 @@ def night_mode():
     
     return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
 
+
+@app.route('/founders')
+def founders():
+    return render_template('founders.html')
+
+@app.route('/founders_nm')
+def founders_nm():
+    return render_template('founders_nm.html')
+
+
 @app.route('/advisory')
 def advisory():
     return render_template('advisory.html')
