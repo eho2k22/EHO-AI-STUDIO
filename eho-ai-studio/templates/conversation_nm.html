@@ -15,6 +15,19 @@
           gtag('config', 'G-KKZ1G64L97');
     </script>
     <style>
+      
+      /* Set a max-width for the page */
+      body {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* Set the width of the content to a percentage */
+      .content {
+        width: 90%;
+        margin: 0 auto;
+      }
+
       /* Add the styles for the button */
       .right-aligned-button {
         float: right; /* Float the button to the right */
@@ -58,8 +71,8 @@
 
 </head>
 <body bgcolor="#AFB9DB" onload="displayWords()">
+  <div class="content">
   <font style="font-family:verdana">
-  
   <center>
         <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
         <button onclick="location.href='{{ url_for('conversation') }}'"><font style="font-family:verdana" color="0x0000FF">LIGHT MODE</font></button>
@@ -125,7 +138,7 @@
       <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
       </form>
     <br></br>
-    <p> <font style="font-family:verdana"> Beta Version 2.1 as of 
+    <p> <font style="font-family:verdana"> Beta Version 2.2 as of 
     <div id="current_date">
       <script>
       date = new Date();
@@ -148,6 +161,10 @@
         <a href='{{ url_for('terms') }}'> Terms</a>
         &nbsp;&nbsp;&nbsp;&nbsp;
         <a href='{{ url_for('privacy') }}'> Privacy</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('founders') }}'> Founder </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('advisory') }}'> Advisors </a>
       </div>
     </font>
   </center>
@@ -157,5 +174,6 @@
   <br></br>
   </center>
   </font>
+</div>
 </body>
 </html>
