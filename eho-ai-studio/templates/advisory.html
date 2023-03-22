@@ -15,7 +15,7 @@
         
         .text-box {
             width: calc(33.33% - 10px);
-            height: 350px;
+            height: 500px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             padding: 10px;
@@ -145,13 +145,16 @@
     <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
     <font style="font-family:verdana">
         <div style="text-align:center">
-            <a href='{{ url_for('terms') }}'> Terms</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href='{{ url_for('privacy') }}'> Privacy</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
             <a href='{{ url_for('founders') }}'> Founder </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
             <a href='{{ url_for('advisory') }}'> Advisors </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('mission') }}'> Mission </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('terms') }}'> Terms </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('privacy') }}'> Privacy </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </font>
 </center>

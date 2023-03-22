@@ -115,6 +115,7 @@ def generate_response(prompt, previous_context):
                    
                 if item["role"] == "assistant":
                     item["content"] = previous_context
+            
 
             gpt_response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
@@ -284,6 +285,7 @@ def conversation():
         response_edited = ""
         prompt = request.form['prompt']
 
+        print("CONVERSATION MODE:  POST ACTION")
     
         if convo_context is None:
             print("about to POST QUERY,  convo_context is NONE ???")
@@ -934,6 +936,15 @@ def founders():
 @app.route('/founders_nm')
 def founders_nm():
     return render_template('founders_nm.html')
+
+
+@app.route('/mission')
+def mission():
+    return render_template('mission.html')
+
+@app.route('/mission_nm')
+def mission_nm():
+    return render_template('mission_nm.html')
 
 
 @app.route('/advisory')

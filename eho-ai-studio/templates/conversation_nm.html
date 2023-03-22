@@ -66,11 +66,16 @@
         width: 0%;
       }
 
-
     </style>
 
+    <script>
+      function setFocusOnTextArea() {
+          document.getElementById("prompt").focus();
+      }
+    </script>
+
 </head>
-<body bgcolor="#AFB9DB" onload="displayWords()">
+<body bgcolor="#AFB9DB" onload="setFocusOnTextArea()">
   <div class="content">
   <font style="font-family:verdana">
   <center>
@@ -85,14 +90,26 @@
     </p>
     </p>
       <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-     <p>
-    <p> <font style="font-family:verdana" color="#ADD8E6"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
-    <p> <font style="font-family:verdana" color="#ADD8E6"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
+    <p>
+    <hr>
+    {% if conversation_history %}
+        {% for conversation in conversation_history %}
+            <!--p><strong>You said : </strong> {{ conversation[0] }}</p>
+            <p><strong>EHO P&R Bot said:</strong> {{ conversation[1] }}</p-->
+            <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
+            <p><strong>EHO P&R Bot responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
+            <hr>
+        {% endfor %}
+    {% endif %}
+
+  <br></br>
+  <p style="font-family:verdana" color="#ADD8E6"> <font style="font-family:verdana" color="#ADD8E6"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
+  <p style="font-family:verdana" color="#ADD8E6"> <font style="font-family:verdana" color="#ADD8E6"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
         <!--p><input type="text" name="prompt" rows="6" cols="70"></p-->
         <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
-        <input type="submit" value="Send" onclick="showProgress()">
+        <input type="submit" id="user-submit" value="Send" onclick="showProgress()" >
     
 
       <div id="progress-bar">
@@ -110,19 +127,12 @@
                 clearInterval(progressInterval);
               }
             }, 1000);
+
           }
+    
       </script>
     </form>
-    <hr>
-    {% if conversation_history %}
-        {% for conversation in conversation_history %}
-            <!--p><strong>You said : </strong> {{ conversation[0] }}</p>
-            <p><strong>EHO P&R Bot said:</strong> {{ conversation[1] }}</p-->
-            <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
-            <p><strong>EHO P&R Bot responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
-            <hr>
-        {% endfor %}
-    {% endif %}
+  <br></br>
   </center>
   <br></br>
 
@@ -138,7 +148,7 @@
       <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
       </form>
     <br></br>
-    <p> <font style="font-family:verdana"> Beta Version 2.2 as of 
+    <p> <font style="font-family:verdana"> Beta Version 2.3 as of 
     <div id="current_date">
       <script>
       date = new Date();
@@ -158,13 +168,16 @@
     <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
     <font style="font-family:verdana">
       <div style="text-align:center">
-        <a href='{{ url_for('terms') }}'> Terms</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href='{{ url_for('privacy') }}'> Privacy</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href='{{ url_for('founders') }}'> Founder </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href='{{ url_for('advisory') }}'> Advisors </a>
+        <a href='{{ url_for('founders_nm') }}'> Founder </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('advisory_nm') }}'> Advisors </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('mission_nm') }}'> Mission </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('terms') }}'> Terms </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('privacy') }}'> Privacy </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
       </div>
     </font>
   </center>

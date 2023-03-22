@@ -74,16 +74,49 @@
     <p></p>
     <center>
     <font style="font-family:verdana">
-
-   
-    <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
-    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
     </center>
     </font>
     <br></br>
     <center>
     <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
     <br></br>
+    </center>
+
+    <center>
+    <br></br>
+    <p> <font style="font-family:verdana"> Beta Version 2.3 as of 
+    <div id="current_date">
+        <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+        </script>
+    </div>
+    </font>
+    </p>
+    </center>
+
+
+    <center>
+    <br></br>
+    <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
+    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+    <font style="font-family:verdana">
+    <div style="text-align:center">
+        <a href='{{ url_for('founders') }}'> Founder </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('advisory') }}'> Advisors </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('mission') }}'> Mission </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('terms') }}'> Terms </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='{{ url_for('privacy') }}'> Privacy </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    </font>
     </center>
 
 </body>

@@ -15,7 +15,7 @@
         
         .text-box {
             width: calc(33.33% - 10px);
-            height: 350px;
+            height: 500px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             padding: 10px;
@@ -124,7 +124,7 @@
 <br>
 <center>
     <br></br>
-        <p> <font style="font-family:verdana"> Beta Version 2.2 as of 
+        <p> <font style="font-family:verdana"> Beta Version 2.3 as of 
         <div id="current_date">
         <script>
             date = new Date();
@@ -144,13 +144,16 @@
         <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
         <font style="font-family:verdana">
             <div style="text-align:center">
-                <a href='{{ url_for('terms') }}'> Terms</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href='{{ url_for('privacy') }}'> Privacy</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
                 <a href='{{ url_for('founders_nm') }}'> Founder </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                 <a href='{{ url_for('advisory_nm') }}'> Advisors </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('mission_nm') }}'> Mission </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('terms') }}'> Terms </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('privacy') }}'> Privacy </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </font>
 </center>    
