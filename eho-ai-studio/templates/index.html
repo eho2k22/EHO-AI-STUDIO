@@ -4,12 +4,13 @@
     <title>EHO AIGC Studio </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+    <meta charset="UTF-8">
     <style>
 
       /* Set a max-width for the page */
       body {
-        max-width: 1000px;
+        max-width: 900px;
         margin: 0 auto;
       }
 
@@ -81,12 +82,7 @@
 </head>
 <body>
     <div class="content">
-    <!--div class="right-aligned-div" id="google_translate_element"></div>
-    <br></br>
-    <br></br>
-    <button class="right-aligned-button" onclick="google.translate.translate(document.body)">Translate</button--->
     <center>
-    <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
     <button onclick="location.href='{{ url_for('night_mode') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
     <p class="text">
     <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
@@ -106,13 +102,8 @@
     </font>
     <br></br>
     </center>
+
 <center>
-  <div style="text-align:center">
-    <!--a href="https://www.youtube.com/@EHO-AI-STUDIO.23"><img src="https://cdn.midjourney.com/46e99b15-ddc2-4905-b1f6-fdbb60798e71/grid_0.png" alt="STUDIO" style="display:inline-block" width="250" height="300" margin-right:10px"></a-->
-  </div>
-</center>
-<center>
-  <!--button onclick="location.href='{{ url_for('night_mode') }}'">Night Mode</button-->
   <button onclick="location.href='{{ url_for('gallery') }}'"><font style="font-family:verdana" color="0x0000FF">View AIGC Gallery  </font> </button>
   </center>
 <center>
@@ -126,13 +117,11 @@
 
 <font style="font-family:verdana">
 <p> 
-  <!--strong> NOT Google Search. No more sifting through pages to locate what you are looking for. </strong-->
 </p>
 </font>
 <br>
 
 <font style="font-family:verdana" color="0x0000FF">
-<!--strong> How To Get Started? </strong-->
 <p></p>
 <p></p>
 </font>
@@ -166,16 +155,14 @@
   </center>
   <br></fr>
   <center>
-  <bold> <strong> <font style="font-family:verdana"> Your Prompt: </font> </strong> </bold>
+  <p><bold> <strong> <font style="font-family:verdana"> Your Prompt: </font> </strong> </bold></p>
   </center>
   <center>
-  <!--input name="prompt"/-->
-  <textarea id="prompt" name="prompt" rows="12" cols="70"></textarea>
+  <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
   <br/><br/>
   </center>
   <center>
   <input type="submit" value="Submit" onclick="showProgress()">
-  <!--button type="submit" onclick="showProgress()"></button>> <font style="font-family:verdana"> Submit </font> </button-->
   <div id="progress-bar">
     <label id="pbf-label"><font style="font-family:verdana" color="0x0000FF"> Wheels Turning ... </font></label>
     <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
