@@ -27,3 +27,33 @@ h1, h2, h3 {
 }
 
 /* Add styles for other elements as needed */
+
+img {
+  border: 5px solid #555;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row img {
+  /*width: 100px; /* adjust as needed */
+  width: 23%;
+  height: auto;
+  margin-left: 20px; /* adjust as needed */
+  border: 5px solid #ADD8E6;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 0 auto; /* add this line */
+}
+
+
+.textbox {
+  width: 70%;
+  margin-left: 20px; /* adjust as needed */
+  border: 5px solid #ccc;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 0 auto; /* add this line */
+}
