@@ -17,7 +17,7 @@ a:link {
   }
   
   a:visited {
-    color: green;
+    color: blue;
     background-color: transparent;
     text-decoration: none;
   }
@@ -112,3 +112,68 @@ div.b {
     font-family: 'Poppins', sans-serif;
     color: rgb(85, 85, 85);
 }
+
+
+.navigation-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    /*background-color: #e7ebee; */
+    background-color: #99a2c2;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .navigation-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navigation-menu li {
+    margin-bottom: 50px;
+  }
+  
+  .navigation-menu li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .navigation-menu a i {
+    margin-right: 10px;
+    color: #333;
+    font-size: 20px;
+  }
+
+
+
+  @media (max-width: 768px) {
+    .navigation-menu {
+      position: static;
+      width: 100%;
+      height: auto;
+      background-color: #99a2c2;
+    }
+  
+    .navigation-menu ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      background-color: #f0f0f0;
+      padding: 20px;
+    }
+  
+    .navigation-menu li {
+      margin-bottom: 0;
+    }
+
+    .navigation-menu a i {
+        margin-right: 10px;
+        color: #333;
+        font-size: 20px;
+      }
+  }
+  

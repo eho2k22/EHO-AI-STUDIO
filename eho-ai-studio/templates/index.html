@@ -3,7 +3,10 @@
 <head>
     <title>EHO AIGC Studio </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /--->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
     <!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
     <meta charset="UTF-8">
     <style>
@@ -81,11 +84,22 @@
     </script>
 </head>
 <body>
+  <div class="navigation-menu">
+    <font style="font-family:verdana" color="0x0000FF">
+    <ul>
+      <li><a href='{{ url_for('founders') }}'> <i class="fa fa-home w3-xxlarge"></i> Founder </a> </li>
+      <li><a href='{{ url_for('advisory') }}'> <i class="fa fa-users w3-xxlarge"></i> Advisors </a></li>
+      <li><a href='{{ url_for('mission') }}'> <i class="fa fa-landmark w3-xxlarge"></i> &nbsp;Mission </a> </li>
+      <li><a href='{{ url_for('terms') }}'> <i class="fa fa-file w3-xxlarge"></i> &nbsp;Terms </a> </li>
+      <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-sharp fa-file w3-xxlarge"></i> &nbsp;Privacy </a> </li>
+    </ul>
+    </font>
+  </div>
     <div class="content">
     <center>
     <button onclick="location.href='{{ url_for('night_mode') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
     <p class="text">
-    <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
+    <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4"> 
     <strong>
     WELCOME TO EHO AI STUDIO 23
     </strong>
@@ -133,10 +147,10 @@
 <sub>(** Higher the Temperature, More Creative the Responses! **)</sub>
 <br></br>
 
-
-<strong> CLICK START CONVERSATION FOR MORE !! </strong>
-<button onclick="location.href='{{ url_for('conversation') }}'"><font style="font-family:verdana" color="0x0000FF"><b>Start Conversation </b></font> </button>
+<strong> CLICK START CONVERSATION FOR MORE !! &nbsp;&nbsp;&nbsp;</strong>
 <br>
+<button onclick="location.href='{{ url_for('conversation') }}'"><font style="font-family:verdana" color="0x0000FF"><b>Start Conversation </b></font> </button>
+
 </font>
 </p> 
 
