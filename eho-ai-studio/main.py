@@ -48,6 +48,7 @@ supa_url = os.environ['SUPABASE_URL']
 supa_key = os.environ['SUPABASE_KEY']
 
 gpt_enabled = os.environ['GPT_KEY']
+app_version = os.environ['APP_VERSION']
 
 supabase = create_client(supa_url, supa_key)
 
@@ -252,7 +253,7 @@ def conversation():
     if request.method == "GET":
         #return render_template("conversation.html")
         if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
-            return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history))
+            return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history))
 
         else : 
             convo_ID = session['convo_ID']
@@ -277,7 +278,7 @@ def conversation():
                 return render_template('conversation.html')            
             else:
                 print("about to GET conversation.html,  what is the convo_histroy_str ? " + convo_history_str)
-                return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+                return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
     elif request.method == 'POST':
@@ -359,7 +360,7 @@ def conversation():
                 print("CLEARING CONVERSATION !!!") 
                 #CLEARING OUT Conversation ID  in DB
                 supabase.table('Conversations').update({"convo_context" : "", "convo_history" : [] }).eq('convo_ID', convo_ID).execute()
-                return render_template('conversation.html', conversation_history=[], conversation_length=0)
+                return render_template('conversation.html', app_version=app_version, conversation_history=[], conversation_length=0)
   
     
         #previous_response defined as CONTEXT 
@@ -398,7 +399,7 @@ def conversation():
         convo_context = ['']
     
     print("convo_history_str AFTER POST is : " + convo_history_str)
-    return render_template('conversation.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+    return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
 @app.route('/conversation_nm', methods=['GET', 'POST'])
@@ -492,7 +493,7 @@ def conversation_nm():
     if request.method == "GET":
         #return render_template("conversation.html")
         if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
-            return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history))
+            return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history))
 
         else : 
             convo_ID = session['convo_ID']
@@ -517,7 +518,7 @@ def conversation_nm():
             if (convo_context == ""):
                 return render_template('conversation_nm.html')            
             else:
-                return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+                return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
     elif request.method == 'POST':
@@ -598,7 +599,7 @@ def conversation_nm():
                 print("CLEARING CONVERSATION !!!") 
                 #CLEARING OUT Conversation ID  in DB
                 supabase.table('Conversations').update({"convo_context" : "", "convo_history" : [] }).eq('convo_ID', convo_ID).execute()
-                return render_template('conversation_nm.html', conversation_history=[], conversation_length=0)
+                return render_template('conversation_nm.html', app_version=app_version, conversation_history=[], conversation_length=0)
   
     
         print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
@@ -634,7 +635,7 @@ def conversation_nm():
         convo_context = ['']
     
     print("convo_history_str AFTER POST in NIGHT_MODE is : " + convo_history_str)
-    return render_template('conversation_nm.html', conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+    return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -756,7 +757,7 @@ def index():
             answer = response['choices'][0]['message']['content']
     
         if userprompt.lower() == "exit":
-            return render_template('index.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
+            return render_template('index.html', app_version=app_version, jokeanswer=jokeanswer, pod_prompt=pod_prompt)
         
 
         #save UserPrompt and Answer as a record into Transcripts table
@@ -778,9 +779,9 @@ def index():
             return render_template("error.html", userapikey=openai.api_key)
 
 
-        return render_template("answer.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
+        return render_template("answer.html", app_version=app_version, userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
-    return render_template('index.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
+    return render_template('index.html', app_version=app_version, jokeanswer=jokeanswer, pod_prompt=pod_prompt)
 
 
 @app.route('/night_mode', methods=["GET", "POST"])
@@ -902,7 +903,7 @@ def night_mode():
 
     
         if userprompt.lower() == "exit":
-            return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
+            return render_template('night_mode.html', app_version=app_version, jokeanswer=jokeanswer, pod_prompt=pod_prompt)
         
         #answer = answer_question(userprompt)
         print("ANSWER IS: " + answer)
@@ -924,36 +925,36 @@ def night_mode():
             print("oops.. INSERT went wrong while saving Transacript Record into Supabase !! ")
             return render_template("error.html", userapikey=openai.api_key)
 
-        return render_template("answer_nm.html", userprompt=userprompt, answer=answer, userapikey=openai.api_key)
+        return render_template("answer_nm.html", app_version=app_version, userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     
-    return render_template('night_mode.html', jokeanswer=jokeanswer, pod_prompt=pod_prompt)
+    return render_template('night_mode.html', app_version=app_version, jokeanswer=jokeanswer, pod_prompt=pod_prompt)
 
 
 @app.route('/founders')
 def founders():
-    return render_template('founders.html')
+    return render_template('founders.html', app_version=app_version)
 
 @app.route('/founders_nm')
 def founders_nm():
-    return render_template('founders_nm.html')
+    return render_template('founders_nm.html', app_version=app_version)
 
 
 @app.route('/mission')
 def mission():
-    return render_template('mission.html')
+    return render_template('mission.html', app_version=app_version)
 
 @app.route('/mission_nm')
 def mission_nm():
-    return render_template('mission_nm.html')
+    return render_template('mission_nm.html', app_version=app_version)
 
 
 @app.route('/advisory')
 def advisory():
-    return render_template('advisory.html')
+    return render_template('advisory.html', app_version=app_version)
 
 @app.route('/advisory_nm')
 def advisory_nm():
-    return render_template('advisory_nm.html')
+    return render_template('advisory_nm.html', app_version=app_version)
 
 @app.route('/gallery')
 def gallery():
@@ -969,11 +970,11 @@ def gallery_nm():
 
 @app.route('/terms')
 def terms():
-    return render_template('terms.html')
+    return render_template('terms.html', app_version=app_version)
 
 @app.route('/privacy')
 def privacy():
-    return render_template('privacy.html')
+    return render_template('privacy.html', app_version=app_version)
 
 
 @app.route("/sendemail", methods=["GET", "POST"])

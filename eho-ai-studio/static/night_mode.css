@@ -15,7 +15,6 @@ h1, h2, h3 {
 
 /* Add styles for other elements as needed */
 
-
 .navigation-menu {
     display: flex;
     flex-direction: column;
@@ -27,52 +26,58 @@ h1, h2, h3 {
     background-color: #353333;
     padding: 20px;
     box-sizing: border-box;
-  }
-  
-  .navigation-menu ul {
+}
+
+.navigation-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  .navigation-menu li {
-    margin-bottom: 50px;
-  }
-  
-  .navigation-menu li:last-child {
-    margin-bottom: 0;
-  }
+}
 
-  .navigation-menu a i {
+.navigation-menu li {
+    margin-bottom: 55px;
+}
+
+.navigation-menu li:last-child {
+    margin-bottom: 0;
+}
+
+.navigation-menu a i {
     margin-right: 10px;
     color: #ffdf00; 
-    font-size: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .navigation-menu {
-      position: static;
-      width: 100%;
-      height: auto;
-      background-color: #353333;
-    }
-  
-    .navigation-menu ul {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
-  
-    .navigation-menu li {
-      margin-bottom: 0;
-    }
+    font-size: 25px;
+}
 
-    .navigation-menu a i {
-        margin-right: 10px;
-        color: #ffdf00; 
-        font-size: 20px;
-    }
-  }
-  
+
+
+@media (max-width: 1200px) {
+.navigation-menu {
+  position: static;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  background-color: #1c1c1c;
+}
+
+.navigation-menu ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #1c1c1c;
+  padding: 20px;
+}
+
+.navigation-menu li {
+  margin-right: 65px;
+}
+
+.navigation-menu li:last-child {
+  margin-right: 0;
+}
+
+.navigation-menu a i {
+    margin-right: 10px;
+    color: #ffdf00; 
+    font-size: 30px;
+}
+}

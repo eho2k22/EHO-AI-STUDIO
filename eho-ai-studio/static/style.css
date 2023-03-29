@@ -113,6 +113,7 @@ div.b {
     color: rgb(85, 85, 85);
 }
 
+/* Add styles for other elements as needed */
 
 .navigation-menu {
     display: flex;
@@ -126,54 +127,58 @@ div.b {
     background-color: #99a2c2;
     padding: 20px;
     box-sizing: border-box;
-  }
-  
-  .navigation-menu ul {
+}
+
+.navigation-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  .navigation-menu li {
-    margin-bottom: 50px;
-  }
-  
-  .navigation-menu li:last-child {
+}
+
+.navigation-menu li {
+    margin-bottom: 55px;
+}
+
+.navigation-menu li:last-child {
     margin-bottom: 0;
-  }
-  
-  .navigation-menu a i {
+}
+
+.navigation-menu a i {
     margin-right: 10px;
     color: #333;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+
+@media (max-width: 1200px) {
+.navigation-menu {
+  position: static;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  background-color: #AFB9DB;
+}
+
+.navigation-menu ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #AFB9DB;
+  padding: 20px;
+}
+
+.navigation-menu li {
+  margin-right: 65px;
+}
+
+.navigation-menu li:last-child {
+  margin-right: 0;
+}
+
+
+.navigation-menu a i {
+    margin-right: 10px;
+    color: #333;
+    font-size: 30px;
   }
-
-
-
-  @media (max-width: 768px) {
-    .navigation-menu {
-      position: static;
-      width: 100%;
-      height: auto;
-      background-color: #99a2c2;
-    }
-  
-    .navigation-menu ul {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      background-color: #f0f0f0;
-      padding: 20px;
-    }
-  
-    .navigation-menu li {
-      margin-bottom: 0;
-    }
-
-    .navigation-menu a i {
-        margin-right: 10px;
-        color: #333;
-        font-size: 20px;
-      }
-  }
-  
+}
