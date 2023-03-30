@@ -116,13 +116,16 @@
     {% endif %}
 
   <br></br>
-  <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
-  <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Prompt "CLEAR_CONVO" to clear conversation cache and restart **) </sub> </font> </p>
+  <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Your conversation history will be cleared after 10 exchanges. **) </sub> </font> </p>
+  <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Click Clear Button to clear conversation history **) </sub> </font> </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
         <!--p><input type="text" name="prompt" rows="6" cols="70"></p-->
         <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
         <input type="submit" id="user-submit" value="Send" onclick="showProgress()" >
+        <br>
+        <br>
+        <input type="button" id="clear-submit" value="Clear" onclick="clearPrompt()">
     
 
       <div id="progress-bar">
@@ -142,8 +145,15 @@
             }, 1000);
 
           }
+
+          function clearPrompt() {
+            // Set the prompt value to "clear_convo"
+            document.getElementById("prompt").value = "clear_convo";
+            // Submit the form
+            document.getElementById("user-submit").click();
+          }
     
-      </script>
+        </script>
     </form>
   <br></br>
   </center>

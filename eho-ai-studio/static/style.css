@@ -25,13 +25,13 @@ a:link {
   a:hover {
     color: red;
     background-color: transparent;
-    text-decoration: underline;
+    text-decoration: none;
   }
   
   a:active {
     color: blue;
     background-color: transparent;
-    text-decoration: underline;
+    text-decoration: none;
   }
 
 
@@ -180,5 +180,6 @@ div.b {
     margin-right: 10px;
     color: #333;
     font-size: 30px;
+    text-align: center; 
   }
 }

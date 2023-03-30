@@ -13,6 +13,36 @@ h1, h2, h3 {
     color: #f2f2f2;
 }
 
+img {
+    border: 5px solid #f2f2f2;
+}
+
+a:link {
+    color: #00bfff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:visited {
+    color: #00bfff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:active {
+    color: #00bfff;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+
+
 /* Add styles for other elements as needed */
 
 .navigation-menu {
