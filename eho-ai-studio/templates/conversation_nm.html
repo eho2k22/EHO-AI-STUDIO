@@ -80,12 +80,13 @@
   <div class="navigation-menu">
     <font style="font-family:verdana">
     <ul>
-      <li><a href='{{ url_for('index') }}'> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a></li>
-      <li><a href='{{ url_for('founders_nm') }}'> <i class="fa fa-home w3-xxlarge"></i> Founder </a> </li>
+      <li><a href='{{ url_for('night_mode') }}'> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a></li>
+      <li><a href='{{ url_for('founders_nm') }}'> <i class="fa fa-user w3-xxlarge"></i> Founder </a> </li>
       <li><a href='{{ url_for('advisory_nm') }}'> <i class="fa fa-users w3-xxlarge"></i> Advisors </a></li>
-      <li><a href='{{ url_for('mission_nm') }}'> <i class="fa fa-landmark w3-xxlarge"></i> &nbsp;Mission </a> </li>
-      <li><a href='{{ url_for('terms') }}'> <i class="fa fa-file w3-xxlarge"></i> &nbsp;Terms </a> </li>
-      <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-sharp fa-file w3-xxlarge"></i> &nbsp;Privacy </a> </li>
+      <li><a href='{{ url_for('mission_nm') }}'> <i class="fa fa-bullseye w3-xxlarge"></i> Mission </a> </li>
+      <li><a href='{{ url_for('trending_nm') }}'> <i class="fa fa-fire w3-xxlarge"></i> Trending </a> </li>
+      <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
+      <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
     </ul>
     </font>
   </div>
@@ -168,7 +169,7 @@
       <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
       </form>
     <br></br>
-    <p> <font style="font-family:verdana"> Beta Version 2.5 as of 
+    <p> <font style="font-family:verdana"> Beta Version {{app_version}} as of 
     <div id="current_date">
       <script>
       date = new Date();

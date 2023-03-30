@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>EHO P&R AI GENIE Conversation</title>
+    <title>EHO P&R AI GENIE PROMPT LEADERBOARD </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -94,81 +94,46 @@
   <font style="font-family:verdana">
   <center>
         <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
-        <button onclick="location.href='{{ url_for('conversation_nm') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
+        <button onclick="location.href='{{ url_for('trending_nm') }}'"><font style="font-family:verdana" color="0x0000FF">NIGHT MODE</font></button>
     <p class="text">
       <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4"> 
       <strong>
-      Conversation with EHO P&R AI Genie
+       PROMPT LEADERBOARD 
       </strong>
       </font>
     </p>
     </p>
       <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
-    <hr>
-    {% if conversation_history %}
-        {% for conversation in conversation_history %}
-            <!--p><strong>You said : </strong> {{ conversation[0] }}</p>
-            <p><strong>EHO P&R Bot said:</strong> {{ conversation[1] }}</p-->
-            <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
-            <p><strong>EHO P&R Bot responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
-            <hr>
-        {% endfor %}
+    <!--hr style="border: 1px solid black; border-left: none; border-right: none;"-->
+    {% if prompt_list %}
+      {% for prompt in prompt_list %}
+        <div style="border-left: 3px solid black; border-right: 3px solid black;">
+        <hr style="border-top: 3px solid black; border-bottom: none;">
+        <div style="padding: 10px; text-align: left;">
+          {{ prompt }}
+        </div>
+        <hr style="border-bottom: 3px solid black; border-top: none;">
+        </div>
+    
+      {% endfor %}
     {% endif %}
 
   <br></br>
-  <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Your conversation history will be cleared after 10 exchanges. **) </sub> </font> </p>
-  <p style="font-family:verdana" color="0x0000FF"> <font style="font-family:verdana" color="0x0000FF"><sub> (** Click Clear Button to clear conversation history **) </sub> </font> </p>
-    <form method="POST">
-        <p><strong>Prompt:</strong></p>
-        <!--p><input type="text" name="prompt" rows="6" cols="70"></p-->
-        <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
-        <input type="submit" id="user-submit" value="Send" onclick="showProgress()" >
-        <br>
-        <br>
-        <input type="button" id="clear-submit" value="Clear" onclick="clearPrompt()">
-    
 
-      <div id="progress-bar">
-          <label id="pbf-label"><font style="font-family:verdana" color="0x0000FF"> one moment please ... </font></label>
-          <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
-      </div>
-        <script>
-          function showProgress() {
-            document.getElementById("progress-bar").style.display = "block";
-            var progress = 0;
-            var progressInterval = setInterval(function() {
-              progress += 10;
-              document.getElementById("progress-bar-fill").style.width = progress + "%";
-              if (progress >= 100) {
-                clearInterval(progressInterval);
-              }
-            }, 1000);
-
-          }
-
-          function clearPrompt() {
-            // Set the prompt value to "clear_convo"
-            document.getElementById("prompt").value = "clear_convo";
-            // Submit the form
-            document.getElementById("user-submit").click();
-          }
-    
-        </script>
-    </form>
   <br></br>
   </center>
 
 
   <center>
     <font style="font-family:verdana">
-      <p> Like this conversation?  Enter your email below and click SEND and we will send a transcript to you! </p>
+      <p> Like these prompts?  Enter your email below and click SEND and we will send this list to you for free! </p>
       <br>
       <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
       <br>
       <form method="post" action="/sendemail">
       <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
-      <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
+      <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>  
       <button onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
       </form>
     <br></br>
