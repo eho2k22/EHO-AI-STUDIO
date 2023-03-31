@@ -14,7 +14,11 @@ h1, h2, h3 {
 }
 
 img {
-    border: 5px solid #f2f2f2;
+    border: 3px solid #f2f2f2;
+}
+
+img.no-border {
+  border: none;
 }
 
 a:link {
@@ -110,8 +114,13 @@ a:link {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center; /*Add this to VERTICALLY CENTER ALL items*/
   background-color: #1c1c1c;
   padding: 20px;
+}
+
+.navigation-menu ul li:first-child { /* Add this rule to adjust the first item */
+  align-self: flex-start;
 }
 
 .navigation-menu li {

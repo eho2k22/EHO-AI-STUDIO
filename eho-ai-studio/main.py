@@ -94,7 +94,7 @@ def generate_response(prompt, previous_context):
 
     except: 
         print("sorry, wrong key")
-        return render_template("error.html", userapikey=openai.api_key)
+        return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
     
     for model in models['data']:
         # print(model.id)
@@ -132,7 +132,7 @@ def generate_response(prompt, previous_context):
             else:
                 # handle all other errors here
                 print(f"something went wrong: {e}")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
         
 
     
@@ -218,7 +218,7 @@ def conversation():
             data = supabase.table('Conversations').insert(records).execute()
         except:
             print("OOPS.. INSERT went WRONG while saving New Conversation ID into DB ")
-            return render_template("error.html", userapikey=openai.api_key)
+            return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
 
     else:
@@ -458,7 +458,7 @@ def conversation_nm():
             data = supabase.table('Conversations').insert(records).execute()
         except:
             print("OOPS.. INSERT went WRONG while saving New Conversation ID into DB ")
-            return render_template("error.html", userapikey=openai.api_key)
+            return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
 
     else:
@@ -663,7 +663,7 @@ def index():
 
         except: 
             print("sorry, wrong key")
-            return render_template("error.html", userapikey=openai.api_key)
+            return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
     
 
         print("Available Models are: ")
@@ -705,7 +705,7 @@ def index():
                 )
             except:
                 print("something went wrong while processing your prompt .. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
         
         elif (available_eho):
             try: 
@@ -720,7 +720,7 @@ def index():
                 )
             except:
                 print("something went wrong while processing your prompt in EHO model .. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
         elif (available_003):
             try: 
@@ -735,7 +735,7 @@ def index():
                 )
             except:
                 print("something went wrong while processing your prompt.. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
         
         else:
             try: 
@@ -749,7 +749,7 @@ def index():
                 )
             except:
                 print("something went wrong while processing your prompt .. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
     
         if (not available_gpt) or (gpt_enabled != "YES"): 
             answer = response.choices[0].text
@@ -776,7 +776,7 @@ def index():
             data = supabase.table('Transcripts').insert(records).execute()
         except:
             print("oops.. INSERT went wrong while saving transcripts into Supabase ")
-            return render_template("error.html", userapikey=openai.api_key)
+            return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
 
         return render_template("answer.html", app_version=app_version, userprompt=userprompt, answer=answer, userapikey=openai.api_key)
@@ -803,7 +803,7 @@ def night_mode():
             models = openai.Model.list()
         except: 
             print("sorry, wrong key")
-            return render_template("error_nm.html", userapikey=openai.api_key)
+            return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
 
         available_003 = False
         available_eho = False 
@@ -847,7 +847,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your prompt .. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
 
         elif (available_eho):
@@ -863,7 +863,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
         elif (available_003):
             try: 
@@ -878,7 +878,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
 
         else:
@@ -893,7 +893,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", userapikey=openai.api_key)
+                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
     
 
         if (not available_gpt) or (gpt_enabled != "YES"):
@@ -923,7 +923,7 @@ def night_mode():
             data = supabase.table('Transcripts').insert(records).execute()
         except:
             print("oops.. INSERT went wrong while saving Transacript Record into Supabase !! ")
-            return render_template("error.html", userapikey=openai.api_key)
+            return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
 
         return render_template("answer_nm.html", app_version=app_version, userprompt=userprompt, answer=answer, userapikey=openai.api_key)
     

@@ -58,7 +58,11 @@ div.a
 }
 
 img {
-    border: 5px solid #555;
+    border: 3px solid #333;
+}
+
+img.no-border {
+    border: none;
 }
   
 input {
@@ -183,8 +187,13 @@ div.b {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center; /*Add this to VERTICALLY CENTER ALL items*/
   background-color: #AFB9DB;
   padding: 20px;
+}
+
+.navigation-menu ul li:first-child { /* Add this rule to adjust the first item */
+    align-self: flex-start;
 }
 
 .navigation-menu li {
