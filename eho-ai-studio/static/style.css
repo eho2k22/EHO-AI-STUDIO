@@ -113,6 +113,26 @@ div.b {
     color: rgb(85, 85, 85);
 }
 
+
+.badge-container {
+    position: relative;
+    display: inline-block;
+  }
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    padding: 5px;
+    border-radius: 50%;
+  }
+  
+
+
+
 /* Add styles for other elements as needed */
 
 .navigation-menu {
