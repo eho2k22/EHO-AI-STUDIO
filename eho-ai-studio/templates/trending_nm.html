@@ -87,6 +87,9 @@
       <li><a href='{{ url_for('trending_nm') }}'>
         <span class="badge-container"><i class="fa fa-fire w3-xxlarge"></i><span class="badge">New</span></span> Trending
       </a></li>
+      <li><a href='{{ url_for('gallery_nm') }}'>
+        <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
+      </a></li>
       <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
       <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
     </ul>
@@ -109,13 +112,10 @@
     <p>
     {% if prompt_list %}
       {% for prompt in prompt_list %}
-        <div style="border-left: 3px solid #ADD8E6; border-right: 3px solid #ADD8E6;">
-        <hr style="border-top: 3px solid #ADD8E6; border-bottom: none;">
-        <div style="padding: 10px; text-align: left;">
-          {{ prompt }}
-        </div>
-        <hr style="border-bottom: 3px solid #ADD8E6; border-top: none;">
-        </div>
+      <div style="display: inline-block; background-color: #252525; color: #f2f2f2; border: 3px solid #ffdf00; box-shadow: 3px 3px #3a3a3a; 
+      border-radius: 10px; padding: 10px; text-align: center; width: 300px;">
+        {{ prompt }}
+      </div>
     
       {% endfor %}
     {% endif %}
@@ -127,7 +127,7 @@
 
   <center>
     <font >
-      <p> Like this conversation?  Enter your email below and click SEND and we will send a transcript to you! </p>
+      <p> Enter your email below and we will send a transcript to you! </p>
       <br>
       <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
       <br>

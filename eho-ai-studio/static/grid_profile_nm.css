@@ -72,7 +72,7 @@ img {
   width: 23%;
   height: auto;
   margin-left: 20px; /* adjust as needed */
-  border: 5px solid #ADD8E6;
+  border: 3px solid #ADD8E6;
   box-sizing: border-box;
   padding: 10px;
   margin: 0 auto; /* add this line */
@@ -82,7 +82,7 @@ img {
 .textbox {
   width: 70%;
   margin-left: 20px; /* adjust as needed */
-  border: 5px solid #ccc;
+  border: 3px solid #ccc;
   box-sizing: border-box;
   padding: 10px;
   margin: 0 auto; /* add this line */

@@ -80,7 +80,7 @@ img {
   width: 23%;
   height: auto;
   margin-left: 20px; /* adjust as needed */
-  border: 5px solid #ffdf00;
+  border: 3px solid #ffdf00;
   box-sizing: border-box;
   padding: 10px;
   margin: 0 auto; /* add this line */
@@ -90,7 +90,7 @@ img {
 .textbox {
   width: 70%;
   margin-left: 20px; /* adjust as needed */
-  border: 5px solid black;
+  border: 3px solid black;
   box-sizing: border-box;
   padding: 10px;
   margin: 0 auto; /* add this line */

@@ -40,6 +40,8 @@ a:active {
 .image-grid img {
   width: 30%;
   padding: 1%;
+  /*#ADD8E6;*/
+  border: 3px solid #ADD8E6;
 }
 
 

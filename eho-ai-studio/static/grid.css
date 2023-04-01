@@ -39,6 +39,7 @@ a:active {
 .image-grid img {
   width: 30%;
   padding: 1%;
+  border: 3px solid #555;
 }
 
 .btn {

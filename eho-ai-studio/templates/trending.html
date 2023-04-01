@@ -87,6 +87,9 @@
       <li><a href='{{ url_for('trending') }}'>
         <span class="badge-container"><i class="fa fa-fire w3-xxlarge"></i><span class="badge">New</span></span> Trending
       </a></li>
+      <li><a href='{{ url_for('gallery') }}'>
+        <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
+      </a></li>
       <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
       <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
     </ul>
@@ -110,13 +113,20 @@
     <!--hr style="border: 1px solid black; border-left: none; border-right: none;"-->
     {% if prompt_list %}
       {% for prompt in prompt_list %}
-        <div style="border-left: 3px solid black; border-right: 3px solid black;">
+        <!--div style="border-left: 3px solid black; border-right: 3px solid black;">
         <hr style="border-top: 3px solid black; border-bottom: none;">
         <div style="padding: 10px; text-align: left;">
           {{ prompt }}
         </div>
         <hr style="border-bottom: 3px solid black; border-top: none;">
+        </div-->
+
+        <div style="display: inline-block; background-color:
+         #f9d6b8; border: 3px solid #c8640e; box-shadow: 3px 3px #9c4805; border-radius: 10px; padding: 10px; text-align: center; width: 300px;">
+          {{ prompt }}
         </div>
+        
+        
     
       {% endfor %}
     {% endif %}

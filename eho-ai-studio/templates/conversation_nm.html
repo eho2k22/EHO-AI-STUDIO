@@ -87,8 +87,12 @@
       <li><a href='{{ url_for('trending_nm') }}'>
         <span class="badge-container"><i class="fa fa-fire w3-xxlarge"></i><span class="badge">New</span></span> Trending
       </a></li>
+      <li><a href='{{ url_for('gallery_nm') }}'>
+        <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
+      </a></li>
       <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
       <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
+      <li></li>
     </ul>
     </font>
   </div>
@@ -158,9 +162,9 @@
 
   <center>
     <font>
-      <p> Like this conversation?  Enter your email below and click SEND and we will send a transcript to you! </p>
+      <p> Enter your email below and click SEND and we will send a transcript to you! </p>
       <br>
-      <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
+      <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
       <br>
       <form method="post" action="/sendemail_nm">
       <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
