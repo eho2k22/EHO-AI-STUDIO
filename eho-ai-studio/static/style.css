@@ -2,13 +2,9 @@
 body {
     background-color: #AFB9DB;
     color: #3D3D3D;
-    /*background-image: url('https://cdn.midjourney.com/44336a7d-0d7c-4671-b13c-4af08c8c31cd/grid_0.png'); */
+    font-family: Arial, sans-serif; 
+ 
 }
-/*
-a {
-    color: #0011ff;
-}
-*/
 
 a:link {
     color: blue;
@@ -97,6 +93,28 @@ div.b {
     hyphens: auto;
 }
 
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1.0rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #0000FF; 
+    background-color: white; 
+    border: none;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+  
+.btn:hover {
+    background-color: gray; 
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.1rem);
+}
+  
+
+  
+
 
 .login-btn {
     justify-content: center;
@@ -110,12 +128,14 @@ div.b {
     box-shadow: 3px 3px 3px rgb(170, 170, 170);
     border-radius: 15px;
 }
+
 .btn-text {
     justify-content: center;
     padding: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     color: rgb(85, 85, 85);
 }
+
 
 
 .badge-container {
@@ -147,7 +167,6 @@ div.b {
     left: 0;
     height: 100%;
     width: 200px;
-    /*background-color: #e7ebee; */
     background-color: #99a2c2;
     padding: 20px;
     box-sizing: border-box;
@@ -158,6 +177,11 @@ div.b {
     margin: 0;
     padding: 0;
 }
+
+.navigation-menu a:link {
+    color: #1a1aff;
+}
+
 
 .navigation-menu li {
     margin-bottom: 55px;
@@ -190,6 +214,10 @@ div.b {
   align-items: center; /*Add this to VERTICALLY CENTER ALL items*/
   background-color: #AFB9DB;
   padding: 20px;
+}
+
+.navigation-menu a:link {
+    color: #1a1aff;
 }
 
 .navigation-menu ul li:first-child { /* Add this rule to adjust the first item */

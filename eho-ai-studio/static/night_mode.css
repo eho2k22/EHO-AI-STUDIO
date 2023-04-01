@@ -3,6 +3,7 @@
 body {
     background-color: #1c1c1c;
     color: #f2f2f2;
+    font-family: Arial, sans-serif; 
 }
 
 a {
@@ -44,6 +45,26 @@ a:link {
     background-color: transparent;
     text-decoration: none;
   }
+
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1.0rem;
+    font-size: 0.9rem;
+    font-weight: bold; 
+    color: #0000FF; 
+    background-color: white; 
+    border: none;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: gray; 
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.1rem);
+  }
+  
 
 
   .badge-container {

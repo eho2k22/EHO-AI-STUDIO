@@ -83,7 +83,7 @@
 </head>
 <body>
     <div class="navigation-menu">
-    <font style="font-family:verdana">
+    <font >
     <ul>
       <li><a href='{{ url_for('night_mode') }}'> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a></li>
       <li><a href='{{ url_for('founders_nm') }}'> <i class="fa fa-user w3-xxlarge"></i> Founder </a> </li>
@@ -91,6 +91,9 @@
       <li><a href='{{ url_for('mission_nm') }}'> <i class="fa fa-bullseye w3-xxlarge"></i> Mission </a> </li>
       <li><a href='{{ url_for('trending_nm') }}'>
         <span class="badge-container"><i class="fa fa-fire w3-xxlarge"></i><span class="badge">New</span></span> Trending
+      </a></li>
+      <li><a href='{{ url_for('gallery_nm') }}'>
+        <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
       </a></li>
       <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
       <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
@@ -100,18 +103,21 @@
     </div>
     <div class="content">
     <center>
-    <button onclick="location.href='{{ url_for('index') }}'"><font style="font-family:verdana" color="0x0000FF">LIGHT MODE</font></button>
+    <button class="btn" onclick="location.href='{{ url_for('index') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
     <p class="text">
-    <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4">
+    <font color="#ffdf00", size="+4">
     <strong>
     WELCOME TO EHO AI STUDIO 23
     </strong>
     </font>
     </p>
-    <font style="font-family:verdana" color="#ADD8E6">
-    <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <font >
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <hr>
     <p>
+      <strong>
       PROMPT OF THE DAY : 
+      </strong>
     </p>
     <p>
       {{pod_prompt}}
@@ -121,30 +127,21 @@
     </center>
 
 <center>
-  <button onclick="location.href='{{ url_for('gallery_nm') }}'"><font style="font-family:verdana" color="0x0000FF">View AIGC Gallery  </font> </button>
-  </center>
-<center>
-  <h2 style="font-family:verdana" color="#FFD700">
+  <h2  color="#FFD700">
     EHO AI P&R (Prompt & Response) GENIE
   </h2>
 </center>
 <center>
-  <p style="font-family:verdana" color="#ADD8E6"></p> <sub> ( **upgraded to <a href="https://github.com/openai/openai-python"> <font color="#ADD8E6"> OpenAI's GPT-3.5-TURBO Model </font> </a> <font color="#ADD8E6"> for *FASTER* and *SMARTER* responses. </font>  ) </sub> </p>
-  <p style="font-family:verdana" color="#ADD8E6"></p> <sub> ( source code available at <a href="https://github.com/eho2k22/EHO-AI-STUDIO"> <font color="#ADD8E6"> EHO AI GitHub </font> </a> ) </sub> </p>
+  <p> <sub> ( **upgraded to <a href="https://github.com/openai/openai-python"> <font color="#00bfff"> OpenAI's GPT-3.5-TURBO Model </font> </a>  for *FASTER* and *SMARTER* responses. ) </sub> </p>
+  <p> <sub> ( source code available at <a href="https://github.com/eho2k22/EHO-AI-STUDIO"> <font color="#00bfff"> EHO AI GitHub </font> </a> ) </sub> </p>
 <br>
-<font style="font-family:verdana" >
-  <p> 
-    <!--strong> NOT Google Search. No more sifting through pages to locate what you are looking for. </strong-->
-  </p>
-</font>
-
-<font style="font-family:verdana" color="#ADD8E6">
-<!---strong> How To Get Started? </strong--->
+<p> 
+</p>
 <p></p>
 <p></p>
-</font>
 
-<font style="font-family:verdana" color="#ADD8E6">
+
+<font>
 
 <strong> SELECT DESIRED TEMPERATURE LEVEL </strong>
 <br>
@@ -153,7 +150,8 @@
 
 <strong> CLICK START CONVERSATION FOR MORE !! &nbsp;&nbsp;&nbsp;</strong>
 <br>
-<button onclick="location.href='{{ url_for('conversation_nm') }}'"><font style="font-family:verdana" color="0x0000FF"><b>Start Conversation </b></font> </button>
+<br>
+<button class="btn" onclick="location.href='{{ url_for('conversation_nm') }}'"><font  color="0x0000FF"><b>Start Conversation </b></font> </button>
 
 </font>
 </p> 
@@ -164,7 +162,7 @@
   
   <center>
 
-  <label for="temperature"> <bold> <strong> <font style="font-family:verdana"> Temperature Level: </font> </strong> </bold> </label>
+  <label for="temperature"> <bold> <strong> <font > Temperature Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">
       <option value="Standard">Standard</option>
       <option value="High">High</option>
@@ -173,7 +171,7 @@
   </center>
   <br></fr>
   <center>
-  <p><bold> <strong> <font style="font-family:verdana"> Your Prompt: </font> </strong></bold></p>
+  <p><bold> <strong> <font > Your Prompt: </font> </strong></bold></p>
   </center>
   <center>
   <!--input name="prompt"/-->
@@ -181,9 +179,9 @@
   <br/><br/>
   </center>
   <center>
-  <input type="submit" value="Submit" onclick="showProgress()">
+  <input type="submit" value="Submit" class="btn" onclick="showProgress()">
   <div id="progress-bar">
-    <label id="pbf-label"><font style="font-family:verdana" color="0x0000FF"> Wheels Turning ... </font></label>
+    <label id="pbf-label"><font  color="0x0000FF"> Wheels Turning ... </font></label>
     <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
   </div>
   <script>
@@ -204,7 +202,7 @@
 
 <center>
   <br></br>
-  <p> <font style="font-family:verdana"> Beta Version {{app_version}} as of 
+  <p> <font > Beta Version {{app_version}} as of 
   <div id="current_date">
     <script>
     date = new Date();
@@ -220,18 +218,16 @@
                     
 <center>
   <br></br>
-  <font style="font-family:verdana">
-  <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated !! </a>
+  <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated !! &nbsp;&nbsp;&nbsp;&nbsp; </a>
   <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
 
-    <div style="text-align:center">
-        <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" width="30" height="30" alt="Twitter"> </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" width="30" height="30" alt="Discord"> </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-    </div>
-  </font>
- 
+  <div style="text-align:center">
+    <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="30" height="30" alt="Discord">  </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
+  </div>
 </center>
 </div>
 </body>

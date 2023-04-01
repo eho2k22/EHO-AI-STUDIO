@@ -42,30 +42,28 @@
     <div class="container">
         <center>
             <p class="text">
-                <font face="Verdana, Geneva, sans-serif" color="#DB9200", size="+4"> 
+                <font  color="#ffdf00", size="+4"> 
                 <strong>
-                EHO AIGC STUDIO 23 FOUNDING TEAM
+                EHO AIGC STUDIO 23 FOUNDER 
                 </strong>
                 </font>
             </p>
         </center>
         <p>
         <center>
-            <button onclick="location.href='{{ url_for('index') }}'"> GO HOME </button>
+            <button class="btn" onclick="location.href='{{ url_for('index') }}'"> GO HOME </button>
             &nbsp;&nbsp;
-            <button onclick="location.href='{{ url_for('founders_nm') }}'"> NIGHT MODE </button>
+            <button class="btn" onclick="location.href='{{ url_for('founders_nm') }}'"> NIGHT MODE </button>
         </center>
         </p> 
-        <!--div class="image-profile-grid">
-            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/ernieho.jpg">
-        </div-->
+  
         <br>  
         <div class="row">
             
             <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/ernieho.png" alt="Ernie Ho">
             <div class="textbox">
               <p>
-                <font style="font-family:verdana" size="2">
+                <font size="3">
                 <strong> Ernie Ho - Founder </strong>
                 <br>
                 <br>
@@ -109,7 +107,7 @@
 <br>
 <center>
     <br></br>
-    <p> <font style="font-family:verdana"> Beta Version {{app_version}} as of 
+    <p> <font > Beta Version {{app_version}} as of 
     <div id="current_date">
     <script>
         date = new Date();
@@ -125,9 +123,10 @@
       
 <center>
     <br></br>
-    <font style="font-family:verdana">
-    <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
-    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+    <font >
+    <a href="https://square.link/u/NxKDrUfw">  Your support is greatly appreciated ! </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
         <div style="text-align:center">
             <a href='{{ url_for('founders') }}'> Founder </a>
                 &nbsp;&nbsp;&nbsp;&nbsp;

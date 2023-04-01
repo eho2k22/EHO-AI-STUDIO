@@ -78,7 +78,7 @@
 </head>
 <body bgcolor="#AFB9DB" onload="setFocusOnTextArea()">
   <div class="navigation-menu">
-    <font style="font-family:verdana">
+    <font >
     <ul>
       <li><a href='{{ url_for('night_mode') }}'> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a></li>
       <li><a href='{{ url_for('founders_nm') }}'> <i class="fa fa-user w3-xxlarge"></i> Founder </a> </li>
@@ -93,10 +93,10 @@
     </font>
   </div>
   <div class="content">
-  <font style="font-family:verdana">
+  <font >
   <center>
-        <!--h1 style="font-family:verdana" color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
-        <button onclick="location.href='{{ url_for('trending') }}'"><font style="font-family:verdana" color="0x0000FF">LIGHT MODE</font></button>
+        <!--h1  color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
+        <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
     <p class="text">
       <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4"> 
       <strong>
@@ -109,12 +109,12 @@
     <p>
     {% if prompt_list %}
       {% for prompt in prompt_list %}
-        <div style="border-left: 3px solid #00bfff; border-right: 3px solid #00bfff;">
-        <hr style="border-top: 3px solid #00bfff; border-bottom: none;">
+        <div style="border-left: 3px solid #ADD8E6; border-right: 3px solid #ADD8E6;">
+        <hr style="border-top: 3px solid #ADD8E6; border-bottom: none;">
         <div style="padding: 10px; text-align: left;">
           {{ prompt }}
         </div>
-        <hr style="border-bottom: 3px solid #00bfff; border-top: none;">
+        <hr style="border-bottom: 3px solid #ADD8E6; border-top: none;">
         </div>
     
       {% endfor %}
@@ -126,7 +126,7 @@
   <br></br>
 
   <center>
-    <font style="font-family:verdana">
+    <font >
       <p> Like this conversation?  Enter your email below and click SEND and we will send a transcript to you! </p>
       <br>
       <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
@@ -137,7 +137,7 @@
       <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
       </form>
     <br></br>
-    <p> <font style="font-family:verdana"> Beta Version {{app_version}} as of 
+    <p> <font > Beta Version {{app_version}} as of 
     <div id="current_date">
       <script>
       date = new Date();
@@ -153,15 +153,16 @@
 
   <center>
     <br></br>
-    <font style="font-family:verdana">
-    <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated !! </a>
+    <font >
+    <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated!!  &nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
 
     <div style="text-align:center">
         <a href="https://twitter.com/eho_ai_no23"> <img class="no-border"  src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="30" height="30" alt="Discord"> </a>
-              &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
     </div>
     </font>
   
