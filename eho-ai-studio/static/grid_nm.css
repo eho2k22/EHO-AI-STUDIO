@@ -81,3 +81,10 @@ h1, h2, h3 {
 }
 
 /* Add styles for other elements as needed */
+
+@media (max-width: 1200px) {
+
+  body {
+          font-size: 23px;
+  }
+}

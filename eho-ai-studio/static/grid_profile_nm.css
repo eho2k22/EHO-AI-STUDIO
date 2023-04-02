@@ -107,3 +107,9 @@ img {
   transform: translateY(-0.1rem);
 }
 
+@media (max-width: 1200px) {
+
+  body {
+          font-size: 23px;
+  }
+}

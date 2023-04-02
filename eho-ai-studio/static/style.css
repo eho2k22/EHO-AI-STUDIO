@@ -199,6 +199,11 @@ div.b {
 
 
 @media (max-width: 1200px) {
+
+body {
+        font-size: 23px;
+}
+
 .navigation-menu {
   position: static;
   flex-direction: row;

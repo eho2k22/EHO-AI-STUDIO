@@ -60,3 +60,10 @@ a:active {
   box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
   transform: translateY(-0.1rem);
 }
+
+@media (max-width: 1200px) {
+
+  body {
+          font-size: 23px;
+  }
+}
