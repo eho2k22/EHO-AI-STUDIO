@@ -65,6 +65,21 @@ a:link {
     transform: translateY(-0.1rem);
   }
   
+    
+input {
+  border: 5px solid #ffdf00; 
+  box-shadow: 2px 2px 3px #d9d9d9;
+}
+
+text {
+  border: 5px solid #ffdf00; 
+  box-shadow: 2px 2px 3px #d9d9d9;
+}
+
+textarea {
+  border: 5px solid #ffdf00; 
+  box-shadow: 2px 2px 5px 2px #d9d9d9;
+}
 
 
   .badge-container {
@@ -95,7 +110,8 @@ a:link {
     left: 0;
     height: 100%;
     width: 200px;
-    background-color: #353333;
+    /*background-color: #353333; */
+    background-color: #1c1c1c;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -125,7 +141,7 @@ a:link {
 @media (max-width: 1200px) {
 
 body {
-    font-size: 23px;
+    font-size: 32px;
 }
 
 .navigation-menu {

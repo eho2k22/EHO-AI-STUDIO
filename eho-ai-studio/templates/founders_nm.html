@@ -44,14 +44,14 @@
             <p class="text">
                 <font color="#ffdf00", size="+4"> 
                 <strong>
-                EHO AI STUDIO 23 FOUNDER
+                EHO AI STUDIO No.23 FOUNDER 
                 </strong>
                 </font>
             </p>
         </center>
         <p>
             <center>
-                <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> GO HOME </button>
+                <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME </button>
                 &nbsp;&nbsp;
                 <button class="btn" onclick="location.href='{{ url_for('founders') }}'"> LIGHT MODE </button>
             </center>
@@ -104,27 +104,33 @@
 <br>
 <br>
 <center>
-    <br></br>
-        <p> <font> Beta Version {{app_version}} as of 
-        <div id="current_date">
-        <script>
+    <span style="display: inline-block;">
+        <sub> 
+        <strong> 
+            BETA Version {{app_version}} as of 
+            <div id="current_date" style="font-size: inherit;">
+            <script>
             date = new Date();
             year = date.getFullYear();
             month = date.getMonth() + 1;
             day = date.getDate();
             document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-        </script>
-        </div>
-        </font>
-    </p>
+            </script>
+            </div>
+        </strong>
+        </sub>
+    </span>
+    <br></br>
+    <br></br>
 </center>
           
 <center>
     <br></br>
         <font >
-        <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated !! </a>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
+        <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+            <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+            <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+        </a> 
             <div style="text-align:center">
                 <a href='{{ url_for('founders_nm') }}'> Founder </a>
                     &nbsp;&nbsp;&nbsp;&nbsp;

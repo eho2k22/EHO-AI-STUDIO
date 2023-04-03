@@ -1,24 +1,26 @@
 <body bgcolor="#AFB9DB">
     <head>
-        <title>Ernie Ho's AIGC Studio </title>
+        <title>EHO AI STUDIO No.23 </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <br>
     </br>
     <center>
     <h2>
-        <font style="font-family:verdana">
+        <font >
         TERMS OF USE
         </font>
     </h2>
     </center>
     <br></br>
     <center>
+        <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
+        <br></br>
     </center>
     <p></p>
     <center>
-    <font style="font-family:verdana">
-    <textarea readonly style="font-family:verdana" color="#0000FF" id="textprompt" rows="20" cols="100">
+    <font >
+    <textarea readonly  color="#0000FF" id="textprompt" rows="20" cols="100">
    
       Copyright 2023  EHO AI STUDIO 23
 
@@ -67,43 +69,39 @@
     </textarea>
     </font>
     </center>
+
     <br></br>
-    <center>
-    
-    </center>
     <p></p>
-    <center>
-    <font style="font-family:verdana">
-    </center>
-    </font>
     <br></br>
+ 
     <center>
-    <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
-    <br></br>
-    </center>
-
-    <center>
-    <br></br>
-    <p> <font style="font-family:verdana"> Beta Version {{app_version}} as of 
-    <div id="current_date">
-        <script>
-            date = new Date();
-            year = date.getFullYear();
-            month = date.getMonth() + 1;
-            day = date.getDate();
-            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-        </script>
-    </div>
-    </font>
-    </p>
+        <span style="display: inline-block;">
+            <sub> 
+            <strong> 
+                BETA Version {{app_version}} as of 
+                <div id="current_date" style="font-size: inherit;">
+                <script>
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                </script>
+                </div>
+            </strong>
+            </sub>
+        </span>
+        <br></br>
+        <br></br>
     </center>
 
-
     <center>
     <br></br>
-    <font style="font-family:verdana">
-    <a href="https://square.link/u/NxKDrUfw">  Your support is greatly appreciated !!  &nbsp;&nbsp;&nbsp;&nbsp; </a>
-    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+    <font >
+    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a>    
     <div style="text-align:center">
         <a href='{{ url_for('founders') }}'> Founder </a>
         &nbsp;&nbsp;&nbsp;&nbsp;

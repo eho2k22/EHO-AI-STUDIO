@@ -1,13 +1,13 @@
 <body bgcolor="#AFB9DB">
     <head>
-        <title>Ernie Ho's AIGC Studio </title>
+        <title>EHO AI STUDIO No.23 </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
     </head>
     <br>
     </br>
     <center>
     <p>
-    <font style="font-family:verdana">
+    <font>
     <em class="ow-break-word">
     Thank you for trying out EHO's P&R AI Genie.  
     <p></p>
@@ -20,20 +20,28 @@
     <p></p>
     <br></br>
     <center>
-    <button onclick="location.href='{{ url_for('night_mode') }}'"> <font style="font-family:verdana"> Back To Home </font> </button>
+    <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> <font> HOME </font> </button>
     <br></br>
     <br></br>
-    <p> Beta version {{app_veresion}} as of 
-    <div id="current_date">
-        <script>
-        date = new Date();
-        year = date.getFullYear();
-        month = date.getMonth() + 1;
-        day = date.getDate();
-        document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-        </script>
-    </div>
-  </p>
+    <center>
+        <span style="display: inline-block;">
+            <sub> 
+            <strong> 
+                BETA Version {{app_version}} as of 
+                <div id="current_date" style="font-size: inherit;">
+                <script>
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                </script>
+                </div>
+            </strong>
+            </sub>
+        </span>
+        <br></br>
+        <br></br>
     </center>
-
+    </center>
 </body>

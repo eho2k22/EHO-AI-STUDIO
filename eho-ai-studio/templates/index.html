@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EHO AIGC Studio </title>
+    <title>EHO AI STUDIO No.23 </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /--->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
     <!---meta name="viewport" content="width=device-width, initial-scale=1.0"--->
     <meta charset="UTF-8">
     <style>
-
-      
 
       /* Set a max-width for the page */
       body {
@@ -25,7 +21,6 @@
         margin: 0 auto;
       }
       
-
       /* Add the styles for the button */
       .right-aligned-button {
         float: right; /* Float the button to the right */
@@ -100,8 +95,6 @@
       <li><a href='{{ url_for('gallery') }}'>
         <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
       </a></li>
-      <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
-      <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
       <li></li>
     </ul>
     </font>
@@ -117,30 +110,37 @@
     </strong>
     </font>
     </p>
+    <strong>
+    Connecting minds and sparking ideas with EHO AI P&R Genie: 
+    <br>
+    A social platform for sharing insightful prompts and conversations."
+    </strong>
+    <br>
+    <br>
     <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <font>
+
     <p>
       <strong>
       PROMPT OF THE DAY : 
       </strong>
-    </p>
-    <p>
+      <br>
       {{pod_prompt}}
     </p>
-    </font>
+
     <br></br>
     </center>
 
-
 <center>
-  <h2  color="0xD4AF37">
+  <h2 color="0xD4AF37">
     EHO AI P&R (Prompt & Response) GENIE
   </h2>
 </center>
 <center>
-<p > <sub> (**upgraded to <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI's GPT-3.5-TURBO Model </font> </a> for faster and smarter response.** ) </sub> </p>
-<p > <sub> (source code available at <a href="https://github.com/eho2k22/EHO-AI-STUDIO"> <font color="0x0000FF"> EHO AI GitHub </font> </a> ) </sub> </p>
-
+<p> 
+  <sub> (**upgraded to <a href="https://github.com/openai/openai-python"> <font color="0x0000FF"> OpenAI's GPT-3.5-TURBO Model </font> </a> for faster and smarter response.** ) </sub> 
+  <br>
+  <sub> (source code available at <a href="https://github.com/eho2k22/EHO-AI-STUDIO"> <font color="0x0000FF"> EHO AI GitHub </font> </a> ) </sub> 
+</p>
 
 <p> 
 </p>
@@ -209,24 +209,36 @@
 
 <center>
   <br></br>
-  <p> <font > Beta Version {{app_version}} as of 
-  <div id="current_date">
-    <script>
-    date = new Date();
-    year = date.getFullYear();
-    month = date.getMonth() + 1;
-    day = date.getDate();
-    document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-    </script>
-  </div>
-  </font>
-  </p>
+  <span style="display: inline-block;">
+    <sub> 
+      <strong> 
+        BETA Version {{app_version}} as of 
+        <div id="current_date" style="font-size: inherit;">
+          <script>
+          date = new Date();
+          year = date.getFullYear();
+          month = date.getMonth() + 1;
+          day = date.getDate();
+          document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+          </script>
+        </div>
+      </strong>
+    </sub>
+  </span>
+  <br></br>
+  <br></br>
 </center>
 
 <center>
+  <div style="text-align:center">
+    <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+    <a href='{{ url_for('privacy') }}'> Privacy </a>
+  </div>
   <br></br>
-  <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated !! &nbsp;&nbsp;&nbsp;&nbsp; </a>
-  <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
+  <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+      <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+      <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+  </a> 
   <div style="text-align:center">
       <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

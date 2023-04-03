@@ -1,6 +1,6 @@
 <body bgcolor="#AFB9DB">
     <head>
-        <title>Ernie Ho's AIGC Studio </title>
+        <title>EHO AI STUDIO No.23  </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
     </head>
     <br>
@@ -8,7 +8,7 @@
     <center>
     <h2>
         <font >
-        Thanks for trying out EHO's AI Genie! 
+        Thank You for using EHO AI P&R Genie! 
         </font>
     </h2>
     </center>
@@ -62,7 +62,7 @@
     <p></p>
     <center>
     <font >
-    <p> Like Our Responses?  Enter your email below and click SEND and we will send a transcript to you! </p>
+    <p> Enter your email below and click SEND and we will send a transcript to you! </p>
     <br>
     <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
     <br>
@@ -91,25 +91,32 @@
     </form>
 
     <center>
-        <br></br>
-        <p> <font > Beta Version {{app_version}} as of 
-        <div id="current_date">
-            <script>
+        <span style="display: inline-block;">
+            <sub> 
+            <strong> 
+                BETA Version {{app_version}} as of 
+                <div id="current_date" style="font-size: inherit;">
+                <script>
                 date = new Date();
                 year = date.getFullYear();
                 month = date.getMonth() + 1;
                 day = date.getDate();
                 document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-            </script>
-        </div>
-        </font>
-        </p>
+                </script>
+                </div>
+            </strong>
+            </sub>
+        </span>
+        <br></br>
+        <br></br>
     </center>
 
     <br></br>
    
-    <a href="https://square.link/u/NxKDrUfw"> This site stays up and running only if our users find it valuable.  Your support is greatly appreciated ! </a>
-    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:42px;height:42px;"></a>
+    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a> 
     </center>
     </font>
     <br></br>

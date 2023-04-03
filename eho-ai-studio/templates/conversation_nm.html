@@ -90,8 +90,6 @@
       <li><a href='{{ url_for('gallery_nm') }}'>
         <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
       </a></li>
-      <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
-      <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
       <li></li>
     </ul>
     </font>
@@ -99,6 +97,7 @@
   <div class="content">
   <font>
   <center>
+        <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME&nbsp;&nbsp;&nbsp;&nbsp; </button>
         <button class="btn" onclick="location.href='{{ url_for('conversation') }}'"><font color="0x0000FF">LIGHT MODE</font></button>
     <p class="text">
       <font color="#ffdf00", size="+4"> 
@@ -107,8 +106,13 @@
       </strong>
       </font>
     </p>
-    </p>
-      <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <br>
+    <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
+    &nbsp;&nbsp;
+    <button class="btn" onclick="location.href='{{ url_for('conversation_nm') }}'"><font color="0x0000FF">NIGHT MODE</font></button>
+    <br>
+    <br>
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
     <hr>
     {% if conversation_history %}
@@ -120,8 +124,15 @@
     {% endif %}
 
   <br></br>
-  <p color="#ADD8E6"> <font color="#ADD8E6"><sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> </font> </p>
-  <p color="#ADD8E6"> <font color="#ADD8E6"><sub> (** Click Clear Button to clear conversation history **) </sub> </font> </p>
+  <p color="#ADD8E6"> 
+    <font color="#ADD8E6">
+    <strong>
+    <sub> (** Your conversation history will be cleared after 10 exchanges.   **) </sub> 
+    <br>
+    <sub> (** Click Clear Button to clear conversation history **) </sub> 
+    </strong>
+    </font> 
+  </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
         <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
@@ -187,10 +198,16 @@
   </center>
 
   <center>
+    <div style="text-align:center">
+      <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+      <a href='{{ url_for('privacy') }}'> Privacy </a>
+    </div>
     <br></br>
     <font>
-    <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated !! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
-    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
+    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a> 
     <div style="text-align:center">
         <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -201,10 +218,6 @@
     </font>
   </center>
   <br></br>
-  <center>
-  <button onclick="location.href='{{ url_for('night_mode') }}'"> Back To Home </button>
-  <br></br>
-  </center>
   </font>
 </div>
 </body>

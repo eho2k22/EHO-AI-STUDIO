@@ -90,16 +90,13 @@
       <li><a href='{{ url_for('gallery_nm') }}'>
         <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
       </a></li>
-      <li><a href='{{ url_for('terms') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Terms </a> </li>
-      <li><a href='{{ url_for('privacy') }}'> <i class="fa fa-landmark w3-xxlarge"></i> Privacy </a> </li>
+      <li></li>
     </ul>
     </font>
   </div>
   <div class="content">
   <font >
   <center>
-        <!--h1  color="0xD4AF37"> WELCOME to EHO AI STUDIO 23 </h1-->
-        <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
     <p class="text">
       <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4"> 
       <strong>
@@ -107,8 +104,14 @@
       </strong>
       </font>
     </p>
-    </p>
-      <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <br>
+    <br>
+    <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
+    <br>
+    <br>
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
     {% if prompt_list %}
       {% for prompt in prompt_list %}
@@ -126,36 +129,48 @@
   <br></br>
 
   <center>
-    <font >
-      <p> Enter your email below and we will send a transcript to you! </p>
-      <br>
-      <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
-      <br>
-      <form method="post" action="/sendemail_nm">
-      <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
-      <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>    
-      <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
-      </form>
+    <p> Enter your email below and we will send a transcript to you! </p>
+    <br>
+    <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
+    <br>
+    <form method="post" action="/sendemail_nm">
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
+    <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>    
+    <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+    </form>
     <br></br>
-    <p> <font > Beta Version {{app_version}} as of 
-    <div id="current_date">
-      <script>
-      date = new Date();
-      year = date.getFullYear();
-      month = date.getMonth() + 1;
-      day = date.getDate();
-      document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-      </script>
-    </div>
-    </font>
-    </p>
+    <br></br>
+    <span style="display: inline-block;">
+      <sub> 
+        <strong> 
+          BETA Version {{app_version}} as of 
+          <div id="current_date" style="font-size: inherit;">
+            <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+            </script>
+          </div>
+        </strong>
+      </sub>
+    </span>
+    <br></br>
+    <br></br>
   </center>
 
   <center>
+    <div style="text-align:center">
+      <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+      <a href='{{ url_for('privacy') }}'> Privacy </a>
+    </div>
     <br></br>
     <font >
-    <a href="https://square.link/u/NxKDrUfw"> Your support is greatly appreciated!!  &nbsp;&nbsp;&nbsp;&nbsp;</a>
-    <a href="https://square.link/u/NxKDrUfw"><img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;"></a>
+    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a> 
 
     <div style="text-align:center">
         <a href="https://twitter.com/eho_ai_no23"> <img class="no-border"  src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
@@ -165,13 +180,9 @@
         <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
     </div>
     </font>
-  
   </center>
   <br></br>
-  <center>
-  <button onclick="location.href='{{ url_for('night_mode') }}'"> Back To Home </button>
   <br></br>
-  </center>
   </font>
 </div>
 </body>
