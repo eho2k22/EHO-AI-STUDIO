@@ -97,8 +97,6 @@
   <div class="content">
   <font>
   <center>
-        <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME&nbsp;&nbsp;&nbsp;&nbsp; </button>
-        <button class="btn" onclick="location.href='{{ url_for('conversation') }}'"><font color="0x0000FF">LIGHT MODE</font></button>
     <p class="text">
       <font color="#ffdf00", size="+4"> 
       <strong>
@@ -107,9 +105,9 @@
       </font>
     </p>
     <br>
-    <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
-    &nbsp;&nbsp;
-    <button class="btn" onclick="location.href='{{ url_for('conversation_nm') }}'"><font color="0x0000FF">NIGHT MODE</font></button>
+      <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
+      &nbsp;&nbsp;
+      <button class="btn" onclick="location.href='{{ url_for('conversation') }}'"><font color="0x0000FF">LIGHT MODE</font></button>
     <br>
     <br>
     <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
