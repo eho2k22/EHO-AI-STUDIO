@@ -106,7 +106,8 @@
       </font>
     </p>
     <br>
-    <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME &nbsp;&nbsp;&nbsp;&nbsp;</button>
+    <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
     <button class="btn" onclick="location.href='{{ url_for('conversation_nm') }}'"><font color="0x0000FF">NIGHT MODE</font></button>
     <br>
     <br>
@@ -127,7 +128,7 @@
     <strong>
     <sub> (** Your conversation history will be cleared after 10 exchanges. **) </sub> 
     <br>
-    <sub> (** Click Clear Button to clear conversation history **) </sub> 
+    <sub> (** Click Clear Button to remove conversation history **) </sub> 
     </strong>
     </font> 
   </p>
@@ -135,8 +136,7 @@
         <p><strong>Prompt:</strong></p>
         <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
         <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" >
-        <br>
-        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()">
     
 
@@ -173,7 +173,7 @@
 
   <center>
     <font >
-      <p> Enter your email below and we will send a transcript to you! </p>
+      Enter email below to receive a transcript of your conversation!
       <br>
       <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
       <br>
