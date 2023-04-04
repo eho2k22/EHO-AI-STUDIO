@@ -19,7 +19,7 @@
       
       /* Set a max-width for the page */
       body {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
       }
 
@@ -98,7 +98,7 @@
   <font >
   <center>
     <p class="text">
-      <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4"> 
+      <font color="#ffdf00", size="+4"> 
       <strong>
         PROMPT LEADERBOARD 
       </strong>
@@ -115,28 +115,32 @@
     <p>
     {% if prompt_list %}
       {% for prompt in prompt_list %}
-      <div style="display: inline-block; background-color: #252525; color: #f2f2f2; border: 3px solid #ffdf00; box-shadow: 3px 3px #3a3a3a; 
-      border-radius: 10px; padding: 10px; text-align: center; width: 300px;">
+      <div style="display: inline-block; background-color: #252525; color: #f2f2f2; 
+      border: 3px solid #ffdf00; box-shadow: 3px 3px #ffd700;
+      border-radius: 10px; padding: 10px; text-align: center; width: 330px;">
         {{ prompt }}
       </div>
     
       {% endfor %}
     {% endif %}
 
-  <br></br>
-  <br></br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   </center>
-  <br></br>
 
   <center>
-    <p> Enter your email below and we will send a transcript to you! </p>
+    Enter your email below and we will send a transcript to you!
     <br>
     <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
     <br>
     <form method="post" action="/sendemail_nm">
     <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
     <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>    
-    <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+    <button class="btn" onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
     </form>
     <br></br>
     <br></br>
@@ -156,8 +160,7 @@
         </strong>
       </sub>
     </span>
-    <br></br>
-    <br></br>
+    <br>
   </center>
 
   <center>
@@ -165,13 +168,10 @@
       <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
       <a href='{{ url_for('privacy') }}'> Privacy </a>
     </div>
-    <br></br>
-    <font >
     <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
         <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
         <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
     </a> 
-
     <div style="text-align:center">
         <a href="https://twitter.com/eho_ai_no23"> <img class="no-border"  src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -179,7 +179,7 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
     </div>
-    </font>
+
   </center>
   <br></br>
   <br></br>

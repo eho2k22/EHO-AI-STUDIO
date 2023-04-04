@@ -11,7 +11,7 @@
       
       /* Set a max-width for the page */
       body {
-        max-width: 900px; 
+        max-width: 1000px; 
         margin: 0 auto;
       }
 
@@ -142,13 +142,9 @@
   <sub> (source code available at <a href="https://github.com/eho2k22/EHO-AI-STUDIO"> <font color="#00bfff"> EHO AI GitHub </font> </a> ) </sub> 
 </p>
   
-<p> 
-</p>
 <br>
-<p></p>
-<p></p>
-
-<font>
+<br>
+<br>
 
 <strong> SELECT DESIRED TEMPERATURE LEVEL </strong>
 <br>
@@ -160,8 +156,6 @@
 <br>
 <button class="btn" onclick="location.href='{{ url_for('conversation_nm') }}'"><font  color="0x0000FF"><b>Start Conversation </b></font> </button>
 
-</font>
-</p> 
 
 </center>
 <br></br>
@@ -181,9 +175,8 @@
   <p><bold> <strong> <font > Your Prompt: </font> </strong></bold></p>
   </center>
   <center>
-  <!--input name="prompt"/-->
-  <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
-  <br/><br/>
+  <textarea id="prompt" name="prompt" rows="12" cols="70" style="font-size: inherit"></textarea>
+  <br>
   </center>
   <center>
   <input type="submit" value="Submit" class="btn" onclick="showProgress()">
@@ -209,7 +202,10 @@
 </form>
 
 <center>
-  <br></br>
+  <br>
+  <br>
+  <br>
+  <br>
   <span style="display: inline-block;">
     <sub> 
       <strong> 
@@ -227,7 +223,6 @@
     </sub>
   </span>
   <br></br>
-  <br></br>
 </center>
                     
 <center>
@@ -235,12 +230,10 @@
     <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a href='{{ url_for('privacy') }}'> Privacy </a>
   </div>
-  <br></br>
   <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
     <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
-    <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+    <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
   </a> 
-
   <div style="text-align:center">
     <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

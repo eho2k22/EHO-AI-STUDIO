@@ -19,7 +19,7 @@
 
       /* Set a max-width for the page */
        body {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
       }
 
@@ -98,7 +98,7 @@
   <font >
   <center>
     <p class="text">
-      <font face="Verdana, Geneva, sans-serif" color="#ffdf00", size="+4"> 
+      <font  color="#ffdf00", size="+4"> 
       <strong>
        PROMPT LEADERBOARD 
       </strong>
@@ -111,45 +111,37 @@
     <button class="btn" onclick="location.href='{{ url_for('trending_nm') }}'"><font  color="0x0000FF">NIGHT MODE</font></button>
     <br>
     <br>
-  
     <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
-    <!--hr style="border: 1px solid black; border-left: none; border-right: none;"-->
     {% if prompt_list %}
       {% for prompt in prompt_list %}
-        <!--div style="border-left: 3px solid black; border-right: 3px solid black;">
-        <hr style="border-top: 3px solid black; border-bottom: none;">
-        <div style="padding: 10px; text-align: left;">
-          {{ prompt }}
-        </div>
-        <hr style="border-bottom: 3px solid black; border-top: none;">
-        </div-->
-
-        <div style="display: inline-block; background-color:
-         #f9d6b8; border: 3px solid #c8640e; box-shadow: 3px 3px #9c4805; border-radius: 10px; padding: 10px; text-align: center; width: 300px;">
+        <div style="display: inline-block; background-color: #f9d6b8;
+         border: 3px solid #c8640e; box-shadow: 3px 3px #9c4805; 
+         border-radius: 10px; padding: 10px; text-align: center; width: 330px;">
           {{ prompt }}
         </div>
         
-        
-    
       {% endfor %}
     {% endif %}
 
-  <br></br>
 
-  <br></br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   </center>
 
-
   <center>
-    <p> Enter your email below and click SEND and we will send this list to you for free! </p>
+    Enter your email below and click SEND and we will send this list to you for free! 
     <br>
     <sub>(** Your email will be kept private and never mshared with 3rd-party **)</sub>
     <br>
     <form method="post" action="/sendemail">
     <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
     <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>  
-    <button onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
+    <button class="btn" onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
     </form>
     <br></br>
     <br></br>
@@ -169,8 +161,7 @@
         </strong>
       </sub>
     </span>
-    <br></br>
-    <br></br>
+    <br>
   </center>
 
   <center>
@@ -178,13 +169,10 @@
       <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
       <a href='{{ url_for('privacy') }}'> Privacy </a>
     </div>
-    <br></br>
-    <font >
     <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
         <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
         <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
     </a> 
-
     <div style="text-align:center">
           <a href="https://twitter.com/eho_ai_no23"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -192,8 +180,6 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
         </div>
-    </font>
- 
   </center>
   <br></br>
   <br></br>

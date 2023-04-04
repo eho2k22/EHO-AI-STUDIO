@@ -19,7 +19,7 @@
       
       /* Set a max-width for the page */
       body {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
       }
 
@@ -133,7 +133,7 @@
   </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
-        <p><textarea id="prompt" name="prompt" rows="12" cols="70"></textarea></p>
+        <p><textarea id="prompt" name="prompt" rows="12" cols="70" style="font-size: inherit"></textarea></p>
         <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" >
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()">
@@ -166,32 +166,37 @@
     </form>
   <br></br>
   </center>
-  <br></br>
 
   <center>
-    <font>
-      Enter email below to receive a transcript of your conversation!
-      <br>
-      <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
-      <br>
-      <form method="post" action="/sendemail_nm">
-      <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
-      <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
-      <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
-      </form>
+    Enter email below to receive a transcript of your conversation!
+    <br>
+    <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
+    <br>
+    <form method="post" action="/sendemail_nm">
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" style="font-size: inherit"></input>
+    <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
+    <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <span style="display: inline-block;">
+        <sub> 
+        <strong> 
+            BETA Version {{app_version}} as of 
+            <div id="current_date" style="font-size: inherit;">
+            <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+            </script>
+            </div>
+        </strong>
+        </sub>
+    </span>
     <br></br>
-    <p> <font> Beta Version {{app_version}} as of 
-    <div id="current_date">
-      <script>
-      date = new Date();
-      year = date.getFullYear();
-      month = date.getMonth() + 1;
-      day = date.getDate();
-      document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-      </script>
-    </div>
-    </font>
-    </p>
   </center>
 
   <center>
@@ -199,11 +204,10 @@
       <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
       <a href='{{ url_for('privacy') }}'> Privacy </a>
     </div>
-    <br></br>
     <font>
     <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
         <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
-        <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+        <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
     </a> 
     <div style="text-align:center">
         <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
