@@ -646,7 +646,12 @@ def index():
         userprompt = request.form["prompt"]
         #userapikey = request.form["apikey"]
         usertemp = request.form["temperature"]
-        usercheck = request.form["check"]
+        usercheck = ""
+        try:
+            usercheck = request.form["check"]
+        except:
+            print("USER CHECK EXCEPTION !!!")
+
         print("Share Check = " + usercheck) 
 
         print("Your Question is: "+ userprompt)
@@ -953,7 +958,7 @@ def trending():
 
     pod_prompt = ""
     pod_results=[]
-    pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).execute()
+    pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(8).execute()
     pod_index = 0
     prompt_list = []
     prompt_list_str = ""
@@ -998,7 +1003,7 @@ def trending_nm():
 
     pod_prompt = ""
     pod_results=[]
-    pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).execute()
+    pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(8).execute()
     pod_index = 0
     prompt_list = []
     prompt_list_str = ""
