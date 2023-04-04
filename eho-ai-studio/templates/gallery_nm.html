@@ -3,12 +3,62 @@
 <head>
     <title>EHO AIGC Image Gallery</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid_nm.css') }}">
+    <style>
+        .text-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .text-box {
+            /*width: calc(33.33% - 10px); */
+            width: 600px; 
+            height: 800px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 0 auto; /* add this line */
+        }
+        .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+        }
+    </style>
 </head>
 <body bgcolor="#AFB9DB">
     <div class="container">
+        <p>
         <center>
-        <h1> AIGC RENDITIONS </h1>
+            <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn" onclick="location.href='{{ url_for('gallery') }}'"> LIGHT MODE </button>
         </center>
+        </p>
+
+        <center>
+        <p class="text">
+            
+            <font color="#ffdf00", size="+4"> 
+            <strong>
+            AIGC RENDITIONS
+            </strong>
+            </font>
+            
+        </p>
+        </center>
+
         <p>
         <center>
         <sub>
@@ -16,12 +66,6 @@
         <br>
         <a href="https://www.midjourney.com/home/"> visit MidJourney </a>
         </sub>
-        </center>
-        <br></br>
-        <center>
-        <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME </button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="btn" onclick="location.href='{{ url_for('gallery') }}'"> LIGHT MODE </button>
         </center>
         </p> 
         <div class="image-grid">

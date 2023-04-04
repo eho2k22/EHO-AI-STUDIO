@@ -97,6 +97,13 @@
   <div class="content">
   <font >
   <center>
+    <p>
+      <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
+    </p>
+  </center>
+  <center>
     <p class="text">
       <font color="#ffdf00", size="+4"> 
       <strong>
@@ -104,13 +111,9 @@
       </strong>
       </font>
     </p>
+  </center>
     <br>
-    <br>
-    <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"> HOME</button>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
-    <br>
-    <br>
+  <center>
     <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
     {% if prompt_list %}
