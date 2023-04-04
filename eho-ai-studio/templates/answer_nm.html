@@ -23,7 +23,7 @@
     <p></p>
     <center>
     <font >
-    <textarea  color="#0000FF" id="textprompt" rows="10" cols="80" style="font-size: inherit;">
+    <textarea  color="#0000FF" id="textprompt" rows="10" cols="80" >
     {{userprompt}}
     </textarea>
     </font>
@@ -39,7 +39,7 @@
     <p></p>
     <center>
     <em class="ow-break-word"></em>
-    <textarea  color="#0000FF" id="textresponse" rows="25" cols="80" style="font-size: inherit;">
+    <textarea  color="#0000FF" id="textresponse" rows="25" cols="80" >
     {{answer}}
     </textarea>
     </em>
@@ -67,7 +67,7 @@
     <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
     <br>
     <form method="post" action="/sendemail">
-    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" style="font-size: inherit;"></input>
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" ></input>
     <input type="hidden" id="userprompt" name="userprompt" maxlength="100" size="100" value="{{ userprompt }}"></input>
     <input type="hidden" id="answer" name="answer" maxlength="100" size="100"  value="{{ answer }}"></input>  
     <button class="btn" onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>

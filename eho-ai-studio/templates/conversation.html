@@ -134,7 +134,7 @@
   </p>
     <form method="POST">
         <p><strong>Prompt:</strong></p>
-        <p><textarea id="prompt" name="prompt" rows="12" cols="70" style="font-size: inherit"></textarea></p>
+        <p><textarea id="prompt" name="prompt" rows="12" cols="70" ></textarea></p>
         <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" >
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()">
@@ -176,7 +176,7 @@
     <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
     <br>
     <form method="post" action="/sendemail">
-    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" style="font-size: inherit"></input>
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" ></input>
     <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
     <button onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
     </form>
