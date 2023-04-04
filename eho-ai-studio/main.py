@@ -646,6 +646,8 @@ def index():
         userprompt = request.form["prompt"]
         #userapikey = request.form["apikey"]
         usertemp = request.form["temperature"]
+        usercheck = request.form["check"]
+        print("Share Check = " + usercheck) 
 
         print("Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)
@@ -762,10 +764,18 @@ def index():
 
         #save UserPrompt and Answer as a record into Transcripts table
 
-        record = {
-        'prompt': userprompt,
-        'response': answer,
-        }
+        if (usercheck == "YES"):
+            record = {
+            'prompt': userprompt,
+            'response': answer,
+            'rank': 888,
+            }
+        else:
+             record = {
+            'prompt': userprompt,
+            'response': answer,
+             }     
+
 
         #reset records before appending 
         records = []
@@ -910,10 +920,19 @@ def night_mode():
 
         #save UserPrompt and Answer as a record into Transcripts table
 
-        record = {
-        'prompt': userprompt,
-        'response': answer,
-        }
+    
+        if (usercheck == "YES"):
+            record = {
+            'prompt': userprompt,
+            'response': answer,
+            'rank': 888,
+            }
+        else:
+             record = {
+            'prompt': userprompt,
+            'response': answer,
+            }     
+
         #reset records before appending 
         records = []
         records.append(record)

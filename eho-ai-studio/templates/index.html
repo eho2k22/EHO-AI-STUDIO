@@ -154,7 +154,7 @@
 <strong> CLICK START CONVERSATION FOR MORE !! &nbsp;&nbsp;&nbsp;</strong>
 <br>
 <br>
-<button class="btn" onclick="location.href='{{ url_for('conversation') }}'"><font  color="0x0000FF"><b>Start Conversation </b></font> </button>
+<button class="btn" style="font-size: inherit;" onclick="location.href='{{ url_for('conversation') }}'"><font  color="0x0000FF"><b>Start Conversation </b></font> </button>
 
 
 
@@ -176,12 +176,13 @@
   <p><bold> <strong> <font > Your Prompt: </font> </strong> </bold></p>
   </center>
   <center>
-  <textarea id="prompt" name="prompt" rows="12" cols="70" ></textarea>
+  <textarea id="prompt" name="prompt" rows="12" cols="80" ></textarea>
   <br>
   </center>
   <center>
-  <input class="btn" type="submit" value="Submit" onclick="showProgress()">
-  <input type="checkbox" name="check" id="check" value="NO"> <label for="check"> Share Prompt? </label>
+  <input class="btn" type="submit" value="Submit" style="font-size: inherit;" onclick="showProgress()">
+  <input type="checkbox" name="check" id="check" value="NO" onchange="updateCheckboxValue()"> 
+  <label for="check"> Share Prompt? </label>
   <div id="progress-bar">
     <label id="pbf-label"><font  color="0x0000FF"> Wheels Turning ... </font></label>
     <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
@@ -198,6 +199,15 @@
         }
       }, 1000);
     }
+
+    function updateCheckboxValue() {
+    var checkbox = document.getElementById("check");
+    if (checkbox.checked) {
+    checkbox.value = "YES";
+    } else {
+    checkbox.value = "NO";
+    }
+}
   </script>
   </center>
 </form>
