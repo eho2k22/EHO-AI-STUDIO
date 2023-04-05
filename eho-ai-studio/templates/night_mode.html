@@ -213,7 +213,7 @@
   
   <center>
 
-  <label for="temperature"> <bold> <strong> <font > Temperature Level: </font> </strong> </bold> </label>
+  <label for="temperature" style="font-size: inherit;"> <bold> <strong> <font > Temperature Level: </font> </strong> </bold> </label>
     <select name="temperature" id="temperature">
       <option value="Standard">Standard</option>
       <option value="High">High</option>
@@ -230,7 +230,7 @@
   </center>
   <center>
   <input type="submit" value="Submit" class="btn" style="font-size: inherit;" onclick="showProgress()">
-  <input type="checkbox" name="check" id="check" value="NO" onchange="updateCheckboxValue()"> 
+  <input type="checkbox" name="check" id="check" value="NO" onchange="updateCheckboxValue()" style="font-size: inherit;" > 
   <label for="check" style="font-size: inherit;"> Share Prompt? </label>
   <div id="progress-bar">
     <label id="pbf-label"><font  color="0x0000FF"> Wheels Turning ... </font></label>

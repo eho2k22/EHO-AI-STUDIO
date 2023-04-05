@@ -1110,24 +1110,21 @@ def sendemail():
     try:
         useremail = request.form["useremail"]
     except:
-        print("no useremail")
+        print("SENDEMAIL:  no useremail")
     
     try: 
         answer =  request.form["answer"]
         userprompt = request.form["userprompt"]
-
     except:
-        print("no answer or no userprompt")
+        print("SENDEMAIL LIGHT MODE: no answer or no userprompt")
         
     try: 
         json_history = request.form["conversation_history"]
-
     except:
         print("no Conversation History!!??")
 
     try: 
         prompt_list = request.form["prompt_list"]
-
     except:
         print("No Prompt List!!")
 
@@ -1139,15 +1136,16 @@ def sendemail():
     json_history_list = json.loads("[" + json_history + "]")
     json_history_string = json.dumps(json_history_list)
 
-
-    # Create the message based on simple Prompt and Response
-    if (json_history is None) or (not json_history) :
-        message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
+    print("userprompt is : " + userprompt) 
+    print("answer is : " + answer) 
+    print("useremail is : " + useremail) 
+    print("json_history_string : " + json_history_string) 
 
 
     # Recreating PROMPT_LIST MESSAGE Text 
-    elif (prompt_list != ""):
-        print("YAY, Prompt_List is NOT EMPTY :  " + prompt_list) 
+    if (prompt_list != ""):
+        print("*** SENDEMAIL : CREATE PROMPT LIST MESSAGE ***")
+        print("YAY! Prompt_List is NOT EMPTY :  " + prompt_list) 
 
         formatted_prompt_list = ""
         prompt_split_list = prompt_list.split(" -xxxx- ")
@@ -1157,10 +1155,18 @@ def sendemail():
                 formatted_prompt_list = formatted_prompt_list + str(i+1) + " " + prompt_split_list[i] + "\n \n"
         
         message = MIMEText(formatted_prompt_list)
-    
+
     # Recreating CONVERSATION MESSAGE Text 
-    else : 
+    elif (json_history is not None) and len(json_history_list) > 1 : 
         #re-construct context from conversation_history 
+        print("*** SENDEMAIL : CREATE CONVO HISTORY MESSAGE ***")
+        print("Convo JSON HISTORY is : ")
+        print(json_history)
+
+        print("*** CONVO HISTORY LENGTH = *** ")
+        print(len(json_history_list))
+
+
         convomessage = ""
         json_list = json.loads(json_history_string)
 
@@ -1169,11 +1175,15 @@ def sendemail():
                 convomessage = convomessage + "You prompted : " + item.split(" -xxxx- ")[0].strip() + "\n"
                 convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n"
       
-
         print("convomessage = " + convomessage) 
         message = MIMEText(convomessage)
-        
     
+    # Recreating the message based on simple Prompt and Response
+    else:
+        print("*** SENDEMAIL : CREATE P&R MESSAGE ***")
+        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + "EHO AI STUDIO No.23")
+
+        
     
     message["Subject"] = "YOUR P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
@@ -1210,15 +1220,15 @@ def sendemail_nm():
         useremail = request.form["useremail"]
     except:
         print("no useremail")
-    
+
+
     try: 
         answer =  request.form["answer"]
         userprompt = request.form["userprompt"]
-
     except:
         print("no answer or no userprompt")
 
-        
+
     try: 
         json_history = request.form["conversation_history"]
 
@@ -1228,7 +1238,6 @@ def sendemail_nm():
     
     try: 
         prompt_list = request.form["prompt_list"]
-
     except:
         print("No Prompt List!!")
 
@@ -1240,14 +1249,10 @@ def sendemail_nm():
     json_history_list = json.loads("[" + json_history + "]")
     json_history_string = json.dumps(json_history_list)
 
-
-    # Create the simple P&R message
-    if (json_history is None) or (not json_history) :
-        message = MIMEText("Your Question : \n" + userprompt + "\n" + "\n" + "Our Response : \n" + answer + "\n" + "\n" + "Sincerely \n" + "EHO AI STUDIO 23")
-    
     # Recreating PROMPT_LIST MESSAGE Text 
-    elif (prompt_list != ""):
-        print("YAY, Prompt_List is NOT EMPTY :  " + prompt_list) 
+    if (prompt_list != ""):
+        print("*** SENDEMAIL_NM : CREATE PROMPT LIST MESSAGE ***")
+        print("YAY! Prompt_List is NOT EMPTY :  " + prompt_list) 
 
         formatted_prompt_list = ""
         prompt_split_list = prompt_list.split(" -xxxx- ")
@@ -1257,11 +1262,16 @@ def sendemail_nm():
                 formatted_prompt_list = formatted_prompt_list + str(i+1) + " " + prompt_split_list[i] + "\n \n"
         
         message = MIMEText(formatted_prompt_list)
-    
-    
-    # Recreating Conversation Message TEXT 
-    else : 
-        #re-construct email message body with convo_history 
+
+    # Recreating CONVERSATION MESSAGE Text 
+    elif (json_history is not None) and len(json_history_list) > 1 : 
+        #re-construct context from conversation_history 
+        print("*** SENDEMAIL_NM : CREATE CONVO HISTORY MESSAGE ***")
+        print("Convo JSON HISTORY is : ")
+        print(json_history)
+
+        print("*** CONVO HISTORY LENGTH = *** ")
+        print(len(json_history_list))
 
         convomessage = ""
         json_list = json.loads(json_history_string)
@@ -1269,11 +1279,17 @@ def sendemail_nm():
         for item in json_list:
             if (item != "" and len(item) > 5):
                 convomessage = convomessage + "You prompted : " + item.split(" -xxxx- ")[0].strip() + "\n"
-                convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n" 
+                convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n"
       
-
         print("convomessage = " + convomessage) 
         message = MIMEText(convomessage)
+    
+    # Recreating the message based on simple Prompt and Response
+    else:
+        print("*** SENDEMAIL_NM : CREATE P&R MESSAGE ***")
+        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + "EHO AI STUDIO No.23")
+
+
 
     message["Subject"] = "YOUR EHO P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
