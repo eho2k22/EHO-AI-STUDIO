@@ -19,7 +19,7 @@
 
       /* Set a max-width for the page */
        body {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 0 auto;
       }
 
@@ -99,8 +99,6 @@
   
   <center>
     <p>
-      <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME</button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button class="btn" onclick="location.href='{{ url_for('trending_nm') }}'"><font  color="0x0000FF">NIGHT MODE</font></button>
     </p>
   </center>
@@ -120,8 +118,7 @@
     <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
       "Take your creativity and expertise to the next level! Join the ranks of our esteemed Prompt Masters and 
-      contribute to our collaborative community. With the power of EHO AI STUDIO No.23 at your fingertips, you can easily create and share original prompts that truly shine. Help others improve their prompt engineering efficiency by sharing your premium prompts, and unlock the full potential of 
-      prompt engineering with like-minded individuals. Join now and watch your ideas come to life!"
+      contribute to our collaborative community!"
     </p>
     <p>
     {% if prompt_list %}
@@ -145,7 +142,7 @@
   </center>
 
   <center>
-    Enter your email below to receive prompt leaderboard  for free! 
+    <sub> Enter your email below to receive prompt leaderboard for free! </sub>
     <br>
     <sub>(** Your email will be kept private and never mshared with 3rd-party **)</sub>
     <br>
@@ -178,19 +175,23 @@
 
   <center>
     <div style="text-align:center">
-      <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+      <a href='{{ url_for('terms') }}'> Terms </a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href='{{ url_for('privacy') }}'> Privacy </a>
     </div>
+    <br>
     <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
-        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
-        <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
-    </a> 
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:50px;height:50px;">
+        <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a>
+    <br>
+    <br>
     <div style="text-align:center">
-          <a href="https://twitter.com/eho_ai_no23"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
+          <a href="https://twitter.com/eho_ai_no23"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="50" height="50" alt="Twitter"> </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="https://discord.gg/ZMCHtpeuQW"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="30" height="30" alt="Discord">  </a>
+          <a href="https://discord.gg/ZMCHtpeuQW"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="50" height="50" alt="Discord">  </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
+          <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="50" height="50" alt="YouTube"> </a>   
         </div>
   </center>
   <br></br>

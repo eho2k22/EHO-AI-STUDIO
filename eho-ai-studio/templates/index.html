@@ -11,7 +11,7 @@
 
       /* Set a max-width for the page */
       body {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 0 auto;
       }
 
@@ -144,7 +144,7 @@
   </div>
     <div class="content">
     <center>
-    <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"><font  color="0x0000FF">NIGHT MODE</font></button>
+    <button class="btn" onclick="location.href='{{ url_for('night_mode') }}'"><font color="0x0000FF" style="font-size: inherit;">NIGHT MODE</font></button>
     <!--p class="text">
     <font color="#ffdf00", size="+4"> 
     <strong>
@@ -195,7 +195,7 @@
 <br>
 <br>
 
-<strong> SELECT DESIRED TEMPERATURE LEVEL </strong>
+<strong> SELECT TEMPERATURE LEVEL </strong>
 <br>
 <sub>(**Higher the Temperature, More Creative the Responses!**)</sub>
 <br></br>
@@ -231,7 +231,7 @@
   <center>
   <input class="btn" type="submit" value="Submit" style="font-size: inherit;" onclick="showProgress()">
   <input type="checkbox" name="check" id="check" value="NO" onchange="updateCheckboxValue()"> 
-  <label for="check"> Share Prompt? </label>
+  <label for="check" style="font-size: inherit;"> Share Prompt? </label>
   <div id="progress-bar">
     <label id="pbf-label"><font  color="0x0000FF"> Wheels Turning ... </font></label>
     <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
@@ -290,16 +290,19 @@
     <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
     <a href='{{ url_for('privacy') }}'> Privacy </a>
   </div>
+  <br>
   <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
-      <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+      <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:50px;height:50px;">
       <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
-  </a> 
+  </a>
+  <br>
+  <br>
   <div style="text-align:center">
-      <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
+      <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="50" height="50" alt="Twitter"> </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="30" height="30" alt="Discord">  </a>
+      <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="50" height="50" alt="Discord">  </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
+      <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="50" height="50" alt="YouTube"> </a>   
   </div>
 </center>
 </div>

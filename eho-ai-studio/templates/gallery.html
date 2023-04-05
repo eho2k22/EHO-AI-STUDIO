@@ -41,8 +41,6 @@
     <div class="container">
         <p>
             <center>
-                <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button class="btn" onclick="location.href='{{ url_for('gallery_nm') }}'"> NIGHT MODE </button>
             </center>
         </p>
@@ -108,6 +106,8 @@
             <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
         </a> 
         <div style="text-align:center">
+            <a href='{{ url_for('index') }}'> Home </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <a href='{{ url_for('founders') }}'> Founder </a>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <a href='{{ url_for('advisory') }}'> Advisors </a>

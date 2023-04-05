@@ -41,8 +41,6 @@
     <div class="container">
         <p>
             <center>
-                <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
-                &nbsp;&nbsp;
                 <button class="btn" onclick="location.href='{{ url_for('advisory_nm') }}'"> NIGHT MODE </button>
             </center>
         </p> 
@@ -150,6 +148,8 @@
     </a> 
     <font >
         <div style="text-align:center">
+            <a href='{{ url_for('index') }}'> Home </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
             <a href='{{ url_for('founders') }}'> Founder </a>
                 &nbsp;&nbsp;&nbsp;&nbsp;
             <a href='{{ url_for('advisory') }}'> Advisors </a>

@@ -59,7 +59,7 @@ records=[]
 #prompt of the day 
 pod_prompt = ""
 pod_results=[]
-pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).execute()
+pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(1).execute()
 
 for pod_record in pod_results:
 
@@ -806,6 +806,13 @@ def night_mode():
         userprompt = request.form["prompt"]
         #userapikey = request.form["apikey"]
         usertemp = request.form["temperature"]
+
+        usercheck = ""
+        try:
+            usercheck = request.form["check"]
+        except:
+            print("USER CHECK EXCEPTION !!!")
+
 
         print("NIGHT MODE: Your Question is: "+ userprompt)
         print("Your API Key is:" + userapikey)

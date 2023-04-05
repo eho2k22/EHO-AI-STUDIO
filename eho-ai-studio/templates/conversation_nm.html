@@ -19,7 +19,7 @@
       
       /* Set a max-width for the page */
       body {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: 0 auto;
       }
 
@@ -97,19 +97,17 @@
   <div class="content">
   <font>
   <center>
+      <p>
+      <button class="btn" onclick="location.href='{{ url_for('conversation') }}'"><font color="0x0000FF" style="font-size: inherit;">LIGHT MODE</font></button>
+      </p>
+  </center>
+  <center>
     <p class="text">
       <font color="#ffdf00", size="+4"> 
       <strong>
       Conversation with EHO P&R AI GENIE
       </strong>
       </font>
-    </p>
-  </center>
-  <center>
-    <p>
-    <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="btn" onclick="location.href='{{ url_for('conversation') }}'"><font color="0x0000FF">LIGHT MODE</font></button>
     </p>
   </center>
 
@@ -172,14 +170,14 @@
   </center>
 
   <center>
-    Enter email below to receive a transcript of your conversation!
+    <sub> Enter email below to receive a transcript of your conversation! </sub>
     <br>
     <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
     <br>
     <form method="post" action="/sendemail_nm">
     <input type="text" id="useremail" name="useremail" maxlength="61" size="61" ></input>
     <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
-    <button onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+    <button class="btn" onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
     </form>
     <br>
     <br>
@@ -210,15 +208,15 @@
     </div>
     <font>
     <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
-        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:50px;height:50px;">
         <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
     </a> 
     <div style="text-align:center">
-        <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="30" height="30" alt="Twitter"> </a>
+        <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="50" height="50" alt="Twitter"> </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="30" height="30" alt="Discord">  </a>
+        <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="50" height="50" alt="Discord">  </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="30" height="30" alt="YouTube"> </a>   
+        <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="50" height="50" alt="YouTube"> </a>   
     </div>
     </font>
   </center>

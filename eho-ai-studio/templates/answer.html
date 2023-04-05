@@ -3,8 +3,10 @@
         <title> EHO AI STUDIO No.23 </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     </head>
-    <br>
-    </br>
+    <center>
+        <button onclick="location.href='{{ url_for('index') }}'"> HOME </button>
+        <br></br>
+        </center>
     <center>
     <h2>
         <font>
@@ -62,7 +64,7 @@
     <p></p>
     <center>
     <font >
-    <p> Enter your email below and click SEND and we will send a transcript to you! </p>
+    <p> <sub> Enter your email below and click SEND and we will send a transcript to you! </sub> </p>
     <br>
     <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
     <br>
@@ -119,9 +121,5 @@
     </center>
     </font>
     <br></br>
-    <center>
-    <button onclick="location.href='{{ url_for('index') }}'"> Back To Home </button>
-    <br></br>
-    </center>
 
 </body>
