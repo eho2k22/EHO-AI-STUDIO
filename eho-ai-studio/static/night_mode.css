@@ -98,6 +98,69 @@ textarea {
     padding: 5px;
     border-radius: 50%;
   }
+
+
+.text {
+    position: relative;
+    text-shadow: 0 1px 0 #ccc, 
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);
+}
+
+.title {
+  color: #ffdf00;
+  /*color: transparent;*/
+  font-size: 48px;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+}
+
+.title span {
+  position: absolute;
+  opacity: 0;
+  animation: fade-in 1.5s ease-in-out forwards;
+}
+
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    /*transform: translateY(-20%);*/
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 1px rgba(255, 223, 0, 0.1), 
+      0 0 2px rgba(255, 223, 0, 0.1),
+      0 0 3px rgba(255, 223, 0, 0.1),
+      0 0 4px rgba(255, 223, 0, 0.1),
+      0 0 5px rgba(255, 223, 0, 0.1),
+      0 0 6px rgba(255, 223, 0, 0.1),
+      0 0 7px rgba(255, 223, 0, 0.1),
+      0 0 8px rgba(255, 223, 0, 0.1),
+      0 0 9px rgba(255, 223, 0, 0.1),
+      0 0 10px rgba(255, 223, 0, 0.1),
+      0 0 15px rgba(255, 223, 0, 0.1),
+      0 0 20px rgba(255, 223, 0, 0.1),
+      0 0 25px rgba(255, 223, 0, 0.1),
+      0 0 30px rgba(255, 223, 0, 0.1);
+  }
+}
+
+
+
   
 
 
@@ -149,7 +212,7 @@ body {
   position: static;
   flex-direction: row;
   width: 100%;
-  height: auto;
+  height: auto; 
   background-color: #1c1c1c;
 }
 

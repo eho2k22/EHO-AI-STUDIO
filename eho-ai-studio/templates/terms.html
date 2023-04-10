@@ -1,17 +1,38 @@
-<body bgcolor="#AFB9DB">
+<body bgcolor="#C2CCED">
     <head>
         <title>EHO AI STUDIO No.23 </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+        
+        .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+        }
+
+        </style>
     </head>
-    <br>
-    </br>
+    <br></br>
+
     <center>
-    <h2>
-        <font >
-        TERMS OF USE
-        </font>
-    </h2>
+        <p class="text">
+          <font color="#ffdf00", size="+5"> 
+          <strong>
+          TERMS OF USE
+          </strong>
+          </font>
+        </p>
     </center>
+
     <br></br>
     <center>
         <button class="btn" onclick="location.href='{{ url_for('index') }}'"> HOME </button>
@@ -20,7 +41,7 @@
     <p></p>
     <center>
     <font >
-    <textarea readonly  style="font-size: inherit" color="#0000FF" id="textprompt" rows="20" cols="100">
+    <textarea readonly  style="font-size: inherit" color="#0000FF" id="textprompt" rows="20" cols="70">
    
       Copyright 2023  EHO AI STUDIO 23
 

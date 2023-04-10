@@ -8,13 +8,25 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J9VF3JSJD"></script>
-      <script>
+    <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
           gtag('config', 'G-9J9VF3JSJD');
     </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <!--script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+      }
+    </script-->
+    
     <style>
 
       /* Set a max-width for the page */
@@ -54,7 +66,7 @@
       
       #progress-bar {
         width: 500px;
-        height: 22px;
+        height: 30px;
         border: 1px solid #FFD700;
         border-radius: 10px;
         overflow: hidden;
@@ -62,11 +74,14 @@
       }
 
       #progress-bar-fill {
-        height: 100%;
-        background-color: #b24141;
+        height: 15px;
+        background-color: #5edf5e;
         width: 0%;
       }
 
+      .language-picker-wrapper {
+        display: none;
+      }
     </style>
 
     <script>
@@ -104,15 +119,14 @@
   </center>
 
   <center>
-    <p class="text">
-      <font color="#ffdf00", size="+4"> 
-      <strong>
-      Conversation with EHO P&R AI GENIE
-      </strong>
-      </font>
-    </p>
+  <p class="text">
+    <font color="#ffdf00", size="+5"> 
+    <strong>
+    EHO P&R AI CONVERSATION
+    </strong>
+    </font>
+  </p>
   </center>
-
 
   <center>
   <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -146,7 +160,7 @@
 
       <div id="progress-bar">
           <label id="pbf-label"><font color="0x0000FF"> One Moment Please ... </font></label>
-          <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
+          <div aria-labelledby="pdf-label" id="progress-bar-fill" ></div>
       </div>
         <script>
           function showProgress() {
@@ -226,5 +240,18 @@
   <br></br>
   </font>
 </div>
+<br>
+<center>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+   }
+</script>
+</center>
 </body>
 </html>

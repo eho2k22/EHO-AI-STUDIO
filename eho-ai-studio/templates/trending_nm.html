@@ -15,6 +15,9 @@
     
           gtag('config', 'G-KKZ1G64L97');
     </script>
+
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <style>
       
       /* Set a max-width for the page */
@@ -27,14 +30,6 @@
       .content {
         width: 90%;
         margin: 0 auto;
-      }
-
-      /* Add the styles for the button */
-      .right-aligned-button {
-        float: right; /* Float the button to the right */
-      }
-      .right-aligned-div {
-        float: right; /* Float the button to the right */
       }
 
       .text {
@@ -51,10 +46,19 @@
                      0 10px 10px rgba(0,0,0,.2),
                      0 20px 20px rgba(0,0,0,.15);
       }
-      
+
+
+      /* Add the styles for the button */
+      .right-aligned-button {
+        float: right; /* Float the button to the right */
+      }
+      .right-aligned-div {
+        float: right; /* Float the button to the right */
+      }
+
       #progress-bar {
         width: 500px;
-        height: 22px;
+        height: 25px;
         border: 1px solid #FFD700;
         border-radius: 10px;
         overflow: hidden;
@@ -63,7 +67,7 @@
 
       #progress-bar-fill {
         height: 100%;
-        background-color: #b24141;
+        background-color: green; 
         width: 0%;
       }
 
@@ -101,16 +105,25 @@
       <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
     </p>
   </center>
+
   <center>
     <p class="text">
-      <font color="#ffdf00", size="+4"> 
+      <font color="#ffdf00", size="+5"> 
       <strong>
-        PROMPT LEADERBOARD 
+      PROMPT LEADERBOARD
       </strong>
       </font>
     </p>
   </center>
-    <br>
+
+  <!--center>
+    <p class="text">
+      <span class="title">
+        PROMPT LEADERBOARD
+      </span>
+    </p>
+  </center--->
+  <br>
   <center>
     <iframe width="400" height="200" src="https://www.youtube.com/embed/7lDGjqUmr1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
@@ -195,5 +208,19 @@
   <br></br>
   </font>
 </div>
+
+<br>
+<center>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+   }
+</script>
+</center>
 </body>
 </html>
