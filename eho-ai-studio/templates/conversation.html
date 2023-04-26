@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>EHO P&R AI GENIE Conversation</title>
+    <title> Promptlys.ORG AI GENIE Conversation</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -16,17 +16,7 @@
           gtag('config', 'G-9J9VF3JSJD');
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
-    <!--script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-          }, 'google_translate_element');
-      }
-    </script-->
-    
+  
     <style>
 
       /* Set a max-width for the page */
@@ -66,7 +56,8 @@
       
       #progress-bar {
         width: 500px;
-        height: 30px;
+        /*height: 30px;*/
+        height: 4vh;
         border: 1px solid #FFD700;
         border-radius: 10px;
         overflow: hidden;
@@ -74,8 +65,8 @@
       }
 
       #progress-bar-fill {
-        height: 15px;
-        background-color: #5edf5e;
+        height: 0.5vh; 
+        background-color: green;
         width: 0%;
       }
 
@@ -122,7 +113,7 @@
   <p class="text">
     <font color="#ffdf00", size="+5"> 
     <strong>
-    EHO P&R AI CONVERSATION
+    Promptlys P&R AI CONVERSATION
     </strong>
     </font>
   </p>
@@ -132,13 +123,15 @@
   <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
     <hr>
+    <div id="conversation-log" data-convo-id="{{convo_id_str}}">
     {% if conversation_history %}
         {% for conversation in conversation_history %}
             <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
-            <p><strong>EHO P&R Bot responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
+            <p><strong>Promptlys P&R Genie responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
             <hr>
         {% endfor %}
     {% endif %}
+    </div>
 
   <br></br>
   <p color="0x0000FF"> 
@@ -156,6 +149,8 @@
         <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" style="font-size: inherit;">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()" style="font-size: inherit;">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btn" type="button" id="export-btn" value="Export" onclick="exportConversation()" style="font-size: inherit;">
     
 
       <div id="progress-bar">
@@ -182,7 +177,88 @@
             // Submit the form
             document.getElementById("user-submit").click();
           }
-    
+
+          function exportConversation() {
+            // get the conversation log element
+            const conversationLog = document.getElementById("conversation-log");
+            const convoId = conversationLog.dataset.convoId;
+
+            // create a new HTML file
+            const htmlContent = `
+              <html>
+                <head>
+                  <title>Conversation Log</title>
+                </head>
+                <body>
+                  <center>
+                  <h1>Conversation Log {{convo_id_str}} </h1>
+                  ${conversationLog.outerHTML}
+                  </center>
+                  <center>
+                  <br>
+                  <a href="https://www.promptlys.org"> Promptlys.ORG HOME <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a>
+                  </center>
+                </body>
+              </html>
+            `;
+            const blob = new Blob([htmlContent], { type: "text/html" });
+
+            // create a URL for the HTML file
+            const url = URL.createObjectURL(blob);
+
+            // create a link element and click it to download the HTML file
+            const link = document.createElement("a");
+            link.href = url;
+            /*link.download = "conversation_log" + "-" + {{convo_id_str}} + ".html"; */
+            link.download = "conversation_log-" + convoId + ".html";
+            document.body.appendChild(link);
+            link.click();
+
+            // cleanup
+            URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+          }
+
+          async function saveConversationLog() {
+              // get the conversation log element
+              const conversationLog = document.getElementById("conversation-log");
+              const convoId = conversationLog.dataset.convoId;
+
+              // create a new HTML file
+              const htmlContent = `
+                <html>
+                  <head>
+                    <title>Conversation Log</title>
+                  </head>
+                  <body>
+                    <center>
+                    <h1>Conversation Log ${convoId} </h1>
+                    ${conversationLog.outerHTML}
+                    </center>
+                  </body>
+                </html>
+              `;
+              const blob = new Blob([htmlContent], { type: "text/html" });
+
+              // create a FormData object and append the blob to it
+              const formData = new FormData();
+              /*formData.append("file", blob, "conversation_log-" + convoId + ".html");*/
+              formData.append("file", blob, "conversation_log.html");
+
+              // send the FormData to the server using fetch()
+              const response = await fetch("/conversation_log.html", {
+                method: "POST",
+                body: formData,
+              });
+
+              if (response.ok) {
+                // show a success message
+                alert("Conversation log saved successfully!");
+              } else {
+                // show an error message
+                alert("Failed to save conversation log!");
+              }
+            }
         </script>
     </form>
   <br></br>

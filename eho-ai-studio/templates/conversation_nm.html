@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>EHO P&R AI Genie Conversation</title>
+    <title> Promptlys AI Genie Conversation</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -64,7 +64,8 @@
       
       #progress-bar {
         width: 500px;
-        height: 30px;
+        /*height: 30px;*/
+        height: 4vh;
         border: 1px solid #FFD700;
         border-radius: 10px;
         overflow: hidden;
@@ -72,8 +73,9 @@
       }
 
       #progress-bar-fill {
-        height: 15px; 
-        background-color: #5edf5e;
+        /*height: 50%;*/
+        height: 0.5vh;
+        background-color: green; 
         width: 0%;
       }
 
@@ -119,7 +121,7 @@
   <p class="text">
     <font color="#ffdf00", size="+4"> 
     <strong>
-    EHO P&R AI CONVERSATION
+    Promptlys.ORG P&R AI CONVERSATION
     </strong>
     </font>
   </p>
@@ -130,13 +132,15 @@
   <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
     <hr>
-    {% if conversation_history %}
-        {% for conversation in conversation_history %}
-            <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
-            <p><strong>EHO P&R Bot responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
-            <hr>
-        {% endfor %}
-    {% endif %}
+    <div id="conversation-log" data-convo-id="{{convo_id_str}}">
+      {% if conversation_history %}
+          {% for conversation in conversation_history %}
+              <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
+              <p><strong>Promptlys Genie responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
+              <hr>
+          {% endfor %}
+      {% endif %}
+    </div>
 
   <br></br>
   <p color="#ADD8E6"> 
@@ -154,8 +158,9 @@
         <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" style="font-size: inherit;">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()" style="font-size: inherit;">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btn" type="button" id="export-btn" value="Export" onclick="exportConversation()" style="font-size: inherit;">
     
-
       <div id="progress-bar">
           <label id="pbf-label"><font color="#00bfff"> One Moment Please ... </font></label>
           <div aria-labelledby="pdf-label" id="progress-bar-fill"></div>
@@ -179,6 +184,51 @@
             // Submit the form
             document.getElementById("user-submit").click();
           }
+
+          function exportConversation() {
+            // get the conversation log element
+            const conversationLog = document.getElementById("conversation-log");
+            const convoId = conversationLog.dataset.convoId;
+
+            // create a new HTML file
+            const htmlContent = `
+              <html>
+                <head>
+                  <title>Conversation Log</title>
+                </head>
+                <body>
+                  <center>
+                  <h1>Conversation Log {{convo_id_str}} </h1>
+                  ${conversationLog.outerHTML}
+                  </center>
+                  <br>
+                  <br>
+                  <center>
+                  <br>
+                  <a href="https://www.promptlys.org"> Promptlys.ORG HOME <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a>
+                  </center>
+                </body>
+              </html>
+            `;
+            const blob = new Blob([htmlContent], { type: "text/html" });
+
+            // create a URL for the HTML file
+            const url = URL.createObjectURL(blob);
+
+            // create a link element and click it to download the HTML file
+            const link = document.createElement("a");
+            link.href = url;
+            /*link.download = "conversation_log" + "-" + {{convo_id_str}} + ".html"; */
+            link.download = "conversation_log-" + convoId + ".html";
+            document.body.appendChild(link);
+            link.click();
+
+            // cleanup
+            URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+          }
+
+
       </script>
     </form>
   <br></br>

@@ -169,6 +169,7 @@ def conversation():
     convo_context = ""
     dict_data = {}
     convo_history_str = json.dumps({})
+    convo_id_str = ""
 
     # check if the session variable convo_history exists, if not create it
     # print("CURRENT Session ID:", session.sid)
@@ -201,6 +202,7 @@ def conversation():
 
         # setting NEW convo_ID to decrement 5 
         session['convo_ID'] = cid_record_id - 5 
+        convo_id_str = str(cid_record_id - 5 )
         print(" new SESSION ID = " + str(cid_record_id - 5 ) ) 
         # insert NEW convo_ID into DB 
         #save UserPrompt and Answer as a record into Transcripts table
@@ -226,6 +228,8 @@ def conversation():
         print("Session Variable convo_ID ALREADY EXISTS !!")
         
         convo_ID = session['convo_ID']
+
+        convo_id_str= str(convo_ID)
         
         print("EXISTING Session Variable convo_ID == " + str(convo_ID))
     
@@ -253,7 +257,7 @@ def conversation():
     if request.method == "GET":
         #return render_template("conversation.html")
         if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
-            return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history))
+            return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_id_str=convo_id_str)
 
         else : 
             convo_ID = session['convo_ID']
@@ -278,7 +282,7 @@ def conversation():
                 return render_template('conversation.html')            
             else:
                 print("about to GET conversation.html,  what is the convo_histroy_str ? " + convo_history_str)
-                return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+                return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str, convo_id_str=convo_id_str)
 
 
     elif request.method == 'POST':
@@ -399,7 +403,7 @@ def conversation():
         convo_context = ['']
     
     print("convo_history_str AFTER POST is : " + convo_history_str)
-    return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+    return render_template('conversation.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str, convo_id_str=convo_id_str)
 
 
 @app.route('/conversation_nm', methods=['GET', 'POST'])
@@ -409,6 +413,7 @@ def conversation_nm():
     convo_context = ""
     dict_data = {}
     convo_history_str = json.dumps({})
+    convo_id_str = ""
 
     # check if the session variable convo_history exists, if not create it
     # print("CURRENT Session ID:", session.sid)
@@ -441,6 +446,7 @@ def conversation_nm():
 
         # setting NEW convo_ID to decrement 5 
         session['convo_ID'] = cid_record_id - 5 
+        convo_id_str = str(cid_record_id - 5 )
         print(" new SESSION ID = " + str(cid_record_id - 5 ) ) 
         # insert NEW convo_ID into DB 
         #save UserPrompt and Answer as a record into Transcripts table
@@ -466,6 +472,8 @@ def conversation_nm():
         print("Session Variable convo_ID ALREADY EXISTS !!")
         
         convo_ID = session['convo_ID']
+
+        convo_id_str = str(convo_ID)
         
         print("EXISTING Session Variable convo_ID == " + str(convo_ID))
     
@@ -493,7 +501,7 @@ def conversation_nm():
     if request.method == "GET":
         #return render_template("conversation.html")
         if ('convo_ID' not in session) or (session['convo_ID'] == 0) or (session['convo_ID'] == 10005) or (session['convo_ID'] == 10000)  :
-            return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history))
+            return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_id_str=convo_id_str)
 
         else : 
             convo_ID = session['convo_ID']
@@ -518,7 +526,7 @@ def conversation_nm():
             if (convo_context == ""):
                 return render_template('conversation_nm.html')            
             else:
-                return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+                return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str, convo_id_str=convo_id_str)
 
 
     elif request.method == 'POST':
@@ -635,7 +643,7 @@ def conversation_nm():
         convo_context = ['']
     
     print("convo_history_str AFTER POST in NIGHT_MODE is : " + convo_history_str)
-    return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str)
+    return render_template('conversation_nm.html', app_version=app_version, conversation_history=convo_history, conversation_length=len(convo_history), convo_history_str=convo_history_str, convo_id_str=convo_id_str)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -1172,8 +1180,8 @@ def sendemail():
 
         for item in json_list:
             if (item != "" and len(item) > 5):
-                convomessage = convomessage + "You prompted : " + item.split(" -xxxx- ")[0].strip() + "\n"
-                convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n"
+                convomessage = convomessage + "You : " + item.split(" -xxxx- ")[0].strip() + "\n"
+                convomessage = convomessage + "Promptly GENIE : " + item.split(" -xxxx- ")[1].strip() + "\n \n"
       
         print("convomessage = " + convomessage) 
         message = MIMEText(convomessage)
@@ -1181,11 +1189,11 @@ def sendemail():
     # Recreating the message based on simple Prompt and Response
     else:
         print("*** SENDEMAIL : CREATE P&R MESSAGE ***")
-        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + "EHO AI STUDIO No.23")
+        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
 
         
     
-    message["Subject"] = "YOUR P&R AI GENIE Transcript is Ready!" 
+    message["Subject"] = "Your Promptly.ORG GENIE Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -1278,8 +1286,8 @@ def sendemail_nm():
 
         for item in json_list:
             if (item != "" and len(item) > 5):
-                convomessage = convomessage + "You prompted : " + item.split(" -xxxx- ")[0].strip() + "\n"
-                convomessage = convomessage + "EHO P&R Bot responded : " + item.split(" -xxxx- ")[1].strip() + "\n \n"
+                convomessage = convomessage + "You : " + item.split(" -xxxx- ")[0].strip() + "\n"
+                convomessage = convomessage + "Promptlys GENIE: " + item.split(" -xxxx- ")[1].strip() + "\n \n"
       
         print("convomessage = " + convomessage) 
         message = MIMEText(convomessage)
@@ -1287,11 +1295,11 @@ def sendemail_nm():
     # Recreating the message based on simple Prompt and Response
     else:
         print("*** SENDEMAIL_NM : CREATE P&R MESSAGE ***")
-        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + "EHO AI STUDIO No.23")
+        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
 
 
 
-    message["Subject"] = "YOUR EHO P&R AI GENIE Transcript is Ready!" 
+    message["Subject"] = "Promptly P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
