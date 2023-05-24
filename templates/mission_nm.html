@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Promptlys.ORG MISSION STATEMENT</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid_profile_nm.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKZ1G64L97"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+          gtag('config', 'G-KKZ1G64L97');
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+          function googleTranslateElementInit() {
+              new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+
+    <style>
+        .text-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .text-box {
+            /*width: calc(33.33% - 10px);*/
+            width: 600px;
+            height: 800px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 0 auto; /* add this line */
+        }
+        .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+        }
+    </style>
+</head>
+<body bgcolor="#AFB9DB">
+    <div class="container">
+        <p>
+            <center>
+            <button class="btn" onclick="location.href='{{ url_for('mission') }}'"> LIGHT MODE </button>
+            </center>
+        </p> 
+        <center>
+        <p class="text">
+            
+            <font color="#ffdf00", size="+4"> 
+                <strong>
+                Promptlys.ORG MISSION STATEMENT
+                </strong>
+            </font>
+            
+        </p>
+        </center>
+        <br>
+        <div class="row">
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23.png" alt="EHO AI Studio 23">
+            <div class="textbox"> 
+            <font size="3">
+                <strong> Promptlys.ORG - Prompt Sharing Social Platform  </strong>
+                <br>
+                <br>
+                Promptlys.ORG is a Prompt Social platform that enables Prompt Masters to create original prompts,  share or sell their premium prompts, 
+                and allow other members to benefit from their prompts. By sharing and mutually benefitting from effective prompts, users can improve own prompt engineering 
+                efficiency as well as participating in a collaborative prompt sharing community. 
+                <br>
+                <br>
+                Quality prompts are essential for producing quality AIGC content, and Promptlys.ORG platform provides Prompt Masters with the tools 
+                they need to create high-quality prompts that will produce accurate and reliable content. 
+                <br>
+                <br>
+                Promptlys.ORG platform provides a forum for Prompt Masters to share their expertise and collaborate on projects. 
+                This allows Prompt Masters to socialize and learn from one another to hone their prompt skills.  
+                <br>
+                <br>
+                The market for quality prompts is growing rapidly. The global AI market is expected to reach $702.12 billion by 2028, and 
+                the demand for quality prompts is only going to increase. Our platform is well-positioned to capitalize on this growth.
+                <br>
+                <br>
+                We plan to generate revenue through a subscription model. Prompt Masters can subscribe to our platform to access our tools and resources. 
+                We also offer a premium subscription that includes additional features and benefits.
+                <br>
+                <br>
+                We have already signed up over 100 Prompt Masters to our platform. We are currently in the beta 
+                testing phase and we are expecting to launch our platform to the public in the next few months.
+                <br>
+                <br>
+                Our team is composed of experienced professionals with a passion for AI. 
+                We have a strong track record of success in the technology industry.
+                <br>
+                <br>
+                We are seeking investment to help us launch our platform to the public. We believe that our platform has the potential to 
+                be a major success and we are excited to partner with investors who share our vision.
+                <br>
+                <br>
+            </font>
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+    <span style="display: inline-block;">
+        <sub> 
+        <strong> 
+            BETA Version {{app_version}} as of 
+            <div id="current_date" style="font-size: inherit;">
+            <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+            </script>
+            </div>
+        </strong>
+        </sub>
+    </span>
+    <br></br>
+    <br></br>
+</center>
+          
+<center>
+    <br></br>
+        <font >
+        <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+            <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+            <div style="font-size: 14px; margin-top: 5px;">Your support is greatly appreciated !!</div>
+        </a> 
+            <div style="text-align:center">
+                <a href='{{ url_for('night_mode') }}'> Home </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('founders_nm') }}'> Founder </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('advisory_nm') }}'> Advisors </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('mission_nm') }}'> Mission </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('terms') }}'> Terms </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('privacy') }}'> Privacy </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </font>
+</center>
+
+<br>
+<center>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+   }
+</script>
+</center>
+</body>
+</html>

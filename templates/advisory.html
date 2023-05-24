@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Promptlys.ORG ADVISORY BOARD </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid_profile.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        .text-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .text-box {
+            width: calc(33.33% - 10px);
+            height: 500px;
+            border: 3px solid black; 
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+        }
+    </style>
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body bgcolor="#AFB9DB">
+    <div class="container">
+        <p>
+            <center>
+                <button class="btn" onclick="location.href='{{ url_for('advisory_nm') }}'"> NIGHT MODE </button>
+            </center>
+        </p> 
+        <center>
+        <p class="text">
+            <font color="#ffdf00", size="+4"> 
+            <strong>
+            Promptlys.ORG ADVISORY BOARD
+            </strong>
+            </font>
+        </p>
+        </center>
+        <div class="image-profile-grid">
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/davidwang.jpeg">
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/mikelin.png">
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/EddyHsu.jpg">
+        </div>  
+        <div class="text-grid">
+            <div class="text-box"> 
+                <strong> David Wang MD. PhD. </strong>
+                Attending Radiologist and Quality Assurance Co-Chair, National Teleradiology Program, Veterans Affairs
+                <br>
+                *Fellowship: Musculoskeletal Radiology, Massachusetts General Hospital, Harvard Medical School, Boston, MA, 2015
+                <br>
+                *(Instructor at Harvard Medical School, Boston, MA during fellowship)
+                <br>
+                *Residency: Diagnostic Radiology, University of Pittsburgh Medical Center, Pittsburgh, PA, 2014
+                <br>
+                *Internship: Western Pennsylvania Hospital, Pittsburgh, PA, 2010
+                <br>
+                *Medical School: University of Pittsburgh School of Medicine, Pittsburgh, PA, 2009
+                <br>
+                *PhD: Biomedical Engineering, Carnegie Mellon University, Pittsburgh, PA, 2007
+                <br>
+                *Master of Engineering: Computer Science, Cornell University, Ithaca, NY, 2001
+                <br>
+            </div>
+            <div class="text-box">
+                <strong> Michael Lin </strong> is a Californian native and a graduate of UC Berkeley.
+                <br>
+                He has taught EFL in Japan since 2011.
+                <br>
+                He is currently an adjunct EFL instructor at Konan University, Kwansei Gakuin University, and Kindai University.
+                <br>
+                He enjoys helping students developing accuracy and fluency in their English communication. 
+                <br>
+                His research interests are communicative language teaching (CLT), task-based language teaching (TBLT), 
+                <br>
+                content-based instruction (CBI), computer assisted language learning (CALL), and intercultural communication
+                competency (ICC).
+
+            </div>
+            <div class="text-box">
+                <strong> Yu-Jen (Eddy) Hsu PhD </strong> has extensive background in both electrical engineering and mechanical engineering,
+                experienced in process development for solid state thin-film devices (inorganic and organic) such as light emitting 
+                diodes(LED), solar cells(PV), and transistors(TFT)
+                <br>
+                Mr. Hsu has held various engineering and management positions at Luminode and Qualcomm. 
+                <br>
+                Education:
+                <br>
+                * Columbia Engineering                         
+                Ph.D, Electrical Engineering  2007-2011
+                <br>
+                * Columbia Engineering                         
+                Master of Science, Electrical Engineering  2005-2007
+                <br>
+                * National Taiwan University                       
+                Master of Science, Applied Mechanics 2000-2002
+
+            </div>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+    <span style="display: inline-block;">
+        <sub> 
+        <strong> 
+            BETA Version {{app_version}} as of 
+            <div id="current_date" style="font-size: inherit;">
+            <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+            </script>
+            </div>
+        </strong>
+        </sub>
+    </span>
+    <br></br>
+    <br></br>
+</center>
+      
+<center>
+    <br></br>
+    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a> 
+    <font >
+        <div style="text-align:center">
+            <a href='{{ url_for('index') }}'> Home </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('founders') }}'> Founder </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('advisory') }}'> Advisors </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('mission') }}'> Mission </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('terms') }}'> Terms </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href='{{ url_for('privacy') }}'> Privacy </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </font>
+</center>
+
+<center>
+<br>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+   }
+</script>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<body bgcolor="#AFB9DB">
+    <head>
+        <title> Promptlys.ORG </title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+        <style>
+            #textprompt {
+                font-family: Arial, sans-serif;
+                color: #0000FF;
+            }
+
+            #textresponse {
+                font-family: Arial, sans-serif;
+                color: #0000FF;
+            }
+        </style>
+
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+        
+              gtag('config', 'G-9J9VF3JSJD');
+        </script>
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+              }, 'google_translate_element');
+          }
+        </script>
+    </head>
+    <center>
+        <button class="btn" onclick="location.href='{{ url_for('index') }}'"><font color="0x0000FF" style="font-size: inherit;"> HOME </font></button>
+        <br></br>
+        </center>
+    <center>
+    <h2>
+        <font>
+        Thank You for using Promptlys.ORG ! 
+        </font>
+    </h2>
+    </center>
+    <br></br>
+    <center>
+    <h2>
+        <font >
+        Your Prompt : 
+        </font>
+    </h2>
+    </center>
+    <p></p>
+    <center>
+    <font >
+    <textarea  color="#0000FF" id="textprompt" rows="10" cols="80" >
+    {{userprompt}}
+    </textarea>
+    </font>
+    </center>
+    <br></br>
+    <center>
+    <h2>
+        <font >
+        Our Response : 
+        </font>
+    </h2>
+    </center>
+    <p></p>
+    <center>
+    <em class="ow-break-word"></em>
+    <textarea  color="#0000FF" id="textresponse" rows="25" cols="80" >
+    {{answer}}
+    </textarea>
+    </em>
+    <br>
+    <button onclick="copyText()">Copy Response </button>
+    <script>
+        function copyText() {
+        /* Get the textarea element */
+        var textarea = document.getElementById("textresponse");
+        /* Create a new clipboard item */
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          /* Alert the user that the text was copied */
+        alert("Text copied to clipboard: " + textarea.value);
+        }, function(err) {
+          console.error("Failed to copy text: ", err);
+         });
+         }
+    </script>
+    </center>
+    <p></p>
+    <center>
+    <font >
+    <p> <sub> Enter your email below and click SEND and we will send a transcript to you! </sub> </p>
+    <br>
+    <sub>(** Your email will be kept private and will not be shared with 3rd-party **)</sub>
+    <br>
+    <form method="post" action="/sendemail">
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" ></input>
+    <input type="hidden" id="userprompt" name="userprompt" maxlength="100" size="100" value="{{ userprompt }}"></input>
+    <input type="hidden" id="answer" name="answer" maxlength="100" size="100"  value="{{ answer }}"></input>  
+    <button class="btn" onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
+    </form>
+
+    <p > What do you think?  </p>
+    <form>
+        <fieldset>
+          <center><legend>Please rate our response:</legend> </center>
+          <input type="checkbox" id="star1" name="rating" value="1">
+          <label for="star1">1</label>
+          <input type="checkbox" id="star2" name="rating" value="2">
+          <label for="star2">2</label>
+          <input type="checkbox" id="star3" name="rating" value="3">
+          <label for="star3">3</label>
+          <input type="checkbox" id="star4" name="rating" value="4">
+          <label for="star4">4</label>
+          <input type="checkbox" id="star5" name="rating" value="5">
+          <label for="star5">5</label>
+        </fieldset>
+    </form>
+
+    <center>
+        <span style="display: inline-block;">
+            <sub> 
+            <strong> 
+                BETA Version {{app_version}} as of 
+                <div id="current_date" style="font-size: inherit;">
+                <script>
+                date = new Date();
+                year = date.getFullYear();
+                month = date.getMonth() + 1;
+                day = date.getDate();
+                document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                </script>
+                </div>
+            </strong>
+            </sub>
+        </span>
+        <br></br>
+        <br></br>
+    </center>
+
+    <br></br>
+    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+        <div style=" margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a> 
+    </center>
+    </font>
+    <br></br>
+
+</body>

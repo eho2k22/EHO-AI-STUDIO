@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Promptlys.ORG FOUNDER </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='grid_profile_nm.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKZ1G64L97"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KKZ1G64L97');
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <style>
+        .text-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .text-box {
+            /*width: calc(33.33% - 10px);*/
+            width: 600px;
+            height: 600px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 0 auto; /* add this line */
+        }
+        .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+        }
+    </style>
+</head>
+<body bgcolor="#AFB9DB">
+    <div class="container">
+        <p>
+            <center>
+                <button class="btn" onclick="location.href='{{ url_for('founders') }}'" style="font-size: inherit;"> LIGHT MODE </button>
+            </center>
+        </p> 
+        <center>
+            <p class="text">
+                <font color="#ffdf00", size="+4"> 
+                <strong>
+                Promptlys.ORG FOUNDER 
+                </strong>
+                </font>
+            </p>
+        </center>
+        <div class="row"> 
+            <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/ernieho.png" alt="Ernie Ho">
+            <div class="textbox">
+              <p>
+                <font size="3">
+                <strong> Ernie Ho - Founder </strong>
+                <br>
+                <br>
+                Ernie Ho earned his Bachelors in Computer Science from UC Berkeley, and Masters of Engineering in Computer Science from Cornell. 
+                <br>
+                <br>
+                Ernie has had 10+ years software development experience, and held multiple application software developer positions from EFI, Siebel, to Oracle, before transitioning to 
+                <br>
+                technical consulting roles at Oracle, Greensoft, then later taking on the VP of Product Strategy role at 
+                CybEye, an app platform solution provider building custom white-labeled social app solutions for SMB across industries.
+                <br>
+                <br>
+                For the past 12 months Ernie Ho discovered the integrability of AIGC tools and APIs and developed a strong interest in 
+                <br>
+                leveraging AIGC content to scale social platforms. 
+                <br>
+                <br>
+                In December 2022 Ernie Ho founded EHO AI STUDIO No 23 with a mission to build a versatile and engaging AI Bot that 
+                <br>
+                produces qualified, reliable and educational responses to queries rangning from simple life hacks, to complex business requirements
+                <br>
+                all the while staying objective, respectful and enjoyable.  
+                <br>
+                <br>
+                In January 2023 Promptlys.ORG was launched to allow users to share their prompts with others as a new way to interact, socialize, build meaniningful connections.  
+                <br>
+                <br>
+                Ernie firmly believes with powerful AI tools now already doing the heavy lifting, 
+                <br>
+                the ball is in our (humans) court to inject ingenuity, bestow meaning, and create value through innovative applications at scale. 
+                <br>  
+                </font>
+              </p>
+            </div>
+        </div>      
+    </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+    <span style="display: inline-block;">
+        <sub> 
+        <strong> 
+            BETA Version {{app_version}} as of 
+            <div id="current_date" style="font-size: inherit;">
+            <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+            </script>
+            </div>
+        </strong>
+        </sub>
+    </span>
+    <br></br>
+    <br></br>
+</center>
+          
+<center>
+    <br></br>
+        <font >
+        <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+            <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:50px;height:50px;">
+            <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
+        </a> 
+            <div style="text-align:center">
+                <a href='{{ url_for('night_mode') }}'> Home </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('founders_nm') }}'> Founder </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('advisory_nm') }}'> Advisors </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('mission_nm') }}'> Mission </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('terms') }}'> Terms </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href='{{ url_for('privacy') }}'> Privacy </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </font>
+</center> 
+<br>
+<center>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+   }
+</script>
+</center>   
+</body>
+</html>
