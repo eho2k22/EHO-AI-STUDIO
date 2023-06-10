@@ -1,13 +1,4 @@
-runtime: python
-env: flex
-entrypoint: gunicorn -b :$PORT main:app
-
-
-runtime_config:
-    operating_system: "ubuntu18"
-    runtime_version: "3.8"
-
-
+runtime: python39 
 
 env_variables: 
   OPENAI_KEY: "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"
@@ -19,5 +10,5 @@ env_variables:
   SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zZnBmbXdkYXdvbnVlcWFldnJ1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3NTk5MTE5MSwiZXhwIjoxOTkxNTY3MTkxfQ.ImwsqoISh3zCKcAW0FJeB13UCWOCVay5Fm1U5TNwhUU"
 
   GPT_KEY: "YES"
-  APP_VERSION: "4.5"
+  APP_VERSION: "4.2.5"
 

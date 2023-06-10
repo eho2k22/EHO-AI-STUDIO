@@ -1,7 +1,19 @@
 <body bgcolor="#AFB9DB">
     <head>
-        <title> EHO AI STUDIO No.23 </title>
+        <title> Promptlys.ORG </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+        <style>
+            #textprompt {
+                font-family: Arial, sans-serif;
+                color: #0000FF;
+            }
+
+            #textresponse {
+                font-family: Arial, sans-serif;
+                color: #0000FF;
+            }
+        </style>
 
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -28,7 +40,7 @@
     <center>
     <h2>
         <font>
-        Thank You for using EHO AI P&R Genie! 
+        Thank You for using Promptlys.ORG ! 
         </font>
     </h2>
     </center>
@@ -43,7 +55,7 @@
     <p></p>
     <center>
     <font >
-    <textarea  color="#0000FF" id="textprompt" rows="10" cols="80" ">
+    <textarea  color="#0000FF" id="textprompt" rows="10" cols="80" >
     {{userprompt}}
     </textarea>
     </font>
@@ -59,7 +71,7 @@
     <p></p>
     <center>
     <em class="ow-break-word"></em>
-    <textarea  color="#0000FF" id="textresponse" rows="25" cols="80" ">
+    <textarea  color="#0000FF" id="textresponse" rows="25" cols="80" >
     {{answer}}
     </textarea>
     </em>

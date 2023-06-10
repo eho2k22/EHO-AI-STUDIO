@@ -44,6 +44,10 @@
                      0 20px 20px rgba(0,0,0,.15);
       }
 
+      #prompt {
+        font-family: Arial, sans-serif;
+      }
+
       #progress-bar {
         width: 500px;
         /*height: 30px;*/
@@ -111,6 +115,7 @@
       </font>
     </p>
 
+    <div id="platform-desc">
     <sub>
     <strong>
       Connecting minds and sparking ideas on Promptlys.ORG: 
@@ -119,19 +124,43 @@
     </strong>
       <br>
       <sub>(** brought to you by EHO AI Studio 23**)</sub>
+      <br>
     </sub>
+    </div>
+
+
+    <script>
+      var eventSource = new EventSource('/streaming-intro');
+      
+      eventSource.onmessage = function(event) {
+          var chunk = event.data;
+
+          console.log("receiving CHUNK !");
+          console.log(chunk)
+          // Check if the chunk is an empty string or an empty object
+          if (chunk == "THE_END" /*|| JSON.stringify(chunk) == "{}"*/) {
+              console.log("REACHED THE END!!!");
+              eventSource.close(); // Close the eventSource
+              return; // Exit the function
+          }
+
+          // Process the received chunk and update the UI as desired
+          // For example, append the chunk to the conversation log div
+          document.getElementById("platform-desc").innerHTML += chunk;
+      };
+    </script>
     
     <br>
     <br>
-    <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/awyYUw-kOZo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  
-    <p>
+    <!---p>
       <strong>
       PROMPT OF THE DAY : 
       </strong>
       <br>
       {{pod_prompt}}
-    </p>
+    </p--->
 
     <br>
     </center>

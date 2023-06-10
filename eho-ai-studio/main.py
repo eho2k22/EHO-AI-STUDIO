@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, Response, render_template, request, session
+from flask_cors import CORS
 
 # OpenAI Library
 # Copyright (c) 2023 OpenAI
@@ -10,6 +11,8 @@ import os
 import io
 import warnings
 import json
+import re
+import time
 
 import smtplib
 from email.mime.text import MIMEText
@@ -41,6 +44,7 @@ response_filter2 = "I'm"
 response_filter3 = "My"
 response_filter4 = "my"
 response_filter5 = "I"
+response_filter6 = "nn"
 response_default = " requiring more research "
 clear_convo = "CLEAR_CONVO"
 
@@ -160,7 +164,242 @@ def generate_response(prompt, previous_context):
 
 
 app = Flask(__name__)
+
+#CORS(app, resources={r"/streaming-page": {"origins": "https://127.0.0.1"}})
+CORS(app, resources={r"/streaming-page": {"origins": ["https://127.0.0.1", "https://www.prompts.org", "https://prompts.org"]}})
+
 app.config['SECRET_KEY'] = os.environ['OPENAI_KEY']
+
+@app.route('/test_home', methods=['GET', 'POST'])
+def test_home():
+    return render_template('test_home.html', app_version=app_version)
+
+@app.route('/streaming-intro')
+def streaming_intro():
+
+    # create variables to collect the stream of chunks
+    full_reply_content = ""
+
+    print("INSIDE Streaming_Intro (): ")
+
+    def intro_generate():
+        full_reply_content = ""
+        print("INSIDE IntroGenererate (): ")
+        print("Full Reply Content is initialized to : ")
+        print(full_reply_content)
+
+        
+        # send a Generic ChatCompletion request 
+        messages=[
+                {"role": "system", "content": "You are a smart  assistant with a great sense of humor and always start your response with courteous greetings "},
+                {'role': 'user', 'content': "Repeat the following greetings word for word exactly in your response : Welcome to Promptlys! If you feel annoyed or frustrated trying to build prompts,  you have come to the right place! Here you can access, learn and share quality prompts created by top-notch Prompt Creators ."}
+            ]
+                   
+        response = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=messages,
+            temperature=0,
+            stream=True  # set stream=True
+        )
+
+
+        start_time = time.time()
+        for chunk in response:
+            chunk_time = time.time() - start_time
+            #print(chunk)
+            #yield "data: {}\n\n".format(chunk['choices'][0]['delta'])  # yield the chunk as SSE data
+            finish_reason = ""
+            chunk_content = ""
+
+            try: 
+                finish_reason = chunk['choices'][0]['finish_reason']
+                if (finish_reason is not None) and (finish_reason != "") :
+                    print("STREAMING STOPPED !!")
+                    print("finish_reason ==")
+                    print(finish_reason)
+                    chunk_content = "THE_END"
+                    yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+                    break 
+            except (KeyError, IndexError):
+                continue  # continue to the next chunk if the necessary keys don't exist
+
+            try: 
+                chunk_content = chunk['choices'][0]['delta']['content']
+                # yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+
+            except (KeyError, IndexError):
+                continue  # continue to the next chunk if the necessary keys don't exist
+
+            full_reply_content = full_reply_content + chunk_content 
+            print("Full Reply Content == ")
+            print(full_reply_content)
+            
+            yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+
+    
+
+    stream_response = Response(intro_generate(), mimetype='text/event-stream')
+
+
+    # Disable buffering by setting X-Accel-Buffering header to 'no'
+    stream_response.headers['X-Accel-Buffering'] = 'no'
+    # Add additional headers
+    stream_response.headers['Content-Type'] = 'text/event-stream'
+    stream_response.headers['Cache-Control'] = 'no-cache'
+
+    return stream_response 
+
+
+
+@app.route('/streaming-page')
+def streaming_page():
+
+    # create variables to collect the stream of chunks
+    full_reply_content = ""
+
+    print("INSIDE Streaming_Page (): ")
+    print("Full Reply Content is initialized to : ")
+    print(full_reply_content)
+
+    def generate(user_prompt, user_context):
+        full_reply_content = ""
+        print("INSIDE Genererate (): ")
+        print("Full Reply Content is initialized to : ")
+        print(full_reply_content)
+
+        if (user_prompt == "") or (user_prompt == "clear_convo"):
+            print("Streaming_Page:  user prompt is EMPTY! ")
+            user_prompt = "Hello !"
+            #yield "data: {}\n\n".format("")  # yield the chunk content as SSE data
+        
+        # send a Generic ChatCompletion request 
+        messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "assistant", "content": "This is User Context. "},
+                {'role': 'user', 'content': 'how many cities are there in California? '}
+            ]
+
+        for item in messages:
+            if item["role"] == "user":
+                item["content"] = user_prompt
+            if item["role"] == "assistant":
+                item["content"] = user_context
+                   
+        response = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=messages,
+            temperature=0,
+            stream=True  # set stream=True
+        )
+
+
+        start_time = time.time()
+        for chunk in response:
+            chunk_time = time.time() - start_time
+            #print(chunk)
+            #yield "data: {}\n\n".format(chunk['choices'][0]['delta'])  # yield the chunk as SSE data
+            finish_reason = ""
+            chunk_content = ""
+
+            try: 
+                finish_reason = chunk['choices'][0]['finish_reason']
+                if (finish_reason is not None) and (finish_reason != "") :
+                    print("STREAMING STOPPED !!")
+                    print("finish_reason ==")
+                    print(finish_reason)
+                    chunk_content = "THE_END"
+                    yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+                    break 
+            except (KeyError, IndexError):
+                continue  # continue to the next chunk if the necessary keys don't exist
+
+            try: 
+                chunk_content = chunk['choices'][0]['delta']['content']
+                # yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+
+            except (KeyError, IndexError):
+                continue  # continue to the next chunk if the necessary keys don't exist
+
+            full_reply_content = full_reply_content + chunk_content 
+            print("Full Reply Content == ")
+            print(full_reply_content)
+            
+            yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+
+    
+    user_prompt = session.get('user_prompt', '')
+    user_context = session.get('user_context', '')
+    print("Streaming_Page:  User Prompt == ")
+    print(user_prompt)
+    print("Streaming_Page:  User Context == ")
+    print(user_context)
+    #reset user_prompt 
+    session['user_prompt'] = ""
+
+    stream_response = Response(generate(user_prompt, user_context), mimetype='text/event-stream')
+
+    if (user_prompt == ""):
+        print("Streaming_Page:  user prompt is EMPTY! ")
+
+    # send a Generic ChatCompletion request 
+    messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "assistant", "content": "This is User Context. "},
+            {'role': 'user', 'content': 'how many cities are there in California? '}
+        ]
+
+    for item in messages:
+        if item["role"] == "user":
+            item["content"] = user_prompt
+        if item["role"] == "assistant":
+            item["content"] = user_context 
+            
+                
+    response = openai.ChatCompletion.create(
+        model='gpt-3.5-turbo',
+        messages=messages,
+        temperature=0,
+        stream=True  # set stream=True
+    )
+
+    start_time = time.time()
+    for chunk in response:
+        chunk_time = time.time() - start_time
+        finish_reason = ""
+        chunk_content = ""
+
+        try: 
+            finish_reason = chunk['choices'][0]['finish_reason']
+            if (finish_reason is not None) and (finish_reason != "") :
+                print("STREAMING STOPPED !!")
+                print("finish_reason ==")
+                print(finish_reason)
+                chunk_content = "THE_END"
+                break 
+        except (KeyError, IndexError):
+            continue  # continue to the next chunk if the necessary keys don't exist
+
+        try: 
+            chunk_content = chunk['choices'][0]['delta']['content']
+
+        except (KeyError, IndexError):
+            continue  # continue to the next chunk if the necessary keys don't exist
+
+        full_reply_content = full_reply_content + chunk_content 
+
+
+    session['user_response'] = full_reply_content 
+    print("Streaming_Page (): Full Reply Content After Streaming is :")
+    print(full_reply_content)
+
+    # Disable buffering by setting X-Accel-Buffering header to 'no'
+    stream_response.headers['X-Accel-Buffering'] = 'no'
+    # Add additional headers
+    stream_response.headers['Content-Type'] = 'text/event-stream'
+    stream_response.headers['Cache-Control'] = 'no-cache'
+
+    return stream_response 
+    #return Response(generate(user_prompt), mimetype='text/event-stream')
 
 @app.route('/conversation', methods=['GET', 'POST'])
 def conversation():
@@ -264,8 +503,8 @@ def conversation():
         
             print("EXISTING Session Variable convo_ID == " + str(convo_ID))
     
-            cid_results=[]
-            cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
+            #cid_results=[]
+            #cid_results = supabase.table('Conversations').select("*").eq('convo_ID', convo_ID).execute()
 
             if (convo_context is None) :
                 convo_context = ""
@@ -278,6 +517,7 @@ def conversation():
             print("convo_history_str is : ") 
             print(convo_history_str)
             
+            
             if (convo_context == ""):
                 return render_template('conversation.html')            
             else:
@@ -288,10 +528,13 @@ def conversation():
     elif request.method == 'POST':
         response = ""
         response_edited = ""
+        
         prompt = request.form['prompt']
+        session['user_prompt'] = prompt
+    
 
         print("CONVERSATION MODE:  POST ACTION")
-    
+
         if convo_context is None:
             print("about to POST QUERY,  convo_context is NONE ???")
             convo_context = ""
@@ -302,42 +545,47 @@ def conversation():
 
         if (clear_convo.lower() != prompt.lower() ):
             print("NOT CLEAR_CONVO command!!!")
-            response = generate_response(prompt, convo_context)
-            # if response is empty or null,  AI may be confused.  Clear Context, but Leave History as is 
-            if ((response == "" or response is None) and convo_context != ""):
-                print("RESPONSE is EMPTY... may be confused !! ")
-                convo_context = ""
-                supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
-                response = generate_response(prompt, convo_context)
-            
-            # if response includes I'm or I am,   AI may later get confused.  Adjust Context
-            if (response_filter.lower() in response.lower() or 
-                    response_filter2.lower() in response.lower() or 
-                    response_filter3.lower() in response.lower() ):
-                print("RESPONSE contains I'm or I am , maybe confused.  Adjust Response!! ")
-                response_edited = response.replace(response_filter, "You are")
-                print("EDITED RESPONSE 1  : " + response_edited) 
-                response_edited = response_edited.replace(response_filter2, "You are")
-                print("EDITED RESPONSE 2 : " + response_edited) 
-                response_edited = response_edited.replace(response_filter3, "Your")
-                print("EDITED RESPONSE 3 : " + response_edited) 
-                response_edited = response_edited.replace(response_filter4, "your")
-                print("EDITED RESPONSE 4 : " + response_edited) 
-                response_edited = response_edited.replace(response_filter5, "you")
-                print("EDITED RESPONSE 5 : " + response_edited) 
-            
-            # if response includes err or err2  AI may be confused.  Clear Context, but Leave History as is 
-            if ((response_err.lower() in response.lower() or response_err2.lower() in response.lower()) 
-                    and convo_context != ""):
-                print("RESPONSE suggests AI may be confused !! ")
-                convo_context = ""
-                supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
-                response = generate_response(prompt, convo_context)
 
-          
+        # response = generate_response(prompt, convo_context)
+        
+        # if response is empty or null,  AI may be confused.  Clear Context, but Leave History as is 
+
+        if ((response == "" or response is None) and convo_context != ""):
+            print("RESPONSE is EMPTY... may be confused !! ")
+            convo_context = ""
+            supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
+            # response = generate_response(prompt, convo_context)
+        
+        # if response includes I'm or I am,   AI may later get confused.  Adjust Context
+        if (response_filter.lower() in response.lower() or 
+                response_filter2.lower() in response.lower() or 
+                response_filter3.lower() in response.lower() ):
+            print("RESPONSE contains I'm or I am , maybe confused.  Adjust Response!! ")
+            response_edited = response.replace(response_filter, "You are")
+            print("EDITED RESPONSE 1  : " + response_edited) 
+            response_edited = response_edited.replace(response_filter2, "You are")
+            print("EDITED RESPONSE 2 : " + response_edited) 
+            response_edited = response_edited.replace(response_filter3, "Your")
+            print("EDITED RESPONSE 3 : " + response_edited) 
+            response_edited = response_edited.replace(response_filter4, "your")
+            print("EDITED RESPONSE 4 : " + response_edited) 
+            response_edited = response_edited.replace(response_filter5, "you")
+            print("EDITED RESPONSE 5 : " + response_edited) 
+            
+        # if response includes err or err2  AI may be confused.  Clear Context, but Leave History as is 
+        if ((response_err.lower() in response.lower() or response_err2.lower() in response.lower()) 
+                and convo_context != ""):
+            print("RESPONSE suggests AI may be confused !! ")
+            convo_context = ""
+            supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
+            response = generate_response(prompt, convo_context)
+        
+        response = session['user_response']
+        print("Conversation: User Response from Session == ")
+        print(response) 
         print("prompt  = " + prompt) 
         print("response = " + response) 
-
+    
 
         if response is None:
             response = ""
@@ -365,13 +613,37 @@ def conversation():
                 #CLEARING OUT Conversation ID  in DB
                 supabase.table('Conversations').update({"convo_context" : "", "convo_history" : [] }).eq('convo_ID', convo_ID).execute()
                 return render_template('conversation.html', app_version=app_version, conversation_history=[], conversation_length=0)
-  
-    
+
+        
         #previous_response defined as CONTEXT 
         #convo_context = convo_context + convoconjunctor + response 
         print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
 
-        convo_history.append(prompt + " -xxxx- " + response) 
+        #If Convo_History > 0, update PREVIOUS CONVO PAIR with user response from SESSION 
+        if (len(convo_history) > 0) : 
+          
+            print("About to Update previous convo: ")
+        
+            # Define the pattern to match the divider
+            pattern = r" -xxxx- "
+
+            # Find the index where the pattern occurs
+            match = re.search(pattern, convo_history[len(convo_history) - 1])
+
+            if match:
+                # Get the starting index of the matched pattern
+                divider_start = match.start()
+        
+                # Update the substring after the divider with "shop"
+                convo_history[len(convo_history) - 1] = convo_history[len(convo_history) - 1][:divider_start] + " -xxxx- " + response 
+                print("YES,  MATCH FOUND AND UPDATED Convo History")
+                print(convo_history[len(convo_history) - 1])
+            else:
+                print("Divider pattern not found in the string.")
+       
+
+        #append Current Convo Pair 
+        convo_history.append(prompt + " -xxxx- " + "") 
         print("convo_history length AFTER APPEND = " + str(len(convo_history))) 
 
         if ((convo_context == "") or (convo_context is None)) :
@@ -387,12 +659,16 @@ def conversation():
 
         print(" LATEST Convo Context before committing to DB:  " + convo_context) 
 
+        #Update user context to session['user_context']
+        session['user_context'] = convo_context
+
         # Convert the array to a JSON string and remove the square brackets
         convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
 
-        
-        print("convo_history_str is : ") 
+
+        print("convo_history_str AFTER FORMATTING is : ") 
         print(convo_history_str)
+
         
         #Updating context data of Conversation ID  in DB
         supabase.table('Conversations').update({"convo_context" : f'{convo_context}', "convo_history" : f'{{{convo_history_str}}}' }).eq('convo_ID', convo_ID).execute()
@@ -532,8 +808,10 @@ def conversation_nm():
     elif request.method == 'POST':
         response = ""
         response_edited = ""
+        
         prompt = request.form['prompt']
-
+        session['user_prompt'] = prompt
+    
     
         if convo_context is None:
             print("about to POST QUERY,  convo_context is NONE ???")
@@ -551,7 +829,7 @@ def conversation_nm():
                 print("RESPONSE is EMPTY... may be confused !! ")
                 convo_context = ""
                 supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
-                response = generate_response(prompt, convo_context)
+                #response = generate_response(prompt, convo_context)
             
             # if response includes I'm or I am,   AI may later get confused.  Adjust Context
             if (response_filter.lower() in response.lower() or 
@@ -569,6 +847,7 @@ def conversation_nm():
                 response_edited = response_edited.replace(response_filter5, "you")
                 print("EDITED RESPONSE 5 : " + response_edited) 
             
+            
             # if response includes err or err2  AI may be confused.  Clear Context, but Leave History as is 
             if ((response_err.lower() in response.lower() or response_err2.lower() in response.lower()) 
                     and convo_context != ""):
@@ -577,7 +856,10 @@ def conversation_nm():
                 supabase.table('Conversations').update({"convo_context" : ""}).eq('convo_ID', convo_ID).execute()
                 response = generate_response(prompt, convo_context)
 
-          
+
+        response = session['user_response']
+        print("Conversation: User Response from Session == ")
+        print(response) 
         print("prompt  = " + prompt) 
         print("response = " + response) 
 
@@ -610,10 +892,34 @@ def conversation_nm():
                 return render_template('conversation_nm.html', app_version=app_version, conversation_history=[], conversation_length=0)
   
     
-        print("Current Convo Pair :  " + prompt + " -xxxx- " + response) 
+        #If Convo_History > 0, update PREVIOUS CONVO PAIR with user response from SESSION 
+        if (len(convo_history) > 0) : 
+          
+            print("About to Update previous convo: ")
+        
+            # Define the pattern to match the divider
+            pattern = r" -xxxx- "
 
-        convo_history.append(prompt + " -xxxx- " + response) 
+            # Find the index where the pattern occurs
+            match = re.search(pattern, convo_history[len(convo_history) - 1])
+
+            if match:
+                # Get the starting index of the matched pattern
+                divider_start = match.start()
+        
+                # Update the substring after the divider with "shop"
+                convo_history[len(convo_history) - 1] = convo_history[len(convo_history) - 1][:divider_start] + " -xxxx- " + response 
+                print("YES,  MATCH FOUND AND UPDATED Convo History")
+                print(convo_history[len(convo_history) - 1])
+            else:
+                print("Divider pattern not found in the string.")
+
+
+        #append Current Convo Pair 
+        convo_history.append(prompt + " -xxxx- " + "") 
         print("convo_history length AFTER APPEND = " + str(len(convo_history))) 
+
+
 
         if ((convo_context == "") or (convo_context is None)) :
             if (response_edited == ""):
@@ -627,6 +933,10 @@ def conversation_nm():
                 convo_context = convo_context + convoconjunctor2 + response_edited
 
         print(" LATEST Convo Context before committing to DB:  " + convo_context) 
+
+        
+        #Update user context to session['user_context']
+        session['user_context'] = convo_context
 
         # Convert the array to a JSON string and remove the square brackets
         convo_history_str = json.dumps(convo_history, ensure_ascii=False)[1:-1]
@@ -718,6 +1028,9 @@ def index():
                     model="gpt-3.5-turbo",
                     messages=messages 
                 )
+
+         
+
             except:
                 print("something went wrong while processing your prompt .. ")
                 return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
@@ -771,6 +1084,12 @@ def index():
         else:
             answer = response['choices'][0]['message']['content']
     
+        # define the regular expression pattern
+        pattern = re.compile(r"nn(?=\d)")
+        # replace all occurrences of "nn" with "#"
+        answer = pattern.sub("#", answer)
+
+
         if userprompt.lower() == "exit":
             return render_template('index.html', app_version=app_version, jokeanswer=jokeanswer, pod_prompt=pod_prompt)
         
@@ -875,9 +1194,12 @@ def night_mode():
                     model="gpt-3.5-turbo",
                     messages=messages 
                 )
+
+                # replace all occurrences of "nn" with "#"
+                # response = response.replace(response_filter6, "#")
             except:
                 print("something went wrong while processing your prompt .. ")
-                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
+                return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
 
 
         elif (available_eho):
@@ -930,6 +1252,12 @@ def night_mode():
             answer = response.choices[0].text
         else:
             answer = response['choices'][0]['message']['content']
+
+        # define the regular expression pattern
+        pattern = re.compile(r"nn(?=\d)")
+        # replace all occurrences of "nn" with "#"
+        answer = pattern.sub("#", answer)
+
 
     
         if userprompt.lower() == "exit":

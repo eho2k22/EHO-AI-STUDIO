@@ -16,7 +16,7 @@
           gtag('config', 'G-9J9VF3JSJD');
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  
+
     <style>
 
       /* Set a max-width for the page */
@@ -52,6 +52,10 @@
                      0 5px 10px rgba(0,0,0,.25),
                      0 10px 10px rgba(0,0,0,.2),
                      0 20px 20px rgba(0,0,0,.15);
+      }
+
+      #prompt {
+        font-family: Arial, sans-serif;
       }
       
       #progress-bar {
@@ -127,11 +131,39 @@
     {% if conversation_history %}
         {% for conversation in conversation_history %}
             <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
-            <p><strong>Promptlys P&R Genie responded: </strong> {{ conversation.split(' -xxxx- ')[1] }}</p>
-            <hr>
+            {% if loop.last %}
+            {% else %}
+              <p><strong>Promptlys P&R Genie responded: </strong> {{ conversation.split(' -xxxx- ')[1] | replace('.nn', '.\n\n')  | replace(':nn', ':\n\n') | replace('"nn', '"\n\n')
+                | replace(':nn', ':\n\n') | replace(':n', ':\n')  }}</p>
+              <hr>
+            {% endif %}
         {% endfor %}
     {% endif %}
     </div>
+
+  <script>
+      var eventSource = new EventSource('/streaming-page');
+      document.getElementById("conversation-log").innerHTML += "<strong> Promptlys P&R Genie Says.. </strong>"
+      eventSource.onmessage = function(event) {
+          var chunk = event.data;
+
+          console.log("receiving CHUNK !");
+          console.log(chunk)
+          // Check if the chunk is an empty string or an empty object
+          if (chunk == "THE_END" /*|| JSON.stringify(chunk) == "{}"*/) {
+              console.log("REACHED THE END!!!");
+              eventSource.close(); // Close the eventSource
+              return; // Exit the function
+          }
+
+          // Process the received chunk and update the UI as desired
+          // For example, append the chunk to the conversation log div
+          document.getElementById("conversation-log").innerHTML += chunk;
+      };
+  </script>
+
+
+
 
   <br></br>
   <p color="0x0000FF"> 
