@@ -205,6 +205,7 @@ def streaming_intro():
 
         start_time = time.time()
         for chunk in response:
+            time.sleep(0.2)
             chunk_time = time.time() - start_time
             #print(chunk)
             #yield "data: {}\n\n".format(chunk['choices'][0]['delta'])  # yield the chunk as SSE data
@@ -226,6 +227,7 @@ def streaming_intro():
             try: 
                 chunk_content = chunk['choices'][0]['delta']['content']
                 # yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
+        
 
             except (KeyError, IndexError):
                 continue  # continue to the next chunk if the necessary keys don't exist

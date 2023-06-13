@@ -3,7 +3,8 @@ body {
     background-color: #fff8e7;
     color: #000;
     font-size: 20px;
-    font-family: Arial, sans-serif; 
+    /*font-family: Arial, sans-serif; */
+    font-family: "Lucida Console", "Courier New", monospace; 
  
 }
 
