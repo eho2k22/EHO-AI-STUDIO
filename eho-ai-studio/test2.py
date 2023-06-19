@@ -8,6 +8,7 @@ import warnings
 import json
 import re
 import time
+import sys
 
 import smtplib
 from email.mime.text import MIMEText
@@ -29,6 +30,7 @@ from array import array
 
 
 
+print(sys.executable)
 
 
 # Example of an OpenAI ChatCompletion request

@@ -102,11 +102,11 @@ def generate_response(prompt, previous_context):
     
     for model in models['data']:
         # print(model.id)
-        if (model.id == "gpt-3.5-turbo" and gpt_enabled == "YES"):
+        if (model.id == "gpt-3.5-turbo-0613" and gpt_enabled == "YES"):
             available_gpt = True
         
     if (available_gpt):
-        print("GPT-3.5-TURBO is AVAILABLE in generate_response !!! ")
+        print("GPT-3.5-TURBO-0613 is AVAILABLE in generate_response !!! ")
         try: 
             messages = [
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -123,7 +123,7 @@ def generate_response(prompt, previous_context):
             
 
             gpt_response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-3.5-turbo-0613",
                     messages=messages 
             )
             
@@ -196,7 +196,7 @@ def streaming_intro():
             ]
                    
         response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
+            model='gpt-3.5-turbo-0613',
             messages=messages,
             temperature=0,
             stream=True  # set stream=True
@@ -288,7 +288,7 @@ def streaming_page():
                 item["content"] = user_context
                    
         response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
+            model='gpt-3.5-turbo-0613',
             messages=messages,
             temperature=0,
             stream=True  # set stream=True
@@ -358,7 +358,7 @@ def streaming_page():
             
                 
     response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo',
+        model='gpt-3.5-turbo-0613',
         messages=messages,
         temperature=0,
         stream=True  # set stream=True
@@ -996,7 +996,7 @@ def index():
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
-            if (model.id == "gpt-3.5-turbo"):
+            if (model.id == "gpt-3.5-turbo-0613"):
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
@@ -1025,9 +1025,9 @@ def index():
                         item["content"] = userprompt
 
 
-                print("GPT-3.5-TURBO is available !! ")
+                print("GPT-3.5-turbo-0613 is available !! ")
                 response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-3.5-turbo-0613",
                     messages=messages 
                 )
 
@@ -1162,7 +1162,7 @@ def night_mode():
         models = openai.Model.list()
 
         for model in models['data']:
-            if (model.id == "gpt-3.5-turbo") and (gpt_enabled == "YES"):
+            if (model.id == "gpt-3.5-turbo-0613") and (gpt_enabled == "YES"):
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
@@ -1191,9 +1191,9 @@ def night_mode():
                         item["content"] = userprompt
 
 
-                print("GPT-3.5-TURBO is available !! ")
+                print("GPT-3.5-TURBO-0613 is available !! ")
                 response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-3.5-turbo-0613",
                     messages=messages 
                 )
 
