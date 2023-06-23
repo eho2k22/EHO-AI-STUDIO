@@ -2,26 +2,34 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> ROMPT LEADERBOARD </title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='night_mode.css') }}">
+    <title> PROMPT COMMUNITY </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KKZ1G64L97"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9J9VF3JSJD"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
-          gtag('config', 'G-KKZ1G64L97');
+          gtag('config', 'G-9J9VF3JSJD');
     </script>
-
+     
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+      }
+    </script>
     <style>
-      
+
       /* Set a max-width for the page */
-      body {
+       body {
         max-width: 1100px;
         margin: 0 auto;
       }
@@ -47,7 +55,6 @@
                      0 20px 20px rgba(0,0,0,.15);
       }
 
-
       /* Add the styles for the button */
       .right-aligned-button {
         float: right; /* Float the button to the right */
@@ -55,7 +62,7 @@
       .right-aligned-div {
         float: right; /* Float the button to the right */
       }
-
+ 
       #progress-bar {
         width: 500px;
         /*height: 30px;*/
@@ -68,8 +75,28 @@
 
       #progress-bar-fill {
         height: 100%;
-        background-color: green; 
+        background-color: #b24141;
         width: 0%;
+      }
+
+      .prompt-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .prompt-item {
+        background-color: #f9d6b8;
+        color: #252525;
+        border: 3px solid #c8640e;
+        box-shadow: 3px 3px #9c4805;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        width: 90%;
+        max-width: 800px;
       }
 
     </style>
@@ -83,19 +110,19 @@
 </head>
 <body bgcolor="#AFB9DB" onload="setFocusOnTextArea()">
   <div class="navigation-menu">
-    <font >
+    <font  color="0x0000FF">
     <ul>
-      <li><a href='{{ url_for('night_mode') }}'> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a></li>
-      <li><a href='{{ url_for('founders_nm') }}'> <i class="fa fa-user w3-xxlarge"></i> Founder </a> </li>
-      <li><a href='{{ url_for('advisory_nm') }}'> <i class="fa fa-users w3-xxlarge"></i> Advisors </a></li>
-      <li><a href='{{ url_for('mission_nm') }}'> <i class="fa fa-bullseye w3-xxlarge"></i> Mission </a> </li>
-      <li><a href='{{ url_for('community_nm') }}'>
+      <li><a href='{{ url_for('index') }}'>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a></li>
+      <li><a href='{{ url_for('founders') }}'> <i class="fa fa-user w3-xxlarge"></i> Founder </a> </li>
+      <li><a href='{{ url_for('advisory') }}'> <i class="fa fa-users "></i> Advisors </a></li>
+      <li><a href='{{ url_for('mission') }}'> <i class="fa fa-bullseye w3-xxlarge"></i> Mission </a> </li>
+      <li><a href='{{ url_for('community') }}'>
         <span class="badge-container"><i class="fa fa-globe w3-xxlarge"></i><span class="badge">New</span></span> Community
       </a></li>
-      <li><a href='{{ url_for('trending_nm') }}'>
+      <li><a href='{{ url_for('trending') }}'>
         <span class="badge-container"><i class="fa fa-fire w3-xxlarge"></i><span class="badge">New</span></span> Trending
       </a></li>
-      <li><a href='{{ url_for('gallery_nm') }}'>
+      <li><a href='{{ url_for('gallery') }}'>
         <span class="badge-container"><i class="fa fa-pen w3-xxlarge"></i><span class="badge">New</span></span> Gallery
       </a></li>
       <li></li>
@@ -103,10 +130,11 @@
     </font>
   </div>
   <div class="content">
-  <font >
+  <font>
+  
   <center>
     <p>
-      <button class="btn" onclick="location.href='{{ url_for('trending') }}'"><font  color="0x0000FF">LIGHT MODE</font></button>
+      <button class="btn" onclick="location.href='{{ url_for('community_nm') }}'"><font  color="0x0000FF">NIGHT MODE</font></button>
     </p>
   </center>
 
@@ -114,7 +142,7 @@
     <p class="text">
       <font color="#ffdf00", size="+5"> 
       <strong>
-      PROMPT LEADERBOARD
+      PROMPT COMMUNITY
       </strong>
       </font>
     </p>
@@ -129,22 +157,42 @@
   </center--->
   <br>
   <center>
+    <br>
     <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
-      "Take your creativity and expertise to the next level! Join the ranks of our esteemed Prompt Masters and 
-      contribute to our collaborative community!"
+      "Search, Share and Explore a library of quality prompts"
     </p>
+
+    <form method="post" action="/community">
+      <input type="text" id="search" name="search"  placeholder="Search By Keyword" maxlength="61" size="61" ></input>
+      <button class="btn" onclick="location.href='{{ url_for('community') }}'"> Search </button>
+    </form>
+
     <p>
+    <!--p>
     {% if prompt_list %}
       {% for prompt in prompt_list %}
-      <div style="display: inline-block; background-color: #252525; color: #f2f2f2; 
-      border: 3px solid #ffdf00; box-shadow: 3px 3px #ffd700;
-      border-radius: 10px; padding: 10px; text-align: center; width: 330px;">
-        {{ prompt }}
-      </div>
-    
+        <div style="display: inline-block; background-color: #f9d6b8;
+         border: 3px solid #c8640e; box-shadow: 3px 3px #9c4805; 
+         border-radius: 10px; padding: 10px; text-align: center; width: 330px;">
+          {{ prompt }}
+        </div>
+        
       {% endfor %}
     {% endif %}
+    </p--->
+
+    {% if prompt_list %}
+    <div class="prompt-list">
+      {% for prompt in prompt_list %}
+        <div class="prompt-item">
+          {{ prompt }}
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+
 
   <br>
   <br>
@@ -155,14 +203,14 @@
   </center>
 
   <center>
-    <sub>Enter your email below to receive prompt leaderboard for free! </sub>
+    <sub> Enter your email below to receive prompt leaderboard for free! </sub>
     <br>
-    <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
+    <sub>(** Your email will be kept private and never mshared with 3rd-party **)</sub>
     <br>
-    <form method="post" action="/sendemail_nm">
+    <form method="post" action="/sendemail">
     <input type="text" id="useremail" name="useremail" maxlength="61" size="61"></input>
-    <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>    
-    <button class="btn" onclick="location.href='{{ url_for('sendemail_nm') }}'"> Send Email </button>
+    <input type="hidden" id="prompt_list" name="prompt_list" value="{{ prompt_list_str }}"></input>  
+    <button class="btn" onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
     </form>
     <br></br>
     <br></br>
@@ -189,24 +237,23 @@
   <center>
     <div style="text-align:center">
       <a href='{{ url_for('terms') }}'> Terms </a>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <a href='{{ url_for('privacy') }}'> Privacy </a>
     </div>
     <br>
     <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
         <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:50px;height:50px;">
         <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
-    </a> 
+    </a>
     <br>
     <br>
     <div style="text-align:center">
-        <a href="https://twitter.com/eho_ai_no23"> <img class="no-border"  src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="50" height="50" alt="Twitter"> </a>
+          <a href="https://twitter.com/eho_ai_no23"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="50" height="50" alt="Twitter"> </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="50" height="50" alt="Discord"> </a>
+          <a href="https://discord.gg/ZMCHtpeuQW"> <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="50" height="50" alt="Discord">  </a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="50" height="50" alt="YouTube"> </a>   
-    </div>
-
+          <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="50" height="50" alt="YouTube"> </a>   
+        </div>
   </center>
   <br></br>
   <br></br>

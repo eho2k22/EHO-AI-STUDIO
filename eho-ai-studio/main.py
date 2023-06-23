@@ -192,7 +192,7 @@ def streaming_intro():
         # send a Generic ChatCompletion request 
         messages=[
                 {"role": "system", "content": "You are a smart  assistant with a great sense of humor and always start your response with courteous greetings "},
-                {'role': 'user', 'content': "Repeat the following greetings word for word exactly in your response : Welcome to Promptlys! If you feel annoyed or frustrated trying to build prompts,  you have come to the right place! Here you can access, learn and share quality prompts created by top-notch Prompt Creators ."}
+                {'role': 'user', 'content': "Repeat the following greetings word for word exactly in your response : Welcome to Promptlys! Have you struggled with prompting that communicates effectively and generates desired responses? You have come to the right place! Here at Promptly you can access, learn and share quality prompts created by top-notch Prompt Creators ."}
             ]
                    
         response = openai.ChatCompletion.create(
@@ -1385,6 +1385,117 @@ def trending_nm():
         print(prompt_list[i])
 
     return render_template('trending_nm.html', app_version=app_version, prompt_list=prompt_list, prompt_list_str=prompt_list_str)
+
+@app.route('/community', methods=['GET', 'POST'])
+def community():
+
+    pod_prompt = ""
+    pod_results=[]
+ 
+    pod_index = 0
+    prompt_list = []
+    prompt_list_str = ""
+
+    print("YOU are in COMMUNITY PAGE !!")
+
+    if request.method == "POST":
+
+        # Retrieve the search string entered by the user
+        search_string = request.form["search"]
+        #pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(100).execute()
+        # Query the database for related prompt data based on the search string
+        pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').execute()
+   
+
+        for pod_record in pod_results:
+
+            # fetch the JSON object at pod_record[1], and get the first and only record at pod_record[1][0]
+            # ***this JSON OBJECT REPRESENTS ALL SATISFYING PROMPTS ****
+            # convert the JSON DATA object into a Python dictionary
+            print(" CURRENT pod_record is : ")
+            print( pod_record )
+            print(" After printing CURRENT pod_record is : ")
+            # this JSON OBJ includes data of ALL satisfying prompts 
+            
+            print("Total LENGTH of Prompt Items = ")
+            print(len(pod_record[1]))
+
+            for i in range(len(pod_record[1])):
+                json_obj = pod_record[1][i]
+                #print("PRINT this JSON OBJ: ")
+                #print(json_obj)
+                dict_data = json.loads(json.dumps(json_obj))
+                pod_prompt = list(dict_data.values())[2]
+                #print("PRINT this PROMPT: ")
+                #print(pod_prompt)
+                prompt_list.insert(i, pod_prompt)
+                prompt_list_str = prompt_list_str + pod_prompt +  " -xxxx- "
+
+            break 
+
+
+        print("Prompt List is printed below: ")
+        for i in range(len(prompt_list)):
+            print(prompt_list[i])
+
+    return render_template('community.html', app_version=app_version, prompt_list=prompt_list, prompt_list_str=prompt_list_str)
+
+@app.route('/community_nm', methods=['GET', 'POST'])
+def community_nm():
+
+    pod_prompt = ""
+    pod_results=[]
+ 
+    pod_index = 0
+    prompt_list = []
+    prompt_list_str = ""
+
+    print("YOU are in COMMUNITY PAGE !!")
+
+    if request.method == "POST":
+
+        # Retrieve the search string entered by the user
+        search_string = request.form["search"]
+        #pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(100).execute()
+        # Query the database for related prompt data based on the search string
+        pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').execute()
+   
+
+        for pod_record in pod_results:
+
+            # fetch the JSON object at pod_record[1], and get the first and only record at pod_record[1][0]
+            # ***this JSON OBJECT REPRESENTS ALL SATISFYING PROMPTS ****
+            # convert the JSON DATA object into a Python dictionary
+            print(" CURRENT pod_record is : ")
+            print( pod_record )
+            print(" After printing CURRENT pod_record is : ")
+            # this JSON OBJ includes data of ALL satisfying prompts 
+            
+            print("Total LENGTH of Prompt Items = ")
+            print(len(pod_record[1]))
+
+            for i in range(len(pod_record[1])):
+                json_obj = pod_record[1][i]
+                #print("PRINT this JSON OBJ: ")
+                #print(json_obj)
+                dict_data = json.loads(json.dumps(json_obj))
+                pod_prompt = list(dict_data.values())[2]
+                #print("PRINT this PROMPT: ")
+                #print(pod_prompt)
+                prompt_list.insert(i, pod_prompt)
+                prompt_list_str = prompt_list_str + pod_prompt +  " -xxxx- "
+
+            break 
+
+        print("Prompt List is printed below: ")
+        for i in range(len(prompt_list)):
+            print(prompt_list[i])
+
+    return render_template('community_nm.html', app_version=app_version, prompt_list=prompt_list, prompt_list_str=prompt_list_str)
+
+
+
+
 
 
 @app.route('/founders')
