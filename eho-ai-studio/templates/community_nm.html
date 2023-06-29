@@ -18,6 +18,13 @@
 
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <script>
+      function setFilterValue(defaultValue) {
+        document.getElementById('searchfilter').value = defaultValue;
+        document.getElementById('filterForm').submit();
+      }
+    </script>
+    
     <style>
       
       /* Set a max-width for the page */
@@ -92,6 +99,17 @@
         max-width: 800px;
       }
 
+      .filter-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .filter-button {
+        flex: 1;
+        margin-right: 10px;
+      }
+
+
     </style>
 
     <script>
@@ -161,17 +179,28 @@
     </form>
 
     <p>
-    <!---p>
-    {% if prompt_list %}
-      {% for prompt in prompt_list %}
-        <div style="display: inline-block; background-color: #252525; color: #f2f2f2; 
-          border: 3px solid #ffdf00; box-shadow: 3px 3px #ffd700;
-          border-radius: 10px; padding: 10px; text-align: center; width: 330px;">
-          {{ prompt }}
-        </div>  
-      {% endfor %}
-    {% endif %}
-    </p--->
+
+    <br>
+    <form id="filterForm" method="post" action="/community_nm">
+      <div class="filter-buttons">
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Startup')">Startup</button>
+        </div>
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Novelist')">Novelist</button>
+        </div>
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Product')">Product</button>
+        </div>
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Marketing')">Marketing</button>
+        </div>
+      </div>
+      <input type="hidden" id="searchfilter" name="searchfilter" value="">
+    </form>
+    <br>    
+
+
     {% if prompt_list %}
     <div class="prompt-list">
       {% for prompt in prompt_list %}

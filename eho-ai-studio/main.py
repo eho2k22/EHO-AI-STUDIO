@@ -1395,17 +1395,61 @@ def community():
     pod_index = 0
     prompt_list = []
     prompt_list_str = ""
+    search_string = ""
 
     print("YOU are in COMMUNITY PAGE !!")
 
     if request.method == "POST":
 
         # Retrieve the search string entered by the user
-        search_string = request.form["search"]
-        #pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(100).execute()
-        # Query the database for related prompt data based on the search string
+        try:
+            search_string = request.form["search"]
+        except: 
+            try:
+                search_string = request.form["searchfilter"]
+            except:
+                print("NO SEARCH STRING FOUND!!! ") 
+
+    
+        print("Search String is : " + search_string) 
+
+        
+        # Query Supabase for prompt data based on search string
         pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').execute()
    
+    
+        ##### refining query by building OR clauses in Query Condition
+        
+        #keywords = search_string.split()  # Split search string into individual keywords
+        #query = supabase.table('Transcripts').select("*").eq('rank', 888)
+        
+        # Build the query using OR to union all keywords
+        # or_conditions = []
+        #for keyword in keywords:
+            #or_conditions.append({'prompt': {'ilike': f"%{keyword}%"}})
+            #or_conditions.append(('prompt', 'ilike', f"%{keyword}%"))
+
+        #print("OR CLAUSE = " ) 
+
+        #for condition in or_conditions:
+            #print("OR CONDTION : ")
+            #print(condition)
+        
+
+        # Create a new empty query
+        #new_query = None
+
+        # Combine the OR conditions using union_all
+        #for condition in or_conditions:
+            #condition_query = query.ilike(*condition)
+            #if new_query is None:
+                #new_query = condition_query
+            #else:
+                #new_query = new_query.union_all(condition_query)
+
+        
+        #pod_results = query.execute()
+
 
         for pod_record in pod_results:
 
@@ -1449,15 +1493,26 @@ def community_nm():
     pod_index = 0
     prompt_list = []
     prompt_list_str = ""
+    search_string = ""
 
     print("YOU are in COMMUNITY PAGE !!")
 
     if request.method == "POST":
 
         # Retrieve the search string entered by the user
-        search_string = request.form["search"]
-        #pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).order('created_at', desc=True).limit(100).execute()
-        # Query the database for related prompt data based on the search string
+        try:
+            search_string = request.form["search"]
+        except: 
+            try:
+                search_string = request.form["searchfilter"]
+            except:
+                print("NO SEARCH STRING FOUND!!! ") 
+
+    
+        print("Search String is : " + search_string) 
+
+        
+        # Query Supabase for related prompt data based on the search string
         pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').execute()
    
 

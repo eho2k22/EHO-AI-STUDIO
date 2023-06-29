@@ -26,6 +26,12 @@
           }, 'google_translate_element');
       }
     </script>
+    <script>
+      function setFilterValue(defaultValue) {
+        document.getElementById('searchfilter').value = defaultValue;
+        document.getElementById('filterForm').submit();
+      }
+    </script>
     <style>
 
       /* Set a max-width for the page */
@@ -99,6 +105,16 @@
         max-width: 800px;
       }
 
+      .filter-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .filter-button {
+        flex: 1;
+        margin-right: 10px;
+      }
+
     </style>
 
     <script>
@@ -169,18 +185,43 @@
     </form>
 
     <p>
-    <!--p>
-    {% if prompt_list %}
-      {% for prompt in prompt_list %}
-        <div style="display: inline-block; background-color: #f9d6b8;
-         border: 3px solid #c8640e; box-shadow: 3px 3px #9c4805; 
-         border-radius: 10px; padding: 10px; text-align: center; width: 330px;">
-          {{ prompt }}
+
+    <br>
+    <!---form id="filterForm" method="post" action="/community">
+      <div class="filter-buttons">
+        <div class="filter-button">
+          <input type="hidden" id="search1" name="search1" >
+          <button class="btn" onclick="setFilterValue('Business Proprosal')">Business Proposal</button>
         </div>
-        
-      {% endfor %}
-    {% endif %}
-    </p--->
+        <div class="filter-button">
+          <input type="hidden" id="search2" name="search2" >
+          <button class="btn" onclick="setFilterValue('API')">API</button>
+        </div>
+        <div class="filter-button">
+          <input type="hidden" id="search3" name="search3" value="Product Development">
+          <button class="btn" onclick="location.href='{{ url_for('community') }}'">Product Development</button>
+        </div>
+      </div>
+    </form--->
+
+    <form id="filterForm" method="post" action="/community">
+      <div class="filter-buttons">
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Startup')">Startup</button>
+        </div>
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Novelist')">Novelist</button>
+        </div>
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Product')">Product</button>
+        </div>
+        <div class="filter-button">
+          <button class="btn" onclick="setFilterValue('Marketing')">Marketing</button>
+        </div>
+      </div>
+      <input type="hidden" id="searchfilter" name="searchfilter" value="">
+    </form>
+    <br>    
 
     {% if prompt_list %}
     <div class="prompt-list">
