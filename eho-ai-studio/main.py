@@ -1687,11 +1687,11 @@ def sendemail():
     # Recreating the message based on simple Prompt and Response
     else:
         print("*** SENDEMAIL : CREATE P&R MESSAGE ***")
-        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
+        message = MIMEText("Your Prompt : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
 
         
     
-    message["Subject"] = "Your Promptly.ORG GENIE Transcript is Ready!" 
+    message["Subject"] = "Your Promptlys AI Genie Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -1793,11 +1793,11 @@ def sendemail_nm():
     # Recreating the message based on simple Prompt and Response
     else:
         print("*** SENDEMAIL_NM : CREATE P&R MESSAGE ***")
-        message = MIMEText("Your Question : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
+        message = MIMEText("Your Prompt : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
 
 
 
-    message["Subject"] = "Promptly P&R AI GENIE Transcript is Ready!" 
+    message["Subject"] = "Promptlys P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 

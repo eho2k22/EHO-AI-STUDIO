@@ -79,6 +79,35 @@
       gtag('config', 'G-9J9VF3JSJD');
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script>
+      async function signInWithEmail() {
+        const supabase = createSupabaseClient(); // Replace with your Supabase client initialization
+    
+        const { data, error } = await supabase.auth.signInWithOtp({
+          email: 'ernie.y.ho@gmail.com',
+          options: {
+            emailRedirectTo: 'https://www.promptlys.org',
+          },
+        });
+    
+        if (error) {
+          console.error(error);
+          // Handle error scenario
+        } else {
+          console.log(data);
+          // Handle successful sign-in scenario
+        }
+      }
+    
+      function createSupabaseClient() {
+        // Initialize and return a Supabase client object
+        return supabase.createClient('https://msfpfmwdawonueqaevru.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zZnBmbXdkYXdvbnVlcWFldnJ1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3NTk5MTE5MSwiZXhwIjoxOTkxNTY3MTkxfQ.ImwsqoISh3zCKcAW0FJeB13UCWOCVay5Fm1U5TNwhUU');
+      }
+    </script>
+    
+
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </head>
@@ -113,6 +142,8 @@
     </strong>
     </font>
     </p>
+
+    <button onclick="signInWithEmail()">Sign In with OTP ! </button>
 
     <div id="platform-desc">
     <sub>
@@ -152,7 +183,7 @@
     <br>
     <br>
     <!--iframe width="400" height="200" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/vid/promptlys-intro.mp4?t=2023-05-03T06%3A39%3A02.953Z" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe--->
-    <iframe width="400" height="200" src="https://www.youtube.com/embed/awyYUw-kOZo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/wJx_7RvES3w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     
     <!--p>
       <strong>
