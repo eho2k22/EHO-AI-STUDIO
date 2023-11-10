@@ -1,6 +1,6 @@
 # Promptlys
 
-Promptlys is a web application built with Flask, a Python web framework, and powered by OpenAI's GPT-3.5-Turbo language model. It allows users to ask questions and receive AI-generated responses based on the provided prompt.
+Promptlys is a web application built with Flask, a Python web framework, and powered by OpenAI's GPT-4-Turbo language model. It allows users to ask questions and receive AI-generated responses based on the provided prompt.
 
 Features
 Question-Answering: Users can enter a prompt or question, and the application will generate a response using the OpenAI API.
