@@ -102,11 +102,13 @@ def generate_response(prompt, previous_context):
     
     for model in models['data']:
         # print(model.id)
-        if (model.id == "gpt-3.5-turbo-0613" and gpt_enabled == "YES"):
+        if (model.id == "gpt-4-1106-preview" and gpt_enabled == "YES"):
             available_gpt = True
+        if (model.id == "gpt-4-1106-preview"):
+            print("GPT4-0613 IS AVAILABLE !!!")
         
     if (available_gpt):
-        print("GPT-3.5-TURBO-0613 is AVAILABLE in generate_response !!! ")
+        print("gpt-4-1106-preview is AVAILABLE in generate_response !!! ")
         try: 
             messages = [
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -123,7 +125,7 @@ def generate_response(prompt, previous_context):
             
 
             gpt_response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo-0613",
+                    model="gpt-4-1106-preview",
                     messages=messages 
             )
             
@@ -166,13 +168,17 @@ def generate_response(prompt, previous_context):
 app = Flask(__name__)
 
 #CORS(app, resources={r"/streaming-page": {"origins": "https://127.0.0.1"}})
-CORS(app, resources={r"/streaming-page": {"origins": ["https://127.0.0.1", "https://www.prompts.org", "https://prompts.org"]}})
+CORS(app, resources={r"/streaming-page": {"origins": ["https://127.0.0.1", "https://www.prompts.ai", "https://prompts.ai"]}})
 
 app.config['SECRET_KEY'] = os.environ['OPENAI_KEY']
 
 @app.route('/test_home', methods=['GET', 'POST'])
 def test_home():
     return render_template('test_home.html', app_version=app_version)
+
+@app.route('/unicorn_home', methods=['GET', 'POST'])
+def unicorn_home():
+    return render_template('unicorn_index.html', app_version=app_version)
 
 @app.route('/streaming-intro')
 def streaming_intro():
@@ -196,7 +202,7 @@ def streaming_intro():
             ]
                    
         response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo-0613',
+            model='gpt-4-1106-preview',
             messages=messages,
             temperature=0,
             stream=True  # set stream=True
@@ -288,7 +294,7 @@ def streaming_page():
                 item["content"] = user_context
                    
         response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo-0613',
+            model='gpt-4-1106-preview',
             messages=messages,
             temperature=0,
             stream=True  # set stream=True
@@ -358,7 +364,7 @@ def streaming_page():
             
                 
     response = openai.ChatCompletion.create(
-        model='gpt-3.5-turbo-0613',
+        model='gpt-4-1106-preview',
         messages=messages,
         temperature=0,
         stream=True  # set stream=True
@@ -996,7 +1002,7 @@ def index():
         print("Available Models are: ")
         for model in models['data']:
             print(model.id)
-            if (model.id == "gpt-3.5-turbo-0613"):
+            if (model.id == "gpt-4-1106-preview"):
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
@@ -1025,9 +1031,9 @@ def index():
                         item["content"] = userprompt
 
 
-                print("GPT-3.5-turbo-0613 is available !! ")
+                print("gpt-4-1106-preview is available !! ")
                 response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo-0613",
+                    model="gpt-4-1106-preview",
                     messages=messages 
                 )
 
@@ -1162,10 +1168,13 @@ def night_mode():
         models = openai.Model.list()
 
         for model in models['data']:
-            if (model.id == "gpt-3.5-turbo-0613") and (gpt_enabled == "YES"):
+            if (model.id == "gpt-4-1106-preview") and (gpt_enabled == "YES"):
+                print("YES,  gpt-4-1106-preview is now AVAILABLE!!!")
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
+            if (model.id == "gpt-4-1106-preview"):
+                print("YES,  gpt-4-1106-preview is now AVAILABLE!!!")
 
 
         if (usertemp == "Standard"):
@@ -1191,9 +1200,9 @@ def night_mode():
                         item["content"] = userprompt
 
 
-                print("GPT-3.5-TURBO-0613 is available !! ")
+                print("gpt-4-1106-preview is available !! ")
                 response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo-0613",
+                    model="gpt-4-1106-preview",
                     messages=messages 
                 )
 
@@ -1687,7 +1696,7 @@ def sendemail():
     # Recreating the message based on simple Prompt and Response
     else:
         print("*** SENDEMAIL : CREATE P&R MESSAGE ***")
-        message = MIMEText("Your Prompt : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
+        message = MIMEText("Your Prompt : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ai ")
 
         
     
@@ -1793,7 +1802,7 @@ def sendemail_nm():
     # Recreating the message based on simple Prompt and Response
     else:
         print("*** SENDEMAIL_NM : CREATE P&R MESSAGE ***")
-        message = MIMEText("Your Prompt : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ORG ")
+        message = MIMEText("Your Prompt : \n" + userprompt + "\n \n" + "Our Response : \n" + answer + "\n \n" + " Promptlys.ai ")
 
 
 
