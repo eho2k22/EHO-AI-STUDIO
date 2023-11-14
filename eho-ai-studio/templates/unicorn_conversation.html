@@ -1,0 +1,871 @@
+
+<!DOCTYPE html>
+<html class="style-orange-3  custom-colors-enabled  custom-accent-color-bright  custom_fonts comps live_website unicorn-platform-website" lang="en">
+
+<head>
+  
+	<!-- This page is running on Unicorn Platform. Generated at November 12, 2023, 10:48 PM-->
+  
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="alternate" href="https://demo.promptlys.ai/conversation/" hreflang="en" />
+	<link rel="stylesheet" href="static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="static/js/main.js" defer></script>
+	
+		<link href="https://fonts.googleapis.com/css?family=Nunito:700|Nunito+Sans:400,700&display=swap" rel="stylesheet"/>
+  <style>
+			.custom_fonts .custom-google-fonts-enabled * {
+				font-family: 'Nunito Sans', Helvetica, sans-serif;
+			}
+			.custom_fonts .custom-google-fonts-enabled h1,
+			.custom_fonts .custom-google-fonts-enabled h2,
+			.custom_fonts .custom-google-fonts-enabled h3,
+			.custom_fonts .custom-google-fonts-enabled h4,
+			.custom_fonts .custom-google-fonts-enabled h5,
+			.custom_fonts .custom-google-fonts-enabled h6{
+				font-family: 'Nunito', Helvetica, serif;
+			}
+	
+
+       /* Set a max-width for the page */
+       body {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      /* Set the width of the content to a percentage */
+      .content {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      /* Add the styles for the button */
+      .right-aligned-button {
+        float: right; /* Float the button to the right */
+      }
+      .right-aligned-div {
+        float: right; /* Float the button to the right */
+      }
+
+      .text {
+          text-shadow: 0 1px 0 #ccc, 
+                     0 2px 0 #c9c9c9,
+                     0 3px 0 #bbb,
+                     0 4px 0 #b9b9b9,
+                     0 5px 0 #aaa,
+                     0 6px 1px rgba(0,0,0,.1),
+                     0 0 5px rgba(0,0,0,.1),
+                     0 1px 3px rgba(0,0,0,.3),
+                     0 3px 5px rgba(0,0,0,.2),
+                     0 5px 10px rgba(0,0,0,.25),
+                     0 10px 10px rgba(0,0,0,.2),
+                     0 20px 20px rgba(0,0,0,.15);
+      }
+
+      #prompt {
+        font-family: Arial, sans-serif;
+      }
+      
+      #progress-bar {
+        width: 500px;
+        /*height: 30px;*/
+        height: 4vh;
+        border: 1px solid #FFD700;
+        border-radius: 10px;
+        overflow: hidden;
+        display: none;
+      }
+
+      #progress-bar-fill {
+        height: 0.5vh; 
+        background-color: green;
+        width: 0%;
+      }
+
+      .language-picker-wrapper {
+        display: none;
+      }
+  
+	</style>
+
+<script>
+  function setFocusOnTextArea() {
+      document.getElementById("prompt").focus();
+  }
+</script>
+	
+		<link rel="icon" type="image/png" href="https://unicorn-cdn.b-cdn.net/6d804b1d-830e-4a8d-b25f-158a678fbaf5/" sizes="16x16" />
+	
+	<meta property="og:type" content="website">
+    
+        <title>Conversation</title>
+        <meta property="og:title" content="Conversation" />
+        <meta name="twitter:title" content="Conversation" />
+    
+    
+        <meta name="description" content="Conversation">
+        <meta property="og:description" content="Conversation"/>
+        <meta name="twitter:description" content="Conversation" />
+    
+	
+		<meta property="og:image" content="https://unicorn-cdn.b-cdn.net/3640d410-bc50-47b7-83be-ab065bbbe470/social-network-image.pngimage.png"/>
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:image" content="https://unicorn-cdn.b-cdn.net/3640d410-bc50-47b7-83be-ab065bbbe470/social-network-image.pngimage.png">
+	
+  
+  <link href="https://demo.promptlys.ai/conversation/" rel="canonical"><meta name="twitter:url" content="https://demo.promptlys.ai/conversation/"><meta property="og:url" content="https://demo.promptlys.ai/conversation/">
+	
+	
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P9FHV02KWC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P9FHV02KWC');
+</script>
+  
+  
+
+</head>
+
+<body class="custom-google-fonts-enabled comps" id="112764-224805">
+
+    
+	
+
+
+	<nav class="js-nav nav-02 nav-02--static">
+		<div class="container container--large">
+			<div class="nav-02__box">
+				<div class="nav-02__logo"><a class="nav-02__link" href="/" target="_self">
+					
+            
+						<img 
+            
+              class="nav-02__logo_img" 
+              height="32"
+              alt="Logo color"
+              
+              
+                src="https://unicorn-cdn.b-cdn.net/60b93ca6-e5e2-4e63-9cef-1ce93f76ed46/logo-color.png"
+                srcset="https://unicorn-cdn.b-cdn.net/60b93ca6-e5e2-4e63-9cef-1ce93f76ed46/logo-color.png?width=159&amp;height=32 159w,https://unicorn-cdn.b-cdn.net/60b93ca6-e5e2-4e63-9cef-1ce93f76ed46/logo-color.png?width=318&amp;height=64 318w,https://unicorn-cdn.b-cdn.net/60b93ca6-e5e2-4e63-9cef-1ce93f76ed46/logo-color.png?width=477&amp;height=96 477w,"
+                sizes="159px"
+              
+            />
+					
+					
+				</a></div>
+				<div class="nav-02__links js-menu">
+					<div class="nav-02__list_wrapper  ">
+						<ul class="nav-02__list nav-02__list--desktop">
+                        
+                        
+                            
+
+
+    
+        
+            
+                <li class="nav-02__item">
+                    
+                        <a
+                            class="button   button--black-outline  button--empty "
+                                href="https://www.promptlys.ai" target="_self"><span class="button__text">Try Demo!</span>
+                            </a>
+                    
+                </li>
+            
+        
+    
+
+                        
+							<li class="nav-02__item">
+								
+	
+<div class="buttons-set"><ul class="buttons-set__list"><li class="buttons-set__item"><a
+				 data-stripe-product-id="" data-stripe-mode="payment" data-successful-payment-url="" data-cancel-payment-url=""
+
+				 class="button button--black-outline " href="https://forms.gle/ZciU6DYBxGitPAYo9" target="_self"    ><span class="button__text">Join Waitlist</span></a></li></ul></div>
+
+							</li>
+						</ul>
+						<ul class="nav-02__list nav-02__list--mobile">
+                            
+                            
+                                
+
+
+    
+        
+            
+                <li class="nav-02__item">
+                    
+                        <a
+                            class="button   button--black-outline  button--empty "
+                                href="https://www.promptlys.ai" target="_self"><span class="button__text">Try Demo!</span>
+                            </a>
+                    
+                </li>
+            
+        
+    
+
+                            
+							<li class="nav-02__item">
+								
+	
+<div class="buttons-set"><ul class="buttons-set__list"><li class="buttons-set__item"><a
+				 data-stripe-product-id="" data-stripe-mode="payment" data-successful-payment-url="" data-cancel-payment-url=""
+
+				 class="button button--black-outline " href="https://forms.gle/ZciU6DYBxGitPAYo9" target="_self"    ><span class="button__text">Join Waitlist</span></a></li></ul></div>
+
+							</li>
+						</ul>
+					</div>
+          
+            
+              <div class="nav-02__burger">
+	<button class="burger burger--black js-open-menu" type="button">
+		<div class="burger__box">
+			<div class="burger__inner"></div>
+		</div>
+	</button>
+</div>
+            
+          
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+	<div 
+    class="page-component__bg_image_box    bg-white-color  first_component  "
+    id="other-01-485041"
+    
+  >
+		
+		<div 
+      class="page-component__bg_overlay_box " 
+      style=""
+    >
+			
+		</div>
+    
+		<div class="page-component__wrapper" style="z-index: 10;padding-top:0px;padding-bottom:0px;">
+			
+	
+	
+	<section>
+
+
+
+
+<body bgcolor="#AFB9DB" onload="setFocusOnTextArea()">
+  <div class="navigation-menu">
+    <font color="0x0000FF">
+    <ul>
+      <li><a href='{{ url_for('index') }}'>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Promptlys"> </a></li> 
+      <li><a href='{{ url_for('community') }}'>
+        <span class="badge-container"><i class="fa fa-globe w3-xxlarge"></i><span class="badge">New</span></span> Community
+      </a></li>
+      <li><a href='{{ url_for('trending') }}'>
+        <span class="badge-container"><i class="fa fa-fire w3-xxlarge"></i><span class="badge">New</span></span> Trending
+      </a></li>
+      <li><a href='{{ url_for('founders') }}'> <i class="fa fa-user w3-xxlarge"></i> Founder </a> </li>
+      <li><a href='{{ url_for('advisory') }}'> <i class="fa fa-users"></i> Advisors </a></li>
+      <li><a href='{{ url_for('mission') }}'> <i class="fa fa-bullseye w3-xxlarge"></i> Mission </a> </li>
+
+      <li></li>
+    </ul>
+    </font>
+  </div>
+  <div class="content">
+  <font>
+  
+  <center>
+    <p>
+      <button class="btn" onclick="location.href='{{ url_for('conversation_nm') }}'"><font color="0x0000FF" style="font-size: inherit;">NIGHT MODE</font></button>
+    </p>
+  </center>
+
+  <center>
+  <p class="text">
+    <font color="#ffdf00", size="+5"> 
+    <strong>
+    Promptlys P&R AI CONVERSATION
+    </strong>
+    </font>
+  </p>
+  </center>
+
+  <center>
+  <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <p>
+    <hr>
+    <div id="conversation-log" data-convo-id="{{convo_id_str}}">
+    {% if conversation_history %}
+        {% for conversation in conversation_history %}
+            <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
+            {% if loop.last %}
+            {% else %}
+              <p><strong>Promptlys P&R Genie responded: </strong> {{ conversation.split(' -xxxx- ')[1] | replace('.nn', '.\n\n')  | replace(':nn', ':\n\n') | replace('"nn', '"\n\n')
+                | replace(':nn', ':\n\n') | replace(':n', ':\n')  }}</p>
+              <hr>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </div>
+
+  <script>
+      var eventSource = new EventSource('/streaming-page');
+      document.getElementById("conversation-log").innerHTML += "<strong> Promptlys P&R Genie Says.. </strong>"
+      eventSource.onmessage = function(event) {
+          var chunk = event.data;
+
+          console.log("receiving CHUNK !");
+          console.log(chunk)
+          // Check if the chunk is an empty string or an empty object
+          if (chunk == "THE_END" /*|| JSON.stringify(chunk) == "{}"*/) {
+              console.log("REACHED THE END!!!");
+              eventSource.close(); // Close the eventSource
+              return; // Exit the function
+          }
+
+          // Process the received chunk and update the UI as desired
+          // For example, append the chunk to the conversation log div
+          document.getElementById("conversation-log").innerHTML += chunk;
+      };
+  </script>
+
+
+
+
+  <br></br>
+  <p color="0x0000FF"> 
+    <font color="0x0000FF">
+    <strong>
+    <sub> (** Your conversation history will be cleared after 10 exchanges. **) </sub> 
+    <br>
+    <sub> (** Click Clear Button to remove conversation history **) </sub> 
+    </strong>
+    </font> 
+  </p>
+    <form method="POST">
+        <p><strong>Prompt:</strong></p>
+        <p><textarea id="prompt" name="prompt" rows="12" cols="70" ></textarea></p>
+        <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" style="font-size: inherit;">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()" style="font-size: inherit;">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btn" type="button" id="export-btn" value="Export" onclick="exportConversation()" style="font-size: inherit;">
+    
+
+      <div id="progress-bar">
+          <label id="pbf-label"><font color="0x0000FF"> One Moment Please ... </font></label>
+          <div aria-labelledby="pdf-label" id="progress-bar-fill" ></div>
+      </div>
+        <script>
+          function showProgress() {
+            document.getElementById("progress-bar").style.display = "block";
+            var progress = 0;
+            var progressInterval = setInterval(function() {
+              progress += 10;
+              document.getElementById("progress-bar-fill").style.width = progress + "%";
+              if (progress >= 100) {
+                clearInterval(progressInterval);
+              }
+            }, 1000);
+
+          }
+
+          function clearPrompt() {
+            // Set the prompt value to "clear_convo"
+            document.getElementById("prompt").value = "clear_convo";
+            // Submit the form
+            document.getElementById("user-submit").click();
+          }
+
+          function exportConversation() {
+            // get the conversation log element
+            const conversationLog = document.getElementById("conversation-log");
+            const convoId = conversationLog.dataset.convoId;
+
+            // create a new HTML file
+            const htmlContent = `
+              <html>
+                <head>
+                  <title>Conversation Log</title>
+                </head>
+                <body>
+                  <center>
+                  <h1>Conversation Log {{convo_id_str}} </h1>
+                  ${conversationLog.outerHTML}
+                  </center>
+                  <center>
+                  <br>
+                  <a href="https://www.promptlys.ai"> Promptlys.ai HOME <img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Studio 23"> </a>
+                  </center>
+                </body>
+              </html>
+            `;
+            const blob = new Blob([htmlContent], { type: "text/html" });
+
+            // create a URL for the HTML file
+            const url = URL.createObjectURL(blob);
+
+            // create a link element and click it to download the HTML file
+            const link = document.createElement("a");
+            link.href = url;
+            /*link.download = "conversation_log" + "-" + {{convo_id_str}} + ".html"; */
+            link.download = "conversation_log-" + convoId + ".html";
+            document.body.appendChild(link);
+            link.click();
+
+            // cleanup
+            URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+          }
+
+          async function saveConversationLog() {
+              // get the conversation log element
+              const conversationLog = document.getElementById("conversation-log");
+              const convoId = conversationLog.dataset.convoId;
+
+              // create a new HTML file
+              const htmlContent = `
+                <html>
+                  <head>
+                    <title>Conversation Log</title>
+                  </head>
+                  <body>
+                    <center>
+                    <h1>Conversation Log ${convoId} </h1>
+                    ${conversationLog.outerHTML}
+                    </center>
+                  </body>
+                </html>
+              `;
+              const blob = new Blob([htmlContent], { type: "text/html" });
+
+              // create a FormData object and append the blob to it
+              const formData = new FormData();
+              /*formData.append("file", blob, "conversation_log-" + convoId + ".html");*/
+              formData.append("file", blob, "conversation_log.html");
+
+              // send the FormData to the server using fetch()
+              const response = await fetch("/conversation_log.html", {
+                method: "POST",
+                body: formData,
+              });
+
+              if (response.ok) {
+                // show a success message
+                alert("Conversation log saved successfully!");
+              } else {
+                // show an error message
+                alert("Failed to save conversation log!");
+              }
+            }
+        </script>
+    </form>
+  <br></br>
+  </center>
+
+  <center>
+    <sub> Enter email below to receive a transcript of your conversation! </sub>
+    <br>
+    <sub>(** Your email will be kept private and never shared with 3rd-party **)</sub>
+    <br>
+    <form method="post" action="/sendemail">
+    <input type="text" id="useremail" name="useremail" maxlength="61" size="61" ></input>
+    <input type="hidden" id="conversation_history" name="conversation_history" value="{{ convo_history_str }}"></input>  
+    <button class="btn" onclick="location.href='{{ url_for('sendemail') }}'"> Send Email </button>
+    </form>
+    <br>
+    <br>
+    <br>
+      <span style="display: inline-block;">
+          <sub> 
+          <strong> 
+              BETA Version {{app_version}} as of 
+              <div id="current_date" style="font-size: inherit;">
+              <script>
+              date = new Date();
+              year = date.getFullYear();
+              month = date.getMonth() + 1;
+              day = date.getDate();
+              document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+              </script>
+              </div>
+          </strong>
+          </sub>
+      </span>
+      <br></br>
+  </center>
+
+  <center>
+    <div style="text-align:center">
+      <a href='{{ url_for('terms') }}'> Terms &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a>
+      <a href='{{ url_for('privacy') }}'> Privacy </a>
+    </div>
+    <!--a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
+      <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:50px;height:50px;">
+      <div style="margin-top: 5px;">Your support is greatly appreciated !!</div>
+    </a--> 
+    <div style="text-align:center">
+        <a href="https://twitter.com/eho_ai_no23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Twitter.png" id="twitter-img" style="border: none;" width="50" height="50" alt="Twitter">  </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://discord.gg/ZMCHtpeuQW"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Discord.png" id="discord-img" style="border: none;" width="50" height="50" alt="Discord">   </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="https://www.youtube.com/@EHO-AI-STUDIO.23"> <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/YouTube.png" id="youtube-img" style="border: none;" width="50" height="50" alt="YouTube"> </a>   
+    </div>
+  </center>
+  <br></br>
+  </font>
+</div>
+<br>
+<center>
+<div id="google_translate_element"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+         pageLanguage: 'en',
+         includedLanguages: 'en,zh-CN,zh-TW,ko,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+   }
+</script>
+</center>
+</body>
+</html>
+	</section>
+
+		</div>
+	</div>
+
+
+
+	
+
+
+
+
+
+
+
+    
+	
+	
+        <div class="bg-black-color  text-white ">
+            <footer 
+              class="footer-02" 
+              id="footer"
+              style=""
+            >
+                <div class="container">
+                    <div class="footer-02__wrapper">
+                        <div class="footer-02__text content_box">&copy; 2023&nbsp;<p>Promptlys</p>
+
+                        </div>
+                        <div class="social-buttons  "><ul class="social-buttons__list"><li class="social-buttons__item"><a
+								class="social-buttons__link social-buttons__link--email"
+								href="mailto:ernie@promptlys.org" target="_blank"><img
+                                loading="lazy"
+								class="social-buttons__icon"
+                                alt="email icon"
+								src="img/email.svg"/></a></li><li class="social-buttons__item"><a
+								class="social-buttons__link social-buttons__link--twitter"
+								href="https://twitter.com/eho_ai_no23" target="_blank"><img
+                                loading="lazy"
+								class="social-buttons__icon"
+                                alt="twitter icon"
+								src="img/x.svg"/></a></li><li class="social-buttons__item"><a
+								class="social-buttons__link social-buttons__link--youtube"
+								href="https://www.youtube.com/@EHO-AI-STUDIO.23" target="_blank"><img
+                                loading="lazy"
+								class="social-buttons__icon"
+                                alt="youtube icon"
+								src="img/youtube.svg"/></a></li><li class="social-buttons__item"><a
+								class="social-buttons__link social-buttons__link--discord"
+								href="https://discord.com/invite/ZMCHtpeuQW" target="_blank"><img
+                                loading="lazy"
+								class="social-buttons__icon"
+                                alt="discord icon"
+								src="img/discord.svg"/></a></li></ul></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+	
+
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="pswp__bg"></div>
+	<div class="pswp__scroll-wrap">
+		<div class="pswp__container">
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+			<div class="pswp__item"></div>
+		</div>
+		<div class="pswp__ui pswp__ui--hidden">
+			<div class="pswp__top-bar">
+				<div class="pswp__counter"></div>
+				<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+				<button class="pswp__button pswp__button--share" title="Share"></button>
+				<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+				<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+				<div class="pswp__preloader">
+					<div class="pswp__preloader__icn">
+						<div class="pswp__preloader__cut">
+							<div class="pswp__preloader__donut"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+				<div class="pswp__share-tooltip"></div>
+			</div>
+			<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+			<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+			<div class="pswp__caption">
+				<div class="pswp__caption__center"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+			.custom-colors-enabled .fill-main{
+				fill: #FFD697
+			}
+
+			.custom-colors-enabled .button--accent-outline .icon svg *,
+			.button--accent-outline .icon svg .custom-colors-enabled *,
+			.custom-colors-enabled .button--accent-outline .button__system_icon svg *,
+			.button--accent-outline .button__system_icon svg .custom-colors-enabled * {
+				fill: #EA585A
+			}
+
+			.custom-colors-enabled .stroke-main {
+				stroke: #FFD697
+			}
+
+			.custom-colors-enabled .comps .button--accent-outline,
+			.comps .custom-colors-enabled .button--accent-outline,
+			 .custom-colors-enabled .store-button--white:hover{
+				border-color: #EA585A
+			}
+			.custom-colors-enabled .border-main,
+			.custom-colors-enabled .text-input:focus,
+			.custom-colors-enabled .textarea:focus,
+			.custom-colors-enabled .select:focus,
+			.custom-colors-enabled .pricing-02__card_box--accent,
+			.custom-colors-enabled .pricing-03__hover,
+			.custom-colors-enabled .pricing-04__card--accent,
+			.custom-colors-enabled .pricing-04__hover,
+			.custom-colors-enabled .pricing-05__hover,
+			.custom-colors-enabled .bg-medium-color .cta_form-04__wrapper,
+			.bg-medium-color .custom-colors-enabled .cta_form-04__wrapper,
+			.custom-colors-enabled .bg-light-color .cta_form-04__wrapper,
+			.bg-light-color .custom-colors-enabled .cta_form-04__wrapper,
+			.custom-colors-enabled .bg-medium-color .cta_form-04__bottom,
+			.bg-medium-color .custom-colors-enabled .cta_form-04__bottom,
+			.custom-colors-enabled .bg-light-color .cta_form-04__bottom,
+			.bg-light-color .custom-colors-enabled .cta_form-04__bottom,
+			.custom-colors-enabled .bg-medium-color .cta_button-16__wrapper,
+			.bg-medium-color .custom-colors-enabled .cta_button-16__wrapper,
+			.custom-colors-enabled .bg-light-color .cta_button-16__wrapper,
+			.bg-light-color .custom-colors-enabled .cta_button-16__wrapper,
+			.custom-colors-enabled .bg-medium-color .links-02__list,
+			.bg-medium-color .custom-colors-enabled .links-02__list,
+			.custom-colors-enabled .bg-light-color .links-02__list,
+			.bg-light-color .custom-colors-enabled .links-02__list,
+			.custom-colors-enabled .faq-01__question:hover,
+			.custom-colors-enabled .faq-03__question:hover,
+			.custom-colors-enabled .features-09__item--new,
+			.custom-colors-enabled .bg-medium-color .steps-01__number,
+			.bg-medium-color .custom-colors-enabled .steps-01__number,
+			.custom-colors-enabled .bg-light-color .steps-01__number,
+			.bg-light-color .custom-colors-enabled .steps-01__number {
+				border-color: #FFD697
+			}
+
+
+
+			.custom-colors-enabled .comps .button--accent-outline,
+			.comps .custom-colors-enabled .button--accent-outline{
+				color: #EA585A
+			}
+			.custom-colors-enabled .color-main,
+			.custom-colors-enabled .link,
+			.custom-colors-enabled .feature__link,
+			.custom-colors-enabled .testimonials-03__person_link,
+			.custom-colors-enabled .footer-01__link,
+			.custom-colors-enabled .faq-05__link,
+			.custom-colors-enabled .features-16__link,
+			.custom-colors-enabled .subheading,
+			.custom-colors-enabled .content_box a,
+			.content_box .custom-colors-enabled a,
+			.custom-colors-enabled .tab__button.state-active-tab,
+			.custom-colors-enabled .tab__button--active:focus,
+			.custom-colors-enabled .score__value,
+			.custom-colors-enabled .form__message_opener_box,
+			.custom-colors-enabled .message__bubble_link,
+			.custom-colors-enabled .team-05__person_name,
+			.custom-colors-enabled .tabs-04__button.state-active-tab,
+			.custom-colors-enabled .tabs-04__button--active:focus,
+			.custom-colors-enabled .pricing-02__hover,
+			.custom-colors-enabled .pricing-03__hover,
+			.custom-colors-enabled .pricing-04__hover,
+			.custom-colors-enabled .pricing-05__hover,
+			.custom-colors-enabled .cta_button-25__subheading,
+			.custom-colors-enabled .cta_button-31__heading,
+			.custom-colors-enabled .footer-03__pages_link:hover,
+			.custom-colors-enabled .code-02__info_prefix,
+			.custom-colors-enabled .features-17__item .feature__title_text,
+			.features-17__item .custom-colors-enabled .feature__title_text {
+				color: #FFD697
+			}
+
+			.custom-colors-enabled .color-main-hover:hover,
+			.custom-colors-enabled .link:hover,
+			.custom-colors-enabled .feature__link:hover,
+			.custom-colors-enabled .testimonials-03__person_link:hover,
+			.custom-colors-enabled .footer-01__link:hover,
+			.custom-colors-enabled .faq-05__link:hover,
+			.custom-colors-enabled .features-16__link:hover, .custom-colors-enabled .message__bubble_link:hover {
+				color: #d14f50
+			}
+
+			.custom-colors-enabled .comps .button--accent-bg,
+			.comps .custom-colors-enabled .button--accent-bg,
+			.custom-colors-enabled .store-button:hover,
+			.custom-colors-enabled .circle-button--accent-bg,
+			.custom-colors-enabled .circle-button--accent-bg .circle-button__hover_bg,
+			.circle-button--accent-bg .custom-colors-enabled .circle-button__hover_bg,
+			.custom-colors-enabled .circle-button--light-bg:hover,
+			.custom-colors-enabled .slick-dots li.slick-active button,
+			.slick-dots li.slick-active .custom-colors-enabled button{
+				background-color: #EA585A
+			}
+			.custom-colors-enabled .bg-main,
+			.custom-colors-enabled .radio__check:before,
+			.custom-colors-enabled .checkbox__check:before,
+			.custom-colors-enabled .social-buttons__link--circle,
+			.custom-colors-enabled .roadmap-01__column,
+			.custom-colors-enabled .cta_button-25__item::before,
+			.custom-colors-enabled .testimonials-05__blue_box::before,
+			.custom-colors-enabled .footer-03__pages_item:after,
+			.custom-colors-enabled .features-02__number:before,
+			.custom-colors-enabled .features-09__item--new .tag,
+			.features-09__item--new .custom-colors-enabled .tag,
+			.custom-colors-enabled .features-15__item::before,
+			.custom-colors-enabled .bg-medium-color .steps-01__list:before,
+			.bg-medium-color .custom-colors-enabled .steps-01__list:before,
+			.custom-colors-enabled .bg-light-color .steps-01__list:before,
+			.bg-light-color .custom-colors-enabled .steps-01__list:before,
+            .comps.custom-colors-enabled .bg-accent-color .footer-02,
+            .comps.custom-colors-enabled .bg-accent-color .footer-04{
+				background-color: #FFD697
+			}
+
+			.custom-colors-enabled .bg-main-hover:hover,
+			.custom-colors-enabled .comps .button--accent-bg:hover,
+			.comps .custom-colors-enabled .button--accent-bg:hover,
+			.custom-colors-enabled .checkbox__input:checked:hover ~ .checkbox__check:hover:before {
+				background-color: #d14f50
+			}
+
+			.custom-colors-enabled .border-alt,
+			.custom-colors-enabled .comps .button--alt-accent-outline,
+			.comps .custom-colors-enabled .button--alt-accent-outline,
+			.custom-colors-enabled .bg-accent-color .pricing-02__card_box--accent,
+			.bg-accent-color .custom-colors-enabled .pricing-02__card_box--accent,
+			.custom-colors-enabled .bg-accent-color .pricing-04__card--accent,
+			.bg-accent-color .custom-colors-enabled .pricing-04__card--accent {
+				border-color: #4152A4
+			}
+
+			.custom-colors-enabled .color-alt,
+			.custom-colors-enabled .comps .button--alt-accent-outline,
+			.comps .custom-colors-enabled .button--alt-accent-outline {
+				color: #4152A4
+			}
+
+			.custom-colors-enabled .bg-alt,
+			.custom-colors-enabled .comps .button--alt-accent-bg,
+			.comps .custom-colors-enabled .button--alt-accent-bg,
+			.custom-colors-enabled .bg-accent-color .slick-dots li.slick-active button,
+			.bg-accent-color .slick-dots li.slick-active .custom-colors-enabled button {
+				background-color: #4152A4
+			}
+
+			.custom-colors-enabled .bg-alt-hover:hover,
+			.custom-colors-enabled .comps .button--alt-accent-bg:hover,
+			.comps .custom-colors-enabled .button--alt-accent-bg:hover {
+				background-color: #3a4993
+			}
+
+			.custom-colors-enabled .fill-alt .icon svg *,
+			.custom-colors-enabled .comps .button--alt-accent-outline .icon svg *,
+			.comps .custom-colors-enabled .button--alt-accent-outline .icon svg *,
+			.custom-colors-enabled .fill-alt .button__system_icon svg *,
+			.custom-colors-enabled .comps .button--alt-accent-outline .button__system_icon svg *,
+			.comps .custom-colors-enabled .button--alt-accent-outline .button__system_icon svg * {
+				fill: #4152A4
+			}
+
+			.custom-colors-enabled .fill-alt-hover:hover .icon svg *,
+			.custom-colors-enabled .feature__link:hover .icon svg *,
+			.custom-colors-enabled .fill-alt-hover:hover .button__system_icon svg *,
+			.custom-colors-enabled .feature__link:hover .button__system_icon svg * {
+				fill: #4152A4
+			}
+
+
+			.custom-colors-enabled .bg-accent-color .page-component__bg_overlay_box:not(.page-component__bg_overlay_box--always-white),
+			.custom-colors-enabled .bg-accent-color .background-color-picker__circle,
+			.custom-colors-enabled .bg-accent-color .text--01__box {
+				background-color: #FFD697
+			}
+		</style>
+<style>
+	.page-component__bg_image_box .page-component__bg_image_box .page-component__bg_overlay_box {
+        position: relative;
+	}
+	body .page-component__bg_overlay_box {
+		position: absolute;
+	}
+    .footer-02__text.content_box a{
+    	color: inherit !important;
+    }
+    .footer-04__info{
+	    font-size: 14px;
+    }
+</style>
+
+
+
+
+
+
+</body>
+</html>
