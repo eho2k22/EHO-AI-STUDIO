@@ -180,6 +180,10 @@ def test_home():
 def unicorn_home():
     return render_template('unicorn_index.html', app_version=app_version)
 
+@app.route('/unicorn_conversation', methods=['GET', 'POST'])
+def unicorn_conversation():
+    return render_template('unicorn_conversation.html', app_version=app_version)
+
 @app.route('/streaming-intro')
 def streaming_intro():
 
