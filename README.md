@@ -23,4 +23,4 @@ Please note that this application requires valid API keys and credentials for Op
 
 For any issues or questions, please refer to the official OpenAI documentation or reach out to the Flask AI Genie development team.
 
-Enjoy using Flask AI Genie and have fun exploring the capabilities of OpenAI's GPT-3.5-Turbo language model!
+Enjoy using Flask AI Genie and have fun exploring the capabilities of OpenAI's GPT-4.0-Turbo language model!
