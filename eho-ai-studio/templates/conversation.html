@@ -90,7 +90,7 @@
   <div class="navigation-menu">
     <font color="0x0000FF">
     <ul>
-      <li><a href='{{ url_for('index') }}'>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/studio23-75.png" alt="Promptlys"> </a></li> 
+      <li><a href='{{ url_for('index') }}'>&nbsp;&nbsp;&nbsp;&nbsp;<img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/promptlys-150.png" alt="Promptlys"> </a></li> 
       <li><a href='{{ url_for('community') }}'>
         <span class="badge-container"><i class="fa fa-globe w3-xxlarge"></i><span class="badge">New</span></span> Community
       </a></li>
@@ -125,7 +125,7 @@
   </center>
 
   <center>
-  <iframe width="400" height="200" src="https://www.youtube.com/embed/PElgSWzQPd8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="400" height="200" src="https://www.youtube.com/embed/sRO3-yGA2bQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
     <hr>
     <div id="conversation-log" data-convo-id="{{convo_id_str}}">
@@ -134,7 +134,7 @@
             <p><strong>You prompted : </strong> {{ conversation.split(' -xxxx- ')[0] }}</p>
             {% if loop.last %}
             {% else %}
-              <p><strong>Promptlys P&R Genie responded: </strong> {{ conversation.split(' -xxxx- ')[1] | replace('.nn', '.\n\n')  | replace(':nn', ':\n\n') | replace('"nn', '"\n\n')
+              <p><strong>Promptlys Wizard responded: </strong> {{ conversation.split(' -xxxx- ')[1] | replace('.nn', '.\n\n')  | replace(':nn', ':\n\n') | replace('"nn', '"\n\n')
                 | replace(':nn', ':\n\n') | replace(':n', ':\n')  }}</p>
               <hr>
             {% endif %}
@@ -144,7 +144,7 @@
 
   <script>
       var eventSource = new EventSource('/streaming-page');
-      document.getElementById("conversation-log").innerHTML += "<strong> Promptlys P&R Genie Says.. </strong>"
+      document.getElementById("conversation-log").innerHTML += "<strong> Promptlys Wizard Says.. </strong>"
       eventSource.onmessage = function(event) {
           var chunk = event.data;
 
@@ -176,21 +176,49 @@
     </strong>
     </font> 
   </p>
-    <form method="POST">
+    <form id="convo-form" method="POST">
         <p><strong>Prompt:</strong></p>
         <p><textarea id="prompt" name="prompt" rows="12" cols="70" ></textarea></p>
-        <input class="btn" type="submit" id="user-submit" value="Send" onclick="showProgress()" style="font-size: inherit;">
+        <input class="btn" type="submit" id="user-submit" value="Send" style="font-size: inherit;">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="clear-submit" value="Clear" onclick="clearPrompt()" style="font-size: inherit;">
         &nbsp;&nbsp;&nbsp;&nbsp;
         <input class="btn" type="button" id="export-btn" value="Export" onclick="exportConversation()" style="font-size: inherit;">
     
 
-      <div id="progress-bar">
+      <!--div id="progress-bar">
           <label id="pbf-label"><font color="0x0000FF"> One Moment Please ... </font></label>
           <div aria-labelledby="pdf-label" id="progress-bar-fill" ></div>
-      </div>
+      </div-->
+        <br>
+        <br>
+        <div id="carousel" style="display:none; white-space: nowrap;">
+          <font size="+3"> <span style="color:#9C27B0;;">P</span> </font>
+        </div>
+
+        <!--div id="carousel">
+          <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/promptlys-RGB.png" alt="P" style="width: 120px; height: auto;">
+        </div-->
         <script>
+
+          // When the document is fully loaded, attach the click event listener to the Submit button
+          
+          document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('user-submit').addEventListener('click', function(e) {
+             
+              e.preventDefault();
+
+    
+              document.getElementById('carousel').style.display = 'inline'; // or 'inline-block'
+
+        
+              setTimeout(function() {
+                document.getElementById('convo-form').submit();
+              }, 1500); // Delay in milliseconds
+            });
+          }); 
+
+
           function showProgress() {
             document.getElementById("progress-bar").style.display = "block";
             var progress = 0;

@@ -1,12 +1,78 @@
-
 /* Night mode styles */
-body {
-    background-color: #1c1c1c;
-    color: #f2f2f2;
-    font-family: Arial, sans-serif; 
-    /*font-family: "Lucida Console", "Courier New", monospace; */
-    font-size: 20px;
+
+:root {
+
+  /* Night mode colors */
+  --primary-color-night: #2c3e50; /* dark blue background color for night mode */
+  --secondary-color-night: #34495e; /* slightly lighter blue for secondary elements in night mode */
+  --accent-color-night: #f39c12; /* a brighter accent color for contrast against the dark background */
+  --text-color-night: #ecf0f1; /* light color for text for better readability in night mode */
+
+  --pink-light: #F8BBD0;
+  --pink-dark: #880E4F;
+  --orange-light: #FFE0B2;
+  --orange-dark: #E65100;
+  --purple-light: #E1BEE7;
+  --purple-dark: #4A148C;
 }
+
+/* Apply background colors */
+body {
+  background-color: var(--primary-color-night);
+  color: var(--text-color-night);
+  font-family: 'Open Sans', sans-serif; /* Example font, should match the one in the second screenshot */
+}
+
+
+@keyframes carousel-color {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(50%);
+    color: var(--orange-light);
+  }
+  16% {
+    opacity: 1;
+    transform: translateX(0%);
+    color: var(--pink-light);
+  }
+  33% {
+    color: var(--pink-dark);
+  }
+  50% {
+    color: var(--orange-dark);
+  }
+  66% {
+    color: var(--purple-light);
+  }
+  83% {
+    color: var(--purple-dark);
+  }
+}
+
+#carousel span {
+  display: inline-block;
+  opacity: 0;
+  animation: carousel-color 5s linear infinite;
+  font-family: 'Helvetica', 'Arial', sans-serif; 
+}
+
+
+/*
+@keyframes carousel {
+  0%, 100% { opacity: 0; transform: translateX(50%); }
+  50% { opacity: 1; transform: translateX(0%); }
+}
+
+#carousel img {
+  display: none;
+  opacity: 0;
+  animation: carousel 2s linear infinite;
+}
+*/
+
+/* You can adjust the color of the letter 'P' to match the logo */
+
+/* If you want to ensure the whole word disappears before restarting, you can adjust the timing */
 
 a {
     color: #00bfff;
@@ -67,6 +133,41 @@ a:link {
     transform: translateY(-0.1rem);
   }
   
+
+    /* Night Mode version of the primary button */
+  .primary-button.night-mode {
+    background-color: #b0aeae; /* Darker background color for night mode */
+    color: #fcf8f8; /* Lighter text color for contrast */
+    font-size: 16px; /* Adjust as needed */
+    padding: 15px 30px; /* Top/bottom padding and left/right padding */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded corners as before */
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+    text-align: center; /* Center the text inside the button */
+    display: inline-block; /* Allows setting dimensions */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    text-decoration: none; /* In case it's an anchor styled as a button */
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1); /* Subtle glow effect for depth */
+  }
+
+  /* Night Mode hover effect */
+  .primary-button.night-mode:hover {
+    background-color: #666; /* Slightly lighter than the normal state for visibility */
+  }
+
+  /* Night Mode focus style */
+  .primary-button.night-mode:focus {
+    box-shadow: 0 0 0 2px #fcf8f8, 0 0 0 4px #555; /* Custom focus style for night mode */
+  }
+
+  /* Night Mode active (clicked) style */
+  .primary-button.night-mode:active {
+    background-color: #444; /* Even darker for the clicked effect */
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2); /* Inset shadow for a "pressed" effect */
+  }
+
     
 input {
   border: 5px solid #ffdf00; 
@@ -176,9 +277,11 @@ textarea {
     height: 100%;
     width: 200px; 
     /*background-color: #353333; */
-    background-color: #1c1c1c;
+    /*background-color: #1c1c1c;*/
+    background-color: var(--primary-color-night);
     padding: 12px;
     box-sizing: border-box;
+    padding: 1rem; /* Add more padding around the items */
 }
 
 .navigation-menu ul {
@@ -187,6 +290,14 @@ textarea {
     padding: 0;
 }
 
+/* Adjusting the individual navigation links */
+.navigation-menu a {
+  margin-right: 1rem; /* Add margin to space out the icons */
+  font-size: 16px; /* Adjust this as needed for desktop */
+  /* Other styles... */
+}
+
+
 .navigation-menu li {
     margin-bottom: 55px;
 }
@@ -194,6 +305,9 @@ textarea {
 .navigation-menu li:last-child {
     margin-bottom: 0;
 }
+
+
+
 
 .navigation-menu a i {
     margin-right: 10px;
@@ -205,6 +319,16 @@ textarea {
 
 @media (max-width: 1200px) {
 
+/* Adjusting the 'new' banner */
+.badge-banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 1rem; /* Adjust the right margin */
+    padding: 0.2rem 0.4rem; /* Add padding inside the banner for better spacing */
+    /* Other styles... */
+}
+
 body {
     font-size: 38px;
 }
@@ -214,7 +338,8 @@ body {
   flex-direction: row;
   width: 100%;
   height: auto; 
-  background-color: #1c1c1c;
+  background-color: var(--primary-color);
+  padding: 1rem; /* Add more padding around the items */
 }
 
 .navigation-menu ul {
@@ -222,8 +347,14 @@ body {
   flex-direction: row;
   justify-content: space-around;
   align-items: center; /*Add this to VERTICALLY CENTER ALL items*/
-  background-color: #1c1c1c;
+  /*background-color: #1c1c1c;*/
+  background-color: var(--primary-color);
   padding: 20px;
+}
+
+.navigation-menu ul li {
+  margin: 0 auto; /* Centers each navigation item */
+  padding: 0 10px; /* Adds padding between items */
 }
 
 .navigation-menu ul li:first-child { /* Add this rule to adjust the first item */
@@ -243,4 +374,37 @@ body {
     color: #ffdf00; 
     font-size: 30px;
 }
+}
+
+
+
+/* Additional responsive adjustments for the top navigation */
+@media (max-width: 768px) {
+  .navigation-menu a {
+      margin-right: 0.5rem; /* Less margin for smaller screens */
+      font-size: 4vw; /* Starts scaling as the viewport width decreases */
+  }
+
+  .badge-banner {
+      margin-right: 0.5rem; /* Adjust the margin for smaller screens */
+  }
+
+  /* If the navigation menu is a flex container */
+  .navigation-menu {
+      justify-content: space-between; /* This will add space between menu items */
+      /* Other styles... */
+  }
+
+  .navigation-menu a i {
+    font-size: 25px; /* Increase the font size for small screens */
+  }
+
+}
+
+
+/* Minimum font size for very small viewports */
+@media (max-width: 480px) {
+  .navigation-menu a {
+      font-size: 12px; /* Minimum font size so text remains legible */
+  }
 }

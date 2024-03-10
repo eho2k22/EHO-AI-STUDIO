@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../../eho-aigc"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../wewinmeta-agent"
+		},
+		{
+			"path": "../../superbowl-agent"
+		},
+		{
+			"path": "../../Promptlys_TeleBot"
+		},
+		{
+			"path": "../../Promptlys_Bot"
+		},
+		{
+			"path": "../../Promptlys_WhatsApp"
+		}
+	],
+	"settings": {}
+}

@@ -115,6 +115,15 @@
         margin-right: 10px;
       }
 
+      .message {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
     </style>
 
     <script>
@@ -128,7 +137,7 @@
   <div class="navigation-menu">
     <font  color="0x0000FF">
     <ul>
-      <li><a href='{{ url_for('index') }}'>&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/promptlys-75.png" alt="Promptlys"> </a></li>
+      <li><a href='{{ url_for('index') }}'>&nbsp;&nbsp;&nbsp;&nbsp;<img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/promptlys-150.png" alt="Promptlys"> </a></li>
       <li><a href='{{ url_for('community') }}'>
         <span class="badge-container"><i class="fa fa-globe w3-xxlarge"></i><span class="badge">New</span></span> Community
       </a></li>
@@ -156,7 +165,7 @@
     <p class="text">
       <font color="#ffdf00", size="+5"> 
       <strong>
-      PROMPT COMMUNITY
+      PROMPTLYS COMMUNITY
       </strong>
       </font>
     </p>
@@ -172,9 +181,9 @@
   <br>
   <center>
     <br>
-    <iframe width="400" height="200" src="https://www.youtube.com/embed/wJx_7RvES3w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="400" height="200" src="https://www.youtube.com/embed/sRO3-yGA2bQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <p>
-      "Search, Share and Explore a library of quality prompts"
+      "Search, Share and Explore a library of effective prompts"
     </p>
 
     <form method="post" action="/community">
@@ -219,7 +228,14 @@
       </div>
       <input type="hidden" id="searchfilter" name="searchfilter" value="">
     </form>
-    <br>    
+    <br>  
+    
+    {% if message %}
+    <div class="message">
+      {{ message | safe }}
+    </div>
+    {% endif %}
+    <br>
 
     {% if prompt_list %}
     <div class="prompt-list">

@@ -1,16 +1,78 @@
 
+/* Define color scheme */
+:root {
+  --primary-color: #f5f1e6; /* primary beige background color */
+  --secondary-color: #e2d5c1; /* secondary beige for elements */
+  --accent-color: #c29d59; /* accent color for buttons or highlights, taken from the logo */
+  --text-color: #333; /* dark color for text for better readability */
 
-body {
-    /*background-color: #C2CCED;*/
-    background-color: #fff8e7;
-    color: #000;
-    font-size: 20px;
-    /*font-family: Arial, sans-serif;*/
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-weight: bold;
-    /*font-family: "Lucida Console", "Courier New", monospace; */
- 
+  --pink-light: #F8BBD0;
+  --pink-dark: #880E4F;
+  --orange-light: #FFE0B2;
+  --orange-dark: #E65100;
+  --purple-light: #E1BEE7;
+  --purple-dark: #4A148C;
 }
+
+
+/* Apply background colors */
+body {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  font-family: 'Open Sans', sans-serif; /* Example font, should match the one in the second screenshot */
+}
+
+
+@keyframes carousel-color {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(50%);
+    color: var(--orange-light);
+  }
+  16% {
+    opacity: 1;
+    transform: translateX(0%);
+    color: var(--pink-light);
+  }
+  33% {
+    color: var(--pink-dark);
+  }
+  50% {
+    color: var(--orange-dark);
+  }
+  66% {
+    color: var(--purple-light);
+  }
+  83% {
+    color: var(--purple-dark);
+  }
+}
+
+#carousel span {
+  display: inline-block;
+  opacity: 0;
+  animation: carousel-color 5s linear infinite;
+  font-family: 'Helvetica', 'Arial', sans-serif; 
+}
+
+
+/* Image Carousel 
+@keyframes carousel {
+  0%, 100% { opacity: 0; transform: translateX(50%); }
+  50% { opacity: 1; transform: translateX(0%); }
+}
+
+#carousel img {
+  display: none;
+  opacity: 0;
+  animation: carousel 2s linear infinite;
+}
+*/
+
+
+/* You can adjust the color of the letter 'P' to match the logo */
+
+/* If you want to ensure the whole word disappears before restarting, you can adjust the timing */
 
 a:link {
     color: blue;
@@ -115,6 +177,42 @@ div.b {
     box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
     transform: translateY(-0.1rem);
 }
+
+/* Define a primary button style */
+.primary-button {
+  background-color: #d6c39e; /* Adjust the color to match your brand accent color */
+  color: white; /* Text color */
+  font-size: 16px; /* Adjust as needed */
+  padding: 15px 30px; /* Top/bottom padding and left/right padding */
+  border: none; /* No border */
+  border-radius: 20px; /* Increased rounded corners */
+  text-transform: uppercase; /* Uppercase text */
+  font-weight: bold; /* Bold font weight */
+  cursor: pointer; /* Cursor changes to pointer to indicate it's clickable */
+  text-align: center; /* Center the text inside the button */
+  display: inline-block; /* Allows setting dimensions */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  text-decoration: none; /* In case it's an anchor styled as a button */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow to lift the button off the page */
+}
+
+/* Define a hover effect for the button */
+.primary-button:hover {
+  background-color: darken(#c29d59, 10%); /* Darkens the button color on hover - adjust the percentage as needed */
+}
+
+/* Define a focus style for the button to improve accessibility */
+.primary-button:focus {
+  outline: none; /* Removes the default focus outline */
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #c29d59; /* Adds a custom focus style */
+}
+
+/* Define an active (clicked) style for the button */
+.primary-button:active {
+  background-color: darken(#c29d59, 20%); /* Even darker on click */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: inset shadow to give a "pressed" effect */
+}
+
   
 
 .login-btn {
@@ -223,17 +321,28 @@ div.b {
     left: 0;
     height: 100%;
     width: 200px;
-    /*background-color: #C2CCED;*/
-    background-color: #fff8e7;
+    background-color: var(--primary-color);
     padding: 12px;
     box-sizing: border-box;
+    padding: 1rem; /* Add more padding around the items */
 }
+
 
 .navigation-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
+
+/* Adjusting the individual navigation links */
+.navigation-menu a {
+  margin-right: 1rem; /* Add margin to space out the icons */
+  font-size: 16px; /* Adjust this as needed for desktop */
+  /* Other styles... */
+}
+
+
 
 .navigation-menu a:link {
     color: blue; 
@@ -255,6 +364,125 @@ div.b {
 }
 
 
+
+
+
+
+@media (max-width: 1200px) {
+
+    /* Adjusting the 'new' banner */
+  .badge-banner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 1rem; /* Adjust the right margin */
+    padding: 0.2rem 0.4rem; /* Add padding inside the banner for better spacing */
+    /* Other styles... */
+  }
+
+  body {
+    font-size: 38px;
+  }
+
+  .navigation-menu {
+      position: static;
+      flex-direction: row;
+      width: 100%;
+      height: auto;
+      background-color: var(--primary-color);
+      padding: 20px;
+      justify-content: center; /* Centers navigation items */
+      padding: 1rem; /* Add more padding around the items */
+  }
+
+  
+  .navigation-menu ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center; /*Add this to VERTICALLY CENTER ALL items*/
+    background-color: var(--primary-color);
+    padding: 20px;
+  }
+
+  .navigation-menu ul li {
+      margin: 0 auto; /* Centers each navigation item */
+      padding: 0 10px; /* Adds padding between items */
+  }
+
+  .navigation-menu ul li:first-child { /* Add this rule to adjust the first item */
+    align-self: flex-start;
+  }
+  
+  .navigation-menu li {
+    margin-right: 65px;
+  }
+  
+  .navigation-menu li:last-child {
+    margin-right: 0;
+  }
+  
+  .navigation-menu a i {
+      margin-right: 10px;
+      color: #333; 
+      font-size: 30px;
+  }
+
+  /*
+  body, .container, .main-content {
+      text-align: center; 
+      display: flex;
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center; 
+  }
+  */
+
+
+
+}
+  /* Add additional selectors and properties as needed */
+
+  
+  /* Additional responsive adjustments for the top navigation */
+@media (max-width: 768px) {
+    .navigation-menu a {
+          margin-right: 0.5rem; /* Less margin for smaller screens */
+          font-size: 4vw; /* Starts scaling as the viewport width decreases */
+      }
+
+    .new-banner {
+        margin-right: 0.5rem; /* Adjust the margin for smaller screens */
+    }
+
+    /* If the navigation menu is a flex container */
+    .navigation-menu {
+        justify-content: space-between; /* This will add space between menu items */
+        /* Other styles... */
+    }
+
+    .navigation-menu a i {
+      font-size: 25px; /* Increase the font size for small screens */
+    }
+    
+    /* Adjust the margin for the list items if necessary */
+    .navigation-menu li {
+      margin-right: 20px; /* Adjust as needed for spacing on small screens */
+    }
+
+
+}
+
+/* Minimum font size for very small viewports */
+@media (max-width: 480px) {
+  .navigation-menu a {
+      font-size: 12px; /* Minimum font size so text remains legible */
+  }
+}
+
+
+
+/*
 @media (max-width: 1200px) {
 
 body {
@@ -266,17 +494,15 @@ body {
   flex-direction: row;
   width: 100%;
   height: auto; 
-  /*background-color: #C2CCED;*/
-  background-color: #fff8e7;
+  background-color: var(--primary-color);
 }
 
 .navigation-menu ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center; /*Add this to VERTICALLY CENTER ALL items*/
-  /*background-color: #C2CCED;*/
-  background-color: #fff8e7;
+  align-items: center; 
+  background-color: var(--primary-color);
   padding: 20px;
 }
 
@@ -284,7 +510,7 @@ body {
     color: blue; 
 }
 
-.navigation-menu ul li:first-child { /* Add this rule to adjust the first item */
+.navigation-menu ul li:first-child { 
     align-self: flex-start;
 }
 
@@ -304,3 +530,4 @@ body {
     text-align: center; 
   }
 }
+*/

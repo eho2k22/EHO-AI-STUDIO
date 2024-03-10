@@ -21,6 +21,12 @@ import email.message
 from supabase import create_client
 from array import array 
 
+#from postgrest import Postgrest
+#from postgrest.base_client import PostgrestClient  # Try this line 
+
+
+##from jinja2 import Markup
+
 
 userapikey=""
 userprompt=""
@@ -55,6 +61,11 @@ gpt_enabled = os.environ['GPT_KEY']
 app_version = os.environ['APP_VERSION']
 
 supabase = create_client(supa_url, supa_key)
+
+#pg_client = postgrest.base_client.PostgrestClient(
+   # supa_url,
+   # api_key=supa_key
+#)
 
 print("supabase client initiated successfully! ")
 
@@ -1026,13 +1037,14 @@ def index():
             try: 
                 print("GPT TURBO is Available !!")
                 messages = [
-                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "system", "content": "You are an expert prompt builder that is proficient at digesting vague, generic prompts and converting them to specific, well-constructed prompts by following general prompting guidelines such as setting the role, the tone, providing context specfics and describing expected output format."},
+                    {"role": "assistant", "content": "This is Context. "},
                     {"role": "user", "content": "This is User's Question"}
                 ]
                 #messagees[1]['content'] = userprompt
                 for item in messages:
                     if item["role"] == "user":
-                        item["content"] = userprompt
+                        item["content"] = "Please provide prompt examples of " + userprompt
 
 
                 print("gpt-4-1106-preview is available !! ")
@@ -1428,40 +1440,62 @@ def community():
     
         print("Search String is : " + search_string) 
  
-        # Query Supabase for prompt data based on search string
+    
+
+    # Assuming 'supabase' is your Supabase client instance
+    # and 'search_string' is the string containing multiple keywords.
+
+    # Split the search string into keywords.
+    # keywords = search_string.split()
+
+    # Start building the query.
+    # query = supabase.table('Transcripts').select("*").eq('rank', 888)
+
+    # ... Your Supabase setup
+    # pg_client = supabase.table('Transcripts').from_('Transcripts')  
+
+    # Create the SQL query dynamically (including 'OR' condition)
+    #sql_query = f"""
+    #SELECT * FROM Transcripts
+    #WHERE rank = 888 AND ({' OR '.join([f"prompt ILIKE '%{keyword}%'" for keyword in keywords])})  
+    #ORDER BY created_at DESC;
+    #"""
+
+    #  Execute using the PostgREST client's 'rpc' function
+    # pod_results = pg_client.rpc('rpc', params={'sql': sql_query}).execute() 
+
+
+
+
+
+   # Add conditions for each keyword using '.or_'.
+    # for keyword in keywords:
+      #  filter_condition = supabase.table('Transcripts').textSearch('prompt', f'%{keyword}%')
+       # query = query.or_(filter_condition)
+
+
+    # Execute the query
+    # pod_results = query.execute()
+
+
+    
+    print("finish executing Search query")
+    
+    
+    # Query Supabase for prompt data based on search string
     pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').order('created_at', desc=True).execute()
    
     
-        ##### refining query by building OR clauses in Query Condition
-        
-        #keywords = search_string.split()  # Split search string into individual keywords
-        #query = supabase.table('Transcripts').select("*").eq('rank', 888)
-        
-        # Build the query using OR to union all keywords
-        # or_conditions = []
-        #for keyword in keywords:
-            #or_conditions.append({'prompt': {'ilike': f"%{keyword}%"}})
-            #or_conditions.append(('prompt', 'ilike', f"%{keyword}%"))
-
-        #print("OR CLAUSE = " ) 
-
-        #for condition in or_conditions:
-            #print("OR CONDTION : ")
-            #print(condition)
         
 
-        # Create a new empty query
-        #new_query = None
+    if not pod_results.data:
+        # Display a message when no results are found
+        print("About to Print Not Found Error Message! ")
+        message = "Unfortunately we are unable to locate any results. Here is a link to our Prompt Expert Bot, and he can assist you further! <a href='https://t.me/Promptlys_TeleBot'>Prompt Expert Bot</a>"
+        return render_template('community.html', app_version=app_version, message=message)
 
-        # Combine the OR conditions using union_all
-        #for condition in or_conditions:
-            #condition_query = query.ilike(*condition)
-            #if new_query is None:
-                #new_query = condition_query
-            #else:
-                #new_query = new_query.union_all(condition_query)
-        
-        #pod_results = query.execute()
+    print("pod_results == ")
+    print(pod_results)
 
     for pod_record in pod_results:
 
@@ -1704,7 +1738,7 @@ def sendemail():
 
         
     
-    message["Subject"] = "Your Promptlys AI Genie Transcript is Ready!" 
+    message["Subject"] = "Your Promptlys.AI Wizard Transcript is ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -1810,7 +1844,7 @@ def sendemail_nm():
 
 
 
-    message["Subject"] = "Promptlys P&R AI GENIE Transcript is Ready!" 
+    message["Subject"] = "Your Promptlys.AI Wizard Transcript is ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 

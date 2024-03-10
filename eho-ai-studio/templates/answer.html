@@ -1,6 +1,6 @@
 <body bgcolor="#AFB9DB">
     <head>
-        <title> Promptlys.ORG </title>
+        <title> Promptlys.AI </title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
         <style>
@@ -12,6 +12,14 @@
             #textresponse {
                 font-family: Arial, sans-serif;
                 color: #0000FF;
+            }
+
+            /* Add this new style for the logo image */
+            img#logoImage { /* Assume your image has an ID 'logoImage' */
+                display: block;
+                width: 66.66%;
+                margin: 0 auto;
+                border: none; /* This removes any border */
             }
         </style>
 
@@ -38,9 +46,10 @@
         <br></br>
         </center>
     <center>
+    <img id="logoImage" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/promptlys-RGB.png" alt="Promptlys">
     <h2>
         <font>
-        Thank You for using Promptlys.ORG ! 
+        Thank You for using Promptlys.AI ! 
         </font>
     </h2>
     </center>
@@ -48,7 +57,7 @@
     <center>
     <h2>
         <font >
-        Your Prompt : 
+        Your prompt description: 
         </font>
     </h2>
     </center>
@@ -64,7 +73,7 @@
     <center>
     <h2>
         <font >
-        Our Response : 
+        Here are some examples:
         </font>
     </h2>
     </center>
@@ -144,8 +153,8 @@
     </center>
 
     <br></br>
-    <a href="https://square.link/u/NxKDrUfw" style="display: inline-block; text-align: center;">
-        <img src="{{ url_for('static', filename='square-checkout.png') }}" alt="Support" style="width:30px;height:30px;">
+    <a href="https://melio.me/promptlys/r/6ef17d20" style="display: inline-block; text-align: center;">
+        <img class="no-border" src="https://msfpfmwdawonueqaevru.supabase.co/storage/v1/object/public/img/Melio_Logo_Purple.svg" alt="Support" style="width:50px;height:50px;">
         <div style=" margin-top: 5px;">Your support is greatly appreciated !!</div>
     </a> 
     </center>
