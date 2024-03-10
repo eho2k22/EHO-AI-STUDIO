@@ -7,6 +7,7 @@ from flask_cors import CORS
 
 
 import openai
+from openai import OpenAI
 import os
 import io
 import warnings
@@ -20,12 +21,6 @@ import email.message
 
 from supabase import create_client
 from array import array 
-
-#from postgrest import Postgrest
-#from postgrest.base_client import PostgrestClient  # Try this line 
-
-
-##from jinja2 import Markup
 
 
 userapikey=""
@@ -62,11 +57,6 @@ app_version = os.environ['APP_VERSION']
 
 supabase = create_client(supa_url, supa_key)
 
-#pg_client = postgrest.base_client.PostgrestClient(
-   # supa_url,
-   # api_key=supa_key
-#)
-
 print("supabase client initiated successfully! ")
 
 records=[]
@@ -94,7 +84,8 @@ for pod_record in pod_results:
 # Use SYSTEM API key
 
 try:
-    openai.api_key = os.environ['OPENAI_KEY']
+    #openai.api_key = os.environ['OPENAI_KEY']
+    openai = OpenAI(api_key = os.environ['OPENAI_KEY'])
 except:
     print("Sorry, No API Key available")
 
@@ -113,13 +104,13 @@ def generate_response(prompt, previous_context):
     
     for model in models['data']:
         # print(model.id)
-        if (model.id == "gpt-4-1106-preview" and gpt_enabled == "YES"):
+        if (model.id == "gpt-4-0125-preview" and gpt_enabled == "YES"):
             available_gpt = True
-        if (model.id == "gpt-4-1106-preview"):
+        if (model.id == "gpt-4-0125-preview"):
             print("GPT4-0613 IS AVAILABLE !!!")
         
     if (available_gpt):
-        print("gpt-4-1106-preview is AVAILABLE in generate_response !!! ")
+        print("gpt-4-0125-preview is AVAILABLE in generate_response !!! ")
         try: 
             messages = [
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -135,8 +126,8 @@ def generate_response(prompt, previous_context):
                     item["content"] = previous_context
             
 
-            gpt_response = openai.ChatCompletion.create(
-                    model="gpt-4-1106-preview",
+            gpt_response = openai.chat.completions.create(
+                    model="gpt-4-0125-preview",
                     messages=messages 
             )
             
@@ -216,8 +207,8 @@ def streaming_intro():
                 {'role': 'user', 'content': "Repeat the following greetings word for word exactly in your response : Welcome to Promptlys! Have you struggled with prompting that communicates effectively and generates desired responses? You have come to the right place! Here at Promptly you can access, learn and share quality prompts created by top-notch Prompt Creators ."}
             ]
                    
-        response = openai.ChatCompletion.create(
-            model='gpt-4-1106-preview',
+        response = openai.chat.completions.create(
+            model='gpt-4-0125-preview',
             messages=messages,
             temperature=0,
             stream=True  # set stream=True
@@ -234,7 +225,8 @@ def streaming_intro():
             chunk_content = ""
 
             try: 
-                finish_reason = chunk['choices'][0]['finish_reason']
+                #finish_reason = chunk['choices'][0]['finish_reason']
+                finish_reason = chunk.choices[0]['finish_reason']
                 if (finish_reason is not None) and (finish_reason != "") :
                     print("STREAMING STOPPED !!")
                     print("finish_reason ==")
@@ -246,7 +238,8 @@ def streaming_intro():
                 continue  # continue to the next chunk if the necessary keys don't exist
 
             try: 
-                chunk_content = chunk['choices'][0]['delta']['content']
+                #chunk_content = chunk['choices'][0]['delta']['content'] 
+                chunk_content = chunk.choices[0].delta.content
                 # yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
         
 
@@ -308,8 +301,8 @@ def streaming_page():
             if item["role"] == "assistant":
                 item["content"] = user_context
                    
-        response = openai.ChatCompletion.create(
-            model='gpt-4-1106-preview',
+        response = openai.chat.completions.create(
+            model='gpt-4-0125-preview',
             messages=messages,
             temperature=0,
             stream=True  # set stream=True
@@ -325,7 +318,8 @@ def streaming_page():
             chunk_content = ""
 
             try: 
-                finish_reason = chunk['choices'][0]['finish_reason']
+                #finish_reason = chunk.choices[0]['finish_reason']
+                finish_reason = chunk.choices[0].finish_reason
                 if (finish_reason is not None) and (finish_reason != "") :
                     print("STREAMING STOPPED !!")
                     print("finish_reason ==")
@@ -337,7 +331,8 @@ def streaming_page():
                 continue  # continue to the next chunk if the necessary keys don't exist
 
             try: 
-                chunk_content = chunk['choices'][0]['delta']['content']
+                #chunk_content = chunk['choices'][0]['delta']['content']
+                chunk_content = chunk.choices[0].delta.content
                 # yield "data: {}\n\n".format(chunk_content)  # yield the chunk content as SSE data
 
             except (KeyError, IndexError):
@@ -378,21 +373,25 @@ def streaming_page():
             item["content"] = user_context 
             
                 
-    response = openai.ChatCompletion.create(
-        model='gpt-4-1106-preview',
+    response = openai.chat.completions.create(
+        model='gpt-4-0125-preview',
         messages=messages,
         temperature=0,
         stream=True  # set stream=True
     )
 
     start_time = time.time()
+    ##for chunk in stream:
+    ##if chunk.choices[0].delta.content is not None:
+        ##print(chunk.choices[0].delta.content, end="")
     for chunk in response:
         chunk_time = time.time() - start_time
         finish_reason = ""
         chunk_content = ""
 
         try: 
-            finish_reason = chunk['choices'][0]['finish_reason']
+            #finish_reason = chunk.choices[0]['finish_reason']
+            finish_reason = chunk.choices[0].finish_reason
             if (finish_reason is not None) and (finish_reason != "") :
                 print("STREAMING STOPPED !!")
                 print("finish_reason ==")
@@ -403,7 +402,8 @@ def streaming_page():
             continue  # continue to the next chunk if the necessary keys don't exist
 
         try: 
-            chunk_content = chunk['choices'][0]['delta']['content']
+            #chunk_content = chunk['choices'][0]['delta']['content']
+            chunk_content = chunk.choices[0].delta.content
 
         except (KeyError, IndexError):
             continue  # continue to the next chunk if the necessary keys don't exist
@@ -1007,7 +1007,8 @@ def index():
         available_gpt = False 
     
         try: 
-            models = openai.Model.list()
+            #models = openai.Model.list()
+            models = openai.models.list()
 
         except: 
             print("sorry, wrong key")
@@ -1015,9 +1016,9 @@ def index():
     
 
         print("Available Models are: ")
-        for model in models['data']:
+        for model in models.data: 
             print(model.id)
-            if (model.id == "gpt-4-1106-preview"):
+            if (model.id == "gpt-4-0125-preview"):
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
@@ -1037,7 +1038,7 @@ def index():
             try: 
                 print("GPT TURBO is Available !!")
                 messages = [
-                    {"role": "system", "content": "You are an expert prompt builder that is proficient at digesting vague, generic prompts and converting them to specific, well-constructed prompts by following general prompting guidelines such as setting the role, the tone, providing context specfics and describing expected output format."},
+                    {"role": "system", "content": "You are an expert prompt builder that is proficient at digesting vague, generic descriptions and converting them to specific, well-constructed prompt paragraphs that explicitly declares the role and tone appropriate for the asks, and effectively communicates user's intentions and goals in order to generates optimal responses."},
                     {"role": "assistant", "content": "This is Context. "},
                     {"role": "user", "content": "This is User's Question"}
                 ]
@@ -1047,13 +1048,12 @@ def index():
                         item["content"] = "Please provide prompt examples of " + userprompt
 
 
-                print("gpt-4-1106-preview is available !! ")
-                response = openai.ChatCompletion.create(
-                    model="gpt-4-1106-preview",
+                print("gpt-4-0125-preview is available !! ")
+                response = openai.chat.completions.create(
+                    model="gpt-4-0125-preview",
                     messages=messages 
                 )
 
-         
 
             except:
                 print("something went wrong while processing your prompt .. ")
@@ -1106,7 +1106,7 @@ def index():
         if (not available_gpt) or (gpt_enabled != "YES"): 
             answer = response.choices[0].text
         else:
-            answer = response['choices'][0]['message']['content']
+            answer = response.choices[0].message.content
     
         # define the regular expression pattern
         pattern = re.compile(r"nn(?=\d)")
@@ -1173,7 +1173,8 @@ def night_mode():
             openai.api_key = userapikey
 
         try: 
-            models = openai.Model.list()
+            #models = openai.Model.list()
+             models = openai.models.list()
         except: 
             print("sorry, wrong key")
             return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
@@ -1181,16 +1182,16 @@ def night_mode():
         available_003 = False
         available_eho = False 
         available_gpt = False 
-        models = openai.Model.list()
 
-        for model in models['data']:
-            if (model.id == "gpt-4-1106-preview") and (gpt_enabled == "YES"):
-                print("YES,  gpt-4-1106-preview is now AVAILABLE!!!")
+
+        for model in models.data: 
+            print(model.id)
+            if (model.id == "gpt-4-0125-preview"):
                 available_gpt = True
             if (model.id == "text-davinci-003"):
                 available_003 = True
-            if (model.id == "gpt-4-1106-preview"):
-                print("YES,  gpt-4-1106-preview is now AVAILABLE!!!")
+            #if (model.id == "davinci:ft-personal:eho-23-2023-03-04-21-00-29"):
+                #available_eho = True
 
 
         if (usertemp == "Standard"):
@@ -1207,23 +1208,23 @@ def night_mode():
             try: 
                 print("GPT TURBO is Available !!")
                 messages = [
-                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "system", "content": "You are an expert prompt builder that is proficient at digesting vague, generic descriptions and converting them to specific, well-constructed prompt paragraphs that explicitly declares the role and tone appropriate for the asks, and effectively communicates user's intentions and goals in order to generates optimal responses."},
+                    {"role": "assistant", "content": "This is Context. "},
                     {"role": "user", "content": "This is User's Question"}
                 ]
                 #messagees[1]['content'] = userprompt
                 for item in messages:
                     if item["role"] == "user":
-                        item["content"] = userprompt
+                        item["content"] = "Please provide prompt examples of " + userprompt
 
 
-                print("gpt-4-1106-preview is available !! ")
-                response = openai.ChatCompletion.create(
-                    model="gpt-4-1106-preview",
+                print("gpt-4-0125-preview is available !! ")
+                print("about to generate prompts in Night Mode !! ")
+                response = openai.chat.completions.create(
+                    model="gpt-4-0125-preview",
                     messages=messages 
                 )
 
-                # replace all occurrences of "nn" with "#"
-                # response = response.replace(response_filter6, "#")
             except:
                 print("something went wrong while processing your prompt .. ")
                 return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
@@ -1242,7 +1243,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
+                return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
 
         elif (available_003):
             try: 
@@ -1257,7 +1258,7 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
+                return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
 
 
         else:
@@ -1272,13 +1273,13 @@ def night_mode():
                 )
             except:
                 print("something went wrong while processing your question.. ")
-                return render_template("error.html", app_version=app_version, userapikey=openai.api_key)
+                return render_template("error_nm.html", app_version=app_version, userapikey=openai.api_key)
     
 
         if (not available_gpt) or (gpt_enabled != "YES"):
             answer = response.choices[0].text
         else:
-            answer = response['choices'][0]['message']['content']
+            answer = response.choices[0].message.content
 
         # define the regular expression pattern
         pattern = re.compile(r"nn(?=\d)")
@@ -1440,62 +1441,15 @@ def community():
     
         print("Search String is : " + search_string) 
  
-    
-
-    # Assuming 'supabase' is your Supabase client instance
-    # and 'search_string' is the string containing multiple keywords.
-
-    # Split the search string into keywords.
-    # keywords = search_string.split()
-
-    # Start building the query.
-    # query = supabase.table('Transcripts').select("*").eq('rank', 888)
-
-    # ... Your Supabase setup
-    # pg_client = supabase.table('Transcripts').from_('Transcripts')  
-
-    # Create the SQL query dynamically (including 'OR' condition)
-    #sql_query = f"""
-    #SELECT * FROM Transcripts
-    #WHERE rank = 888 AND ({' OR '.join([f"prompt ILIKE '%{keyword}%'" for keyword in keywords])})  
-    #ORDER BY created_at DESC;
-    #"""
-
-    #  Execute using the PostgREST client's 'rpc' function
-    # pod_results = pg_client.rpc('rpc', params={'sql': sql_query}).execute() 
-
-
-
-
-
-   # Add conditions for each keyword using '.or_'.
-    # for keyword in keywords:
-      #  filter_condition = supabase.table('Transcripts').textSearch('prompt', f'%{keyword}%')
-       # query = query.or_(filter_condition)
-
-
-    # Execute the query
-    # pod_results = query.execute()
-
-
-    
-    print("finish executing Search query")
-    
-    
-    # Query Supabase for prompt data based on search string
+        # Query Supabase for prompt data based on search string
     pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').order('created_at', desc=True).execute()
    
-    
-        
-
     if not pod_results.data:
         # Display a message when no results are found
         print("About to Print Not Found Error Message! ")
-        message = "Unfortunately we are unable to locate any results. Here is a link to our Prompt Expert Bot, and he can assist you further! <a href='https://t.me/Promptlys_TeleBot'>Prompt Expert Bot</a>"
+        message = "Unfortunately we are unable to locate any results. Here is a link to Promptly TeleBot to assist you further! <a href='https://t.me/Promptlys_TeleBot'>Prompt Expert Bot</a>"
         return render_template('community.html', app_version=app_version, message=message)
-
-    print("pod_results == ")
-    print(pod_results)
+        
 
     for pod_record in pod_results:
 
@@ -1564,6 +1518,12 @@ def community_nm():
     # Query Supabase for related prompt data based on the search string
     pod_results = supabase.table('Transcripts').select("*").eq('rank', 888).ilike('prompt', f'%{search_string}%').order('created_at', desc=True).execute()
    
+
+    if not pod_results.data:
+        # Display a message when no results are found
+        print("About to Print Not Found Error Message! ")
+        message = "Unfortunately we are unable to locate any results. Here is a link to Promptly TeleBot to assist you further! <a href='https://t.me/Promptlys_TeleBot'>Prompt Expert Bot</a>"
+        return render_template('community_nm.html', app_version=app_version, message=message)
 
     for pod_record in pod_results:
 
@@ -1738,7 +1698,7 @@ def sendemail():
 
         
     
-    message["Subject"] = "Your Promptlys.AI Wizard Transcript is ready!" 
+    message["Subject"] = "Your Promptlys AI Genie Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -1844,7 +1804,7 @@ def sendemail_nm():
 
 
 
-    message["Subject"] = "Your Promptlys.AI Wizard Transcript is ready!" 
+    message["Subject"] = "Promptlys P&R AI GENIE Transcript is Ready!" 
     message["From"] = sender_email
     message["To"] = receiver_email
 
